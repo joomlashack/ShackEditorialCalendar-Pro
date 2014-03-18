@@ -37,8 +37,20 @@ $(document).ready( function()
 		events: "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.getdata', false );?>",
 		eventResize: function(event,dayDelta,minuteDelta,revertFunc)
 		{
+			var url = "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.updateEndTime', false ); ?>" + "&id=" + event.id + "&dayd=" + dayDelta + "&mind=" + minuteDelta + "&plugin=" + event.plugin;
 
-	        alert(
+	        $.ajax({
+	            url: url,
+	            success: function(){
+	                $('#calendar').fullCalendar( 'refetchEvents' );
+	            },
+	            error: function(){
+	                //$('#calendar').fullCalendar( 'refetchEvents' );
+	                revertFunc();
+	            }
+	        });
+
+	        /*alert(
 	            "The end date of " + event.title + "has been moved " +
 	            dayDelta + " days and " +
 	            minuteDelta + " minutes."
@@ -47,7 +59,7 @@ $(document).ready( function()
 	        if (!confirm("is this okay?"))
 		    {
 	            revertFunc();
-	        }
+	        }*/
 
 	    },
 	    eventDrop: function(event,dayDelta,minuteDelta,allDay,revertFunc)
@@ -59,13 +71,13 @@ $(document).ready( function()
 	            dayDelta + " days and " +
 	            minuteDelta + " minutes."
 	        );*/
-	        console.debug( event );
-	        var url = "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.move', false ); ?>" + "&id=" + event.id + "&dayd=" + dayDelta + "&mind=" + minuteDelta;
+	        //console.debug( event );
+	        var url = "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.move', false ); ?>" + "&id=" + event.id + "&dayd=" + dayDelta + "&mind=" + minuteDelta + "&plugin=" + event.plugin;
 
 	        $.ajax({
 	            url: url,
 	            success: function(){
-	                //$('#calendar').fullCalendar( 'refetchEvents' );
+	                $('#calendar').fullCalendar( 'refetchEvents' );
 	            },
 	            error: function(){
 	                //$('#calendar').fullCalendar( 'refetchEvents' );

@@ -23,8 +23,9 @@ class PixPublishControllerPanel extends JControllerLegacy
 			echo JDate::getInstance( $end )->toISO8601();
 			die();*/
 			
-			JPluginHelper::importPlugin( 'pixsubmit' );
-			$dispatcher =& JDispatcher::getInstance();
+			//JPluginHelper::importPlugin( 'pixsubmit' );
+			//$dispatcher =& JDispatcher::getInstance();
+			$dispatcher = $this->importPlugins();
 			$results = $dispatcher->trigger( 'onDataFetch', array( JDate::getInstance( $start ), JDate::getInstance( $end ) ) );
 			
 			$rows = array();
@@ -50,14 +51,39 @@ class PixPublishControllerPanel extends JControllerLegacy
 	public function updateEndTime()
 	{
 		$input = JFactory::getApplication()->input;
+		$id = $input->getCmd( 'id', '' );
+		$source = $input->getCmd( 'plugin', '' );
+		$dayd = $input->getInt( 'dayd', 0 );
+		$mind = $input->getInt( 'mind', 0 );
+		
+		$dispatcher = $this->importPlugins();
+		$results = $dispatcher->trigger( 'onItemReseize', array( $source, $id, $dayd, $mind ) );
 	}
 	
 	public function move()
 	{
 		$input = JFactory::getApplication()->input;
-		$id = $input->getString( 'id', '' );
-		$this->logThis( 'id= '.$id );
+		$id = $input->getCmd( 'id', '' );
+		$source = $input->getCmd( 'plugin', '' );
+		$dayd = $input->getInt( 'dayd', 0 );
+		$mind = $input->getInt( 'mind', 0 );
+		$this->logThis( 'id:'.$id.' source:'.$source );
+		
+		$dispatcher = $this->importPlugins();
+		$results = $dispatcher->trigger( 'onItemMove', array( $source, $id, $dayd, $mind ) );
+		
+		//throw new Exception('Whoops, something happened!', 404);
 		JFactory::getApplication()->close();
+	}
+	
+	/**
+	 * @return JDispatcher
+	 */
+	protected function importPlugins()
+	{
+		JPluginHelper::importPlugin( 'pixsubmit' );
+		$dispatcher =& JDispatcher::getInstance();
+		return $dispatcher;
 	}
 	
 	protected function logThis( $message )
