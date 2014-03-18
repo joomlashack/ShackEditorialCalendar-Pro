@@ -19,9 +19,9 @@ class PixPublishController extends JControllerLegacy
 	
 	public function display($cachable = false, $urlparams = false)
 	{
-		JRequest::setVar( 'view', JRequest::getCmd( 'view', 'articles' ) );
+		JRequest::setVar( 'view', JRequest::getCmd( 'view', 'panel' ) );
 		parent::display( $cachable, $urlparams );
-		PixPublishHelper::addSubmenu( 'articles' );
+		//PixPublishHelper::addSubmenu( 'articles' );
 		
 		return $this;
 	}
