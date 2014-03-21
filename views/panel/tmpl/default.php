@@ -35,6 +35,7 @@ $(document).ready( function()
 			},
 		]*/
 		events: "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.getdata', false );?>",
+		allDayDefault: false,
 		eventResize: function(event,dayDelta,minuteDelta,revertFunc)
 		{
 			var url = "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.updateEndTime', false ); ?>" + "&id=" + event.id + "&dayd=" + dayDelta + "&mind=" + minuteDelta + "&plugin=" + event.plugin;
