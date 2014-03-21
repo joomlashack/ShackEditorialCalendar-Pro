@@ -19,11 +19,33 @@ class PixPublishViewPanel extends JViewLegacy
 		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.min.js' );
 		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.css' );
 		$this->addToolbar();
+		
+		$dispatcher = $this->importPlugins();
+		$results = $dispatcher->trigger( 'onRegisterSearch' );
+		//print_r( $results ); die();
+		$rows = array();
+		foreach ($results as $result)
+		{
+			$rows = array_merge((array) $rows, (array) $result);
+		}
+		//print_r( $rows ); die();
+		
 		parent::display( $tpl );
 	}
 	
 	protected function addToolbar()
 	{
 		JToolBarHelper::title( JText::_( 'COM_PIXPUBLISH_MANAGER_PANEL' ) );
+	}
+	
+	// TODO: Move this to the model
+	/**
+	 * @return JDispatcher
+	 */
+	protected function importPlugins()
+	{
+		JPluginHelper::importPlugin( 'pixsubmit' );
+		$dispatcher =& JDispatcher::getInstance();
+		return $dispatcher;
 	}
 }
