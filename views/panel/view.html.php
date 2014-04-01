@@ -51,6 +51,8 @@ class PixPublishViewPanel extends JViewLegacy
 			$rows = array_merge((array) $rows, (array) $result);
 		}
 		//print_r( $rows ); die();
+		$this->options = JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array('all'=>false) ), 'value', 'text', 0, true);
+		//print_r( $options ); die();
 		
 		parent::display( $tpl );
 	}

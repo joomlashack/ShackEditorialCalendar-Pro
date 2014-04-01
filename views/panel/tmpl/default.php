@@ -6,6 +6,7 @@
 
 // No direct access.
 defined('_JEXEC') or die;
+JHtml::_('formbehavior.chosen', 'select');
 ?>
 <script type="text/javascript">
 <!--
@@ -106,16 +107,18 @@ $(document).ready( function()
 			   title: 'Modal Window',
 			   modal: true,
 			   unload : false,
+			   //height: 500,
 			   buttons: [{id: 0, label: 'Save', val: 'Y', class: 'btn-success'}, {id: 1, label: 'Cancel', val: 'N'}],
 			   callback: function(val)
 			   {
-				   console.debug( val );
+				   //console.debug( val );
+				   var form_data = JSON.stringify( $('#pixsubmit_form').serializeObject() );
 				   //alert('Your selection: ' + val);
 				   if( val == 'Y' )
 				   {
 					   console.debug( $('#pixtest_title').val() );
 					   console.debug( $('#pixtest_start').val() );
-					   var url = "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.save', false ); ?>" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val();
+					   var url = "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.save', false ); ?>" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&data=" + form_data;
 					   $.ajax({
 				            url: url,
 				            success: function(){
@@ -139,6 +142,7 @@ $(document).ready( function()
 					        defaultTime: false,
 					        showMeridian: false,
 					    });
+					 //jQuery('select').chosen({"disable_search_threshold":10,"allow_single_deselect":true,"placeholder_text_multiple":"Select some options","placeholder_text_single":"Select an option","no_results_text":"No results match"});
 					
 				}
 			});
@@ -173,31 +177,37 @@ $(document).ready( function()
     });
 });
 
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    console.debug( o );
+    return o;
+};
+
 }(jQuery));
 
 
 
 //-->
 </script>
-<div class="input-append bootstrap-timepicker">
-             <input id="timepicker1" type="text" class="input-small">
-             <!-- <span class="add-on"><i class="icon-calendar"></i></span>-->
-             <i class="icon-calendar"></i>
+
+<div class="filter-select">
+<select name="filter_status" class="inputbox chzn-color-state" id="filter_status" >
+				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
+				<?php echo $this->options; ?>
+			</select>
 </div>
-
-<div class='popbox'>
-          <a class='open' href='#'>Click Here!</a>
-
-          <div class='collapse'>
-            <div class='box'>
-              <div class='arrow'></div>
-              <div class='arrow-border'></div>
-
-              Content in PopBox goes here :)
-              <a href="#" class="close">close</a>
-            </div>
-          </div>
-        </div>
 
 <div id='calendar' style='margin:3em 0;font-size:13px'>
 	test

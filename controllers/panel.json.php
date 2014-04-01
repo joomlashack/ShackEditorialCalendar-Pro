@@ -93,6 +93,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 		//print_r( $item );
 		$start = JDate::getInstance( $item->start );
 		$start->hour = (int)$start->hour;
+		$options = JHtml::_( 'select.options', JHtml::_( 'jgrid.publishedOptions', array( 'all' => false ) ), 'value', 'text', 0, true );
 		//print_r(JHtml::_('jgrid.publishedOptions') );die();
 		
 		/*$options = JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', true, true);
@@ -104,12 +105,19 @@ class PixPublishControllerPanel extends JControllerLegacy
 		{
 		//echo '<input id="pixtest_title" type="text" value="test" /><br/>';
 $html = <<<HTML
-<input id="pixtest_title" type="text" value="$item->title" /><br/>
+<form action="" method="post" id="pixsubmit_form">
+<input id="pixtest_title" type="text" name="pixtest_title" value="$item->title" /><br/>
 <div class="input-append bootstrap-timepicker">
-             start: <input id="pixtest_start" type="text" class="input-small" value="$start->hour:$start->minute">
+             start: <input id="pixtest_start" name="pixtest_start" type="text" class="input-small" value="$start->hour:$start->minute">
              <!-- <span class="add-on"><i class="icon-calendar"></i></span>-->
              <i class="icon-calendar"></i>
 </div>
+<div class="filter-select">
+<select name="filter_status" class="inputbox" id="filter_status">
+$options
+</select>
+</div>
+</form>
 HTML;
 		}
 		echo $html;
@@ -121,11 +129,13 @@ HTML;
 		$input = JFactory::getApplication()->input;
 		$id = $input->getCmd( 'id', '' );
 		$source = $input->getCmd( 'plugin', '' );
-		$title = $input->getString( 'title', null );
-		$start = $input->getString( 'start', null );
+		//$title = $input->getString( 'title', null );
+		//$start = $input->getString( 'start', null );
+		$data = json_decode( $input->get( 'data', '', 'raw' ) );
+		//print_r( $data ); die();
 		
 		$dispatcher = $this->importPlugins();
-		$results = $dispatcher->trigger( 'onItemSave', array( $source, $id, $start, $title ) );
+		$results = $dispatcher->trigger( 'onItemSave', array( $source, $id, $data ) );
 		
 		JFactory::getApplication()->close();
 	}
