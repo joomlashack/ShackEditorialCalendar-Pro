@@ -57,6 +57,8 @@ class PixPublishViewPanel extends JViewLegacy
 		//echo $this->getName(); die();
 		PixPublishHelper::addSubmenu( $this->getName() );
 		
+		$results = $dispatcher->trigger( 'onRegisterSearchFilters' );
+		
 		$this->sidebar = JHtmlSidebar::render();
 		
 		parent::display( $tpl );

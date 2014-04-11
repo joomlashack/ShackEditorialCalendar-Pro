@@ -31,6 +31,7 @@
 		<folder>controllers</folder>
 		<folder>models</folder>
 		<folder>views</folder>
+		<folder>language</folder>
 	</files>
 	<languages folder="site">
 		<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.ini</language>
@@ -50,9 +51,11 @@
 			<folder>tables</folder>
 			<folder>views</folder>
 		</files>
+		<!-- 
 		<languages folder="admin">
 			<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.ini</language>
 			<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.sys.ini</language>
 		</languages>
+		 -->
 	</administration>
 </extension>
