@@ -14,7 +14,8 @@ class PixPublishControllerPanel extends JControllerLegacy
 		$input = JFactory::getApplication()->input;
 		$start = $input->getUint( 'start', 0 );
 		$end = $input->getUint( 'end', 0 );
-		
+		$data = json_decode( $input->get( 'data', '', 'raw' ) );
+		$this->logThis( 'data: '.print_r( $data, true ) );
 		$result = array();
 		
 		if( $start != 0 && $end != 0 )
@@ -26,7 +27,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 			//JPluginHelper::importPlugin( 'pixsubmit' );
 			//$dispatcher =& JDispatcher::getInstance();
 			$dispatcher = $this->importPlugins();
-			$results = $dispatcher->trigger( 'onDataFetch', array( JDate::getInstance( $start ), JDate::getInstance( $end ) ) );
+			$results = $dispatcher->trigger( 'onDataFetch', array( JDate::getInstance( $start ), JDate::getInstance( $end ), $data ) );
 			
 			$rows = array();
 			foreach ($results as $result)
@@ -93,7 +94,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 		//print_r( $item );
 		$start = JDate::getInstance( $item->start );
 		$start->hour = (int)$start->hour;
-		$options = JHtml::_( 'select.options', JHtml::_( 'jgrid.publishedOptions', array( 'all' => false ) ), 'value', 'text', 0, true );
+		$options = JHtml::_( 'select.options', JHtml::_( 'jgrid.publishedOptions', array( 'all' => false ) ), 'value', 'text', (int)$item->state, true );
 		//print_r(JHtml::_('jgrid.publishedOptions') );die();
 		
 		/*$options = JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', true, true);

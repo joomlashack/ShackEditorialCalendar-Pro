@@ -7,6 +7,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 JHtml::_('formbehavior.chosen', 'select');
+JHtml::_('behavior.keepalive');
 ?>
 <script type="text/javascript">
 <!--
@@ -36,7 +37,19 @@ $(document).ready( function()
 				start: new Date(y, m, 1)
 			},
 		]*/
-		events: "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.getdata', false );?>",
+		//events: "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.getdata', false );?>", // + "&data=" + JSON.stringify( $('#pixpublish_search').serializeObject() ),
+		events:
+		{
+			url: "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.getdata', false );?>",
+			data: function()
+			{
+				return { data: JSON.stringify( $('#pixpublish_search').serializeObject() ) };
+			},
+			error: function()
+			{
+                alert( 'there was an error while fetching events!' );
+            },
+		},
 		allDayDefault: false,
 		eventResize: function(event,dayDelta,minuteDelta,revertFunc)
 		{
@@ -104,7 +117,7 @@ $(document).ready( function()
 		   // $(this).popbox();
 		   Messi.load( "<?php echo JRoute::_( 'index.php?option=com_pixpublish&format=json&task=panel.test', false );?>"  + '&id=' + calEvent.id + "&plugin=" + calEvent.plugin,
 			{
-			   title: 'Modal Window',
+			   title: 'Edit',
 			   modal: true,
 			   unload : false,
 			   //height: 500,
@@ -175,6 +188,19 @@ $(document).ready( function()
         defaultTime: false,
         showMeridian: false,
     });
+
+
+    $('#pixpublish_search_submit').click( function()
+    {
+        //console.debug( 'test' );
+    	var form_data = JSON.stringify( $('#pixpublish_search').serializeObject() );
+    	console.log( form_data );
+    	$('#calendar').fullCalendar( 'refetchEvents' );
+    });
+
+    $( ".pixpublish_trigger" ).change(function() {
+    	 $('#calendar').fullCalendar( 'refetchEvents' );
+    	});
 });
 
 $.fn.serializeObject = function()
@@ -202,13 +228,15 @@ $.fn.serializeObject = function()
 //-->
 </script>
 
-<div class="filter-select">
-<select name="filter_status" class="inputbox chzn-color-state" id="filter_status" >
-				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
-				<?php echo $this->options; ?>
-			</select>
-</div>
-
+<form id="pixpublish_search">
+	<div class="filter-select">
+		<select name="filter_state" class="inputbox chzn-color-state pixpublish_trigger" id="search_filter_status" >
+			<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
+			<?php echo $this->options; ?>
+		</select>
+	</div>
+	<button id="pixpublish_search_submit" type="button">TEST</button>
+</form>
 <div id='calendar' style='margin:3em 0;font-size:13px'>
 	test
 </div>

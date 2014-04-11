@@ -51,8 +51,22 @@ class PixPublishViewPanel extends JViewLegacy
 			$rows = array_merge((array) $rows, (array) $result);
 		}
 		//print_r( $rows ); die();
-		$this->options = JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array('all'=>false) ), 'value', 'text', 0, true);
+		$this->options = JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array('all'=>false) ), 'value', 'text', '', true);
 		//print_r( $options ); die();
+		//PixPublishHelper::addSubmenu( '' );
+		
+		// TODO: Move this to the helper
+		$options[] = JHtml::_('select.option', '1', 'JPUBLISHED');
+		$options[] = JHtml::_('select.option', '0', 'JUNPUBLISHED');
+		$options[] = JHtml::_('select.option', '2', 'JARCHIVED');
+		$options[] = JHtml::_('select.option', '-2', 'JTRASHED');
+		$options[] = JHtml::_('select.option', '*', 'JALL');
+		JHtmlSidebar::addFilter(
+				JText::_('JOPTION_SELECT_PUBLISHED'),
+				'filter_published',
+				JHtml::_('select.options', $options, "value", "text", /*$this->state->get('filter.state')*/'', true)
+		);
+		$this->sidebar = JHtmlSidebar::render();
 		
 		parent::display( $tpl );
 	}
