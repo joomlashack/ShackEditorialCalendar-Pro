@@ -201,6 +201,16 @@ $(document).ready( function()
     $( ".pixpublish_trigger" ).change(function() {
     	 $('#calendar').fullCalendar( 'refetchEvents' );
     	});
+
+    /*$('#pixpublish_search').on('submit', function(e)
+    {
+    	console.log( "testar" );
+    	e.preventDefault();
+    	$('#calendar').fullCalendar( 'refetchEvents' );
+    	
+    	return false;
+    });*/
+    console.log( $('#pixpublish_search') );
 });
 
 $.fn.serializeObject = function()
@@ -221,6 +231,11 @@ $.fn.serializeObject = function()
     return o;
 };
 
+/*function updateCal()
+{
+	$('#calendar').fullCalendar( 'refetchEvents' );
+}*/
+
 }(jQuery));
 
 
@@ -228,16 +243,19 @@ $.fn.serializeObject = function()
 //-->
 </script>
 
-<form id="pixpublish_search">
-	<div class="filter-select">
-		<select name="filter_state" class="inputbox chzn-color-state pixpublish_trigger" id="search_filter_status" >
-			<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
-			<?php echo $this->options; ?>
-		</select>
-	</div>
-	<button id="pixpublish_search_submit" type="button">TEST</button>
-</form>
-<div id='calendar' style='margin:3em 0;font-size:13px'>
-	test
+<?php if( !empty( $this->sidebar ) ) : ?>
+<div id="j-sidebar-container" class="span2">
+	<form id="pixpublish_search" method="POST" onsubmit="console.log( 'clicked' );" action="javascript:(function($) { $('#calendar').fullCalendar( 'refetchEvents' ); }(jQuery));">
+	<?php echo $this->sidebar; ?>
+	</form>
 </div>
+<div id="j-main-container" class="span10">
+<?php else : ?>
+<div id="j-main-container">
+<?php endif;?>
+	<div id='calendar' style='margin:3em 0;font-size:13px'>
+	</div>
+</div>
+
+
 

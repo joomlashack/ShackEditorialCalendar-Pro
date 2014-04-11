@@ -36,7 +36,7 @@ abstract class PixPublishHelper
 		}
 	}*/
 	
-	public static function addSubmenu($vName)
+	public static function addSubmenu( $view )
 	{
 		/*JHtmlSidebar::addEntry(
 				JText::_('JGLOBAL_ARTICLES'),
@@ -52,6 +52,35 @@ abstract class PixPublishHelper
 				'index.php?option=com_content&view=featured',
 				$vName == 'featured'
 		);*/
+		//Code support for joomla version greater than 3.0
+		if( JVERSION >= 3.0 )
+		{
+			//JHtmlSidebar::setAction( 'sudde.php' );
+			JHtmlSidebar::addEntry( JText::_('COM_PIXPUBLISH_VIEW_PANEL'), 'index.php?option=com_pixpublish&view=panel', $view == 'panel' );
+			
+			JHtmlSidebar::addFilter(
+					JText::_('JOPTION_SELECT_PUBLISHED'),
+					'filter_state',
+					JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array('all'=>false) ), 'value', 'text', '', true)
+			);
+			/*JHtmlSidebar::addFilter(
+					JText::_('JOPTION_SELECT_CATEGORY'),
+					'filter_category_id',
+					JHtml::_('select.options', JHtml::_('category.options', 'com_content'), 'value', 'text', '' )
+			);*/
+			
+			JHtmlSidebar::addFilter(
+					JText::_('JOPTION_SELECT_ACCESS'),
+					'filter_access',
+					JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', '' )
+			);
+			
+			JHtmlSidebar::addFilter(
+					JText::_('JOPTION_SELECT_LANGUAGE'),
+					'filter_language',
+					JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', '' )
+			);
+		}
 	}
 	
 	/**
