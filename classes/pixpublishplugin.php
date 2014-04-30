@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 	
 	public function onItemMove( $source, $id, $dayd, $mind );
 	
-	public function onGetDialog( $source, $id, &$html );
+	public function onGetDialog( $source, $id, &$html, &$extra );
 	
 	public function onItemSave( $source, $id, $data  );
 	

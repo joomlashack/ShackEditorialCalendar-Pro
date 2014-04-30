@@ -85,7 +85,8 @@ class PixPublishControllerPanel extends JControllerLegacy
 		$source = $input->getCmd( 'plugin', '' );
 		$dispatcher = $this->importPlugins();
 		$html = '';
-		$results = $dispatcher->trigger( 'onGetDialog', array( $source, $id, &$html ) );
+		$extra = '';
+		$results = $dispatcher->trigger( 'onGetDialog', array( $source, $id, &$html, &$extra ) );
 		$item = null;
 		if( count( $results ) != 0 )
 		{
@@ -117,6 +118,7 @@ $html = <<<HTML
 <select name="filter_status" class="inputbox" id="filter_status">
 $options
 </select>
+$extra
 </div>
 </form>
 HTML;
