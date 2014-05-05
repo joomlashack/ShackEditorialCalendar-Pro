@@ -32,8 +32,11 @@
 			<filename>controller.php</filename>
 			<filename>index.html</filename>
 			<filename>pixpublish.php</filename>
+			<folder>classes</folder>
 			<folder>controllers</folder>
 			<folder>helpers</folder>
+			<folder>language</folder>
+			<folder>media</folder>
 			<folder>models</folder>
 			<folder>sql</folder>
 			<folder>tables</folder>
