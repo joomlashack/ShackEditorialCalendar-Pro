@@ -24,18 +24,6 @@
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
 	</update>
-	<files folder="site">
-		<filename>index.html</filename>
-		<filename>pixpublish.php</filename>
-		<filename>controller.php</filename>
-		<folder>controllers</folder>
-		<folder>models</folder>
-		<folder>views</folder>
-		<folder>language</folder>
-	</files>
-	<languages folder="site">
-		<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.ini</language>
-	</languages>
 	<administration folder="admin">
 		<menu>COM_PIXPUBLISH_MENU</menu>
 		<files>
