@@ -6,7 +6,7 @@
 	method="upgrade">
 	<name>plg_pixpublish_content</name>
 	<author>Johan Sundell</author>
-	<creationDate>March 2014</creationDate>
+	<creationDate>May 2014</creationDate>
 	<copyright>Copyright (C) 2014 Johan Sundell. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
 	<authorEmail>johan@pixpro.net</authorEmail>
@@ -32,4 +32,8 @@
 			</fieldset>
 		</fields>
 	</config>
+	
+	<updateservers>
+		<server type="extension" priority="1" name="PixPublish content">http://labs.pixpro.net/updates/plugins/plg_pixpublish_content.xml</server>
+	</updateservers>
 </extension>
