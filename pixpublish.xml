@@ -29,4 +29,8 @@
 			<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.sys.ini</language>
 		</languages>
 	</administration>
+	
+	<updateservers>
+		<server type="extension" priority="1" name="PixPublish">http://labs.pixpro.net/updates/components/com_pixpublish.xml</server>
+	</updateservers>
 </extension>
