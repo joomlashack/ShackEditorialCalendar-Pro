@@ -1,6 +1,6 @@
 <?php
 /**
-* @copyright	Copyright (C) 2013 Johan Sundell. All rights reserved.
+* @copyright	Copyright (C) 2014 Johan Sundell. All rights reserved.
 * @license		GNU General Public License version 2 or later; see LICENSE.txt
 */
 
@@ -20,3 +20,13 @@ defined('_JEXEC') or die;
 	public function onRegisterSearchFilters();
 }
 
+class ColorFixer
+{
+	public static $st_color = '';
+	public $color;
+	
+	public function __construct()
+	{
+		$this->color = self::$st_color;
+	}
+}

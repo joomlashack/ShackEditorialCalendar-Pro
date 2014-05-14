@@ -1,6 +1,6 @@
 <?php
 /**
-* @copyright	Copyright (C) 2012 Johan Sundell. All rights reserved.
+* @copyright	Copyright (C) 2014 Johan Sundell. All rights reserved.
 * @license		GNU General Public License version 2 or later; see LICENSE.txt
 */
 

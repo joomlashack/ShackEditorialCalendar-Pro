@@ -1,6 +1,6 @@
 <?php
 /**
-* @copyright	Copyright (C) 2013 Johan Sundell. All rights reserved.
+* @copyright	Copyright (C) 2014 Johan Sundell. All rights reserved.
 * @license		GNU General Public License version 2 or later; see LICENSE.txt
 */
 
@@ -20,12 +20,6 @@ class PixPublishControllerPanel extends JControllerLegacy
 		
 		if( $start != 0 && $end != 0 )
 		{
-			/*echo JDate::getInstance( $start )->toISO8601().PHP_EOL;
-			echo JDate::getInstance( $end )->toISO8601();
-			die();*/
-			
-			//JPluginHelper::importPlugin( 'pixsubmit' );
-			//$dispatcher =& JDispatcher::getInstance();
 			$dispatcher = $this->importPlugins();
 			$results = $dispatcher->trigger( 'onDataFetch', array( JDate::getInstance( $start ), JDate::getInstance( $end ), $data ) );
 			
@@ -34,16 +28,6 @@ class PixPublishControllerPanel extends JControllerLegacy
 			{
 				$rows = array_merge((array) $rows, (array) $result);
 			}
-			
-			//print_r( $rows ); die();
-			
-			/*$o1 = new stdClass();
-			$o1->id = 1;
-			$o1->title = 'Test 1';
-			$o1->start = '2014-03-18';
-			
-			
-			$result[] = $o1;*/
 		}
 		echo json_encode( $rows );
 		JFactory::getApplication()->close();
@@ -52,14 +36,6 @@ class PixPublishControllerPanel extends JControllerLegacy
 	public function updateEndTime()
 	{
 		JFactory::getApplication()->close();
-		/*$input = JFactory::getApplication()->input;
-		$id = $input->getCmd( 'id', '' );
-		$source = $input->getCmd( 'plugin', '' );
-		$dayd = $input->getInt( 'dayd', 0 );
-		$mind = $input->getInt( 'mind', 0 );
-		
-		$dispatcher = $this->importPlugins();
-		$results = $dispatcher->trigger( 'onItemReseize', array( $source, $id, $dayd, $mind ) );*/
 	}
 	
 	public function move()
@@ -78,7 +54,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 		JFactory::getApplication()->close();
 	}
 	
-	public function test()
+	public function edit()
 	{
 		$input = JFactory::getApplication()->input;
 		$id = $input->getCmd( 'id', '' );
@@ -92,20 +68,13 @@ class PixPublishControllerPanel extends JControllerLegacy
 		{
 			$item = $results[0];
 		}
-		//print_r( $item );
+
 		$start = JDate::getInstance( $item->start );
 		$start->hour = (int)$start->hour;
 		$options = JHtml::_( 'select.options', JHtml::_( 'jgrid.publishedOptions', array( 'all' => false ) ), 'value', 'text', (int)$item->state, true );
-		//print_r(JHtml::_('jgrid.publishedOptions') );die();
 		
-		/*$options = JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', true, true);
-		echo $options;
-		echo JHtml::_('select.genericlist', $options );
-		die();*/
-		//echo
 		if( $html == '' )
 		{
-		//echo '<input id="pixtest_title" type="text" value="test" /><br/>';
 $html = <<<HTML
 <form action="" method="post" id="pixsubmit_form">
 <input id="pixtest_title" type="text" name="pixtest_title" value="$item->title" /><br/>
@@ -132,10 +101,7 @@ HTML;
 		$input = JFactory::getApplication()->input;
 		$id = $input->getCmd( 'id', '' );
 		$source = $input->getCmd( 'plugin', '' );
-		//$title = $input->getString( 'title', null );
-		//$start = $input->getString( 'start', null );
 		$data = json_decode( $input->get( 'data', '', 'raw' ) );
-		//print_r( $data ); die();
 		
 		$dispatcher = $this->importPlugins();
 		$results = $dispatcher->trigger( 'onItemSave', array( $source, $id, $data ) );
@@ -148,7 +114,7 @@ HTML;
 	 */
 	protected function importPlugins()
 	{
-		JPluginHelper::importPlugin( 'pixsubmit' );
+		JPluginHelper::importPlugin( 'pixpublish' );
 		$dispatcher = JDispatcher::getInstance();
 		return $dispatcher;
 	}

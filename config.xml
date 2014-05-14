@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
-	<fieldset name="settings">
-		<field
-			name="captcha"
-			type="plugins"
-			folder="captcha"
-			default=""
-			label="COM_USERS_CONFIG_FIELD_CAPTCHA_LABEL"
-			description="COM_USERS_CONFIG_FIELD_CAPTCHA_DESC"
-			filter="cmd" >
-			<option
-				value="">JOPTION_USE_DEFAULT</option>
-			<option
-				value="0">JOPTION_DO_NOT_USE</option>
-		</field>
-	</fieldset>
 	<fieldset
 		name="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"

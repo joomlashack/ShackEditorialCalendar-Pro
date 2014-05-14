@@ -2,51 +2,31 @@
 <extension type="component" version="2.5" method="upgrade">
 	<name>com_pixpublish</name>
 	<author>Johan Sundell</author>
-	<creationDate>TODO 2012</creationDate>
-	<copyright>(C) 2012 Pixpro Stockholm AB. All rights reserved.</copyright>
+	<creationDate>May 2014</creationDate>
+	<copyright>Copyright (C) 2014 Pixpro Stockholm AB. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
 	<authorEmail>johan@pixpro.net</authorEmail>
 	<authorUrl>www.pixpro.net</authorUrl>
 	<version>0.0.1</version>
-	<description>COM_PIXPUBLISH_DESCRIPTION</description>
-	<install>
-		<sql>
-			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
-		</sql>
-	</install>
-	<uninstall>
-		<sql>
-			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
-		</sql>
-	</uninstall>
-	<update>
-		<schemas>
-			<schemapath type="mysql">sql/updates/mysql</schemapath>
-		</schemas>
-	</update>
+	<description>TODO</description>
 	<administration folder="admin">
 		<menu>COM_PIXPUBLISH_MENU</menu>
 		<files>
-			<filename>access.xml</filename>
-			<filename>config.xml</filename>
-			<filename>controller.php</filename>
-			<filename>index.html</filename>
-			<filename>pixpublish.php</filename>
 			<folder>classes</folder>
 			<folder>controllers</folder>
 			<folder>helpers</folder>
 			<folder>language</folder>
 			<folder>media</folder>
-			<folder>models</folder>
-			<folder>sql</folder>
-			<folder>tables</folder>
 			<folder>views</folder>
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>index.html</filename>
+			<filename>pixpublish.php</filename>
 		</files>
-		<!-- 
 		<languages folder="admin">
 			<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.ini</language>
 			<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.sys.ini</language>
 		</languages>
-		 -->
 	</administration>
 </extension>
