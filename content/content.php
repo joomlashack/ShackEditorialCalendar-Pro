@@ -9,7 +9,7 @@ defined('_JEXEC') or die;
 
 JLoader::import( 'pixpublishplugin', JPATH_COMPONENT_ADMINISTRATOR.'/classes' );
 
-class PlgPixPublishContent extends JPlugin implements PixPublishPlugin
+class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 {
 	protected $autoloadLanguage = true;
 	
@@ -50,6 +50,9 @@ class PlgPixPublishContent extends JPlugin implements PixPublishPlugin
 		ColorFixer::$st_color = $this->params->get( 'background_colour', '#3a87ad' );
 		$result = $db->setQuery( $query )->loadObjectList( '', 'ColorFixer' );
 		
+		// Fix dates
+		$result = self::fixDates( $result, 'start' );
+		
 		return $result;
 	}
 
@@ -88,7 +91,16 @@ class PlgPixPublishContent extends JPlugin implements PixPublishPlugin
 			$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, "'.$this->getName().'" as plugin' )
 				->from( '#__content tbl' )
 				->where( 'tbl.id = '.(int)$id );
-			return $db->setQuery( $query )->loadObject();
+			
+			$result = $db->setQuery( $query )->loadObject();
+			
+			if( $result )
+			{
+				$arr = array( $result );
+				$arr = self::fixDates( $arr, 'start' );
+				$result = $arr[0];
+			}
+			return $result;
 		}
 	}
 	
@@ -107,7 +119,11 @@ class PlgPixPublishContent extends JPlugin implements PixPublishPlugin
 			$title = $data->pixtest_title;
 
 			if( $time )
+			{
+				$offset = JFactory::getConfig()->get('offset');
+				$time = JFactory::getDate( $time, $offset )->format( 'H:i', false );
 				$query->set( 'publish_up = TIMESTAMP( DATE( publish_up ),'.$query->q( $time ).' )' );
+			}
 			if( $title )
 				$query->set( 'title = '.$query->q( $title ) );
 			
