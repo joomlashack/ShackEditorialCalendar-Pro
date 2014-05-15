@@ -61,7 +61,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	{
 		if( $source === $this->getName() )
 		{
-			if( !$this->getAuth( $id )->get( 'core.edit' ) && !$this->getAuth( $id )->get( 'core.edit.own' ) )
+			if( !$this->getAuth( $id )->get( 'core.edit' ) /*&& !$this->getAuth( $id )->get( 'core.edit.own' )*/ )
 				return false;
 			
 			$this->logThis( 'Got to content onItemMove' );
@@ -72,8 +72,9 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 
 			$query->where( 'id = '.(int)$id );
 			
-			if( $this->getAuth( $id )->get( 'core.edit.own' ) )
-				$query->where( 'created_by = '.(int)JFactory::getUser()->get( 'id' ) );
+			// TODO: query -> fetch -> check
+			/*if( $this->getAuth( $id )->get( 'core.edit.own' ) )
+				$query->where( 'created_by = '.(int)JFactory::getUser()->get( 'id' ) );*/
 			
 			$this->logThis( (string)$query );
 			if( !$db->setQuery($query)->execute() )
@@ -108,7 +109,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	{
 		if( $source === $this->getName() )
 		{
-			if( !$this->getAuth( $id )->get( 'core.edit' ) && !$this->getAuth( $id )->get( 'core.edit.own' ) )
+			if( !$this->getAuth( $id )->get( 'core.edit' ) /*&& !$this->getAuth( $id )->get( 'core.edit.own' )*/ )
 				return false;
 			
 			$db = JFactory::getDbo();
