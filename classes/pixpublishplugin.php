@@ -7,9 +7,9 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-/*abstract class*/ interface PixPublishPlugin //extends JPlugin
+interface iPixPublishPlugin
 {
-	/*abstract*/ public function onDataFetch( $start, $stop, $data );
+	public function onDataFetch( $start, $stop, $data );
 	
 	public function onItemMove( $source, $id, $dayd, $mind );
 	
@@ -18,6 +18,18 @@ defined('_JEXEC') or die;
 	public function onItemSave( $source, $id, $data  );
 	
 	public function onRegisterSearchFilters();
+}
+
+abstract class PixPublishPlugin extends JPlugin
+{
+	protected static function fixDates( &$arr, $fieldname )
+	{
+		$config = JFactory::getConfig();
+		$user = JFactory::getUser();
+		foreach( $arr as $row )
+			$row->$fieldname = JFactory::getDate( $row->start, 'UTC' )->setTimezone( new DateTimeZone( $config->get( 'offset' ) ) )->format( 'Y-m-d H:i:s', true, false );
+		return $arr;
+	}
 }
 
 class ColorFixer
