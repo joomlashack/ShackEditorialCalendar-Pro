@@ -132,8 +132,9 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			
 			$query->where( 'id = '.(int)$id );
 			
-			if( $this->getAuth( $id )->get( 'core.edit.own' ) )
-				$query->where( 'created_by = '.(int)JFactory::getUser()->get( 'id' ) );
+			// TODO: Fix this so that it works
+			/*if( $this->getAuth( $id )->get( 'core.edit.own' ) )
+				$query->where( 'created_by = '.(int)JFactory::getUser()->get( 'id' ) );*/
 			
 			$this->logThis( print_r( $data, true ) );
 			$this->logThis( (string)$query );
