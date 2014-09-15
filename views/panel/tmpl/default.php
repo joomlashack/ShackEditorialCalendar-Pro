@@ -95,13 +95,13 @@ $(document).ready( function()
 				},
 				onopen: function()
 				{
-					 $('#pixtest_start').timepicker({
-					        template: false,
-					        showInputs: false,
-					        minuteStep: 5,
-					        defaultTime: false,
-					        showMeridian: false,
-					    });
+					$('.timepicker').timepicker({
+						template: false,
+						showInputs: false,
+						minuteStep: 5,
+						defaultTime: false,
+						showMeridian: false,
+					});
 				}
 			});
 	    },

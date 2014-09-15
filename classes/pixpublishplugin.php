@@ -13,7 +13,7 @@ interface iPixPublishPlugin
 	
 	public function onItemMove( $source, $id, $dayd, $mind );
 	
-	public function onGetDialog( $source, $id, &$html, &$extra );
+	public function onGetDialog( $source, $id, $form );
 	
 	public function onItemSave( $source, $id, $data  );
 	

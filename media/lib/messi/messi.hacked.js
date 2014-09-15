@@ -56,7 +56,7 @@ function Messi(data, options) {
       
       var cls = (_this.options.buttons[i]["class"]) ? _this.options.buttons[i]["class"] : '';
       var btn = jQuery('<div class="btnbox"><button class="btn ' + cls + '" href="#">' + _this.options.buttons[i].label + '</button></div>').data('value', _this.options.buttons[i].val);
-      console.debug( btn.data() );
+      //console.debug( btn.data() );
       var test = _this.options.buttons[i].val;
       btn.on('click', function() {
         var value = jQuery.data(this, 'value');
