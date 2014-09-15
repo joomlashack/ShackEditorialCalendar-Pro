@@ -11,11 +11,12 @@
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
 	<authorEmail>johan@pixpro.net</authorEmail>
 	<authorUrl>www.pixpro.net</authorUrl>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<description>TODO</description>
 	<files>
 		<file plugin="content">content.php</file>
     	<folder>language</folder>
+    	<folder>form</folder>
 	</files>
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_content.ini</language>

@@ -12,6 +12,7 @@ JLoader::import( 'pixpublishplugin', JPATH_COMPONENT_ADMINISTRATOR.'/classes' );
 class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 {
 	protected $autoloadLanguage = true;
+	protected $item = null;
 	
 	/**
 	 *
@@ -56,15 +57,16 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		return $result;
 	}
 
-	// TODO: Remove title, not used anymore
 	public function onItemMove( $source, $id, $dayd, $mind )
 	{
 		if( $source === $this->getName() )
 		{
-			if( !$this->getAuth( $id )->get( 'core.edit' ) /*&& !$this->getAuth( $id )->get( 'core.edit.own' )*/ )
-				return false;
+		if( !$this->getAuth( $id )->get( 'core.edit' ) )
+			{
+				if( !$this->canEditOwn( $id ) )
+					return false;
+			}
 			
-			$this->logThis( 'Got to content onItemMove' );
 			$db = JFactory::getDbo();
 			$query = $db->getQuery( true );
 			$query->update( '#__content' );
@@ -72,18 +74,13 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 
 			$query->where( 'id = '.(int)$id );
 			
-			// TODO: query -> fetch -> check
-			/*if( $this->getAuth( $id )->get( 'core.edit.own' ) )
-				$query->where( 'created_by = '.(int)JFactory::getUser()->get( 'id' ) );*/
-			
-			$this->logThis( (string)$query );
 			if( !$db->setQuery($query)->execute() )
 				return false;
 		}
 		return true;
 	}
 	
-	public function onGetDialog( $source, $id, &$html, &$extra )
+	public function onGetDialog( $source, $id, $form )
 	{
 		if( $source === $this->getName() )
 		{
@@ -101,6 +98,10 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 				$arr = self::fixDates( $arr, 'start' );
 				$result = $arr[0];
 			}
+			
+			JForm::addFormPath( __DIR__ . '/form' );
+			$form->loadFile( 'form', false );
+			
 			return $result;
 		}
 	}
@@ -109,36 +110,35 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	{
 		if( $source === $this->getName() )
 		{
-			if( !$this->getAuth( $id )->get( 'core.edit' ) /*&& !$this->getAuth( $id )->get( 'core.edit.own' )*/ )
+			$canEdit = $this->getAuth( $id )->get( 'core.edit' );
+			if( !$canEdit )
+				$canEdit = $this->canEditOwn( $id );
+			$canEditState = $this->canEditState( $id );
+			
+			if( !$canEdit && !$canEditState )
 				return false;
 			
 			$db = JFactory::getDbo();
 			$query = $db->getQuery( true );
 			$query->update( '#__content' );
 			
-			$time = $data->pixtest_start;
-			$title = $data->pixtest_title;
+			$time = $data->start;
+			$title = $data->title;
 
 			if( $time )
 			{
 				$offset = JFactory::getConfig()->get('offset');
 				$time = JFactory::getDate( $time, $offset )->format( 'H:i', false );
-				$query->set( 'publish_up = TIMESTAMP( DATE( publish_up ),'.$query->q( $time ).' )' );
+				if( $canEdit )
+					$query->set( 'publish_up = TIMESTAMP( DATE( publish_up ),'.$query->q( $time ).' )' );
 			}
-			if( $title )
+			if( $title && $canEdit )
 				$query->set( 'title = '.$query->q( $title ) );
 			
-			// Fix the auth core.edit.state
-			$query->set( 'state = '.(int)$data->filter_status );
+			if( $canEditState )
+				$query->set( 'state = '.(int)$data->state );
 			
 			$query->where( 'id = '.(int)$id );
-			
-			// TODO: Fix this so that it works
-			/*if( $this->getAuth( $id )->get( 'core.edit.own' ) )
-				$query->where( 'created_by = '.(int)JFactory::getUser()->get( 'id' ) );*/
-			
-			$this->logThis( print_r( $data, true ) );
-			$this->logThis( (string)$query );
 			if( !$db->setQuery($query)->execute() )
 				return false;
 		}
@@ -153,6 +153,43 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	protected function getAuth( $id = 0 )
 	{
 		return PixPublishHelper::getActions( 'com_content', 'article', $id );
+	}
+	
+	protected function canEditOwn( $id )
+	{
+		if( $this->getAuth( $id )->get( 'core.edit.own' ) )
+		{
+			$created_by = (int)$this->getItem( $id )->created_by;
+			$user = JFactory::getUser();
+			$user_id = (int)$user->id;
+			if( $user_id != 0 )
+			{
+				if( $user_id == $created_by )
+					return true;
+			}
+			return false;
+				
+		}
+		return false;
+	}
+	
+	protected function canEditState( $id )
+	{
+		return JFactory::getUser()->authorise( 'core.edit.state', 'com_content.article.'.(int)$id );
+	}
+	
+	protected function getItem( $id )
+	{
+		if( $this->item == null )
+		{
+			$db = JFactory::getDbo();
+			$query = $db->getQuery( true );
+			$query->select( '*' )
+				->from( '#__content' )
+				->where( 'id = '.(int)$id );
+			$this->item = $db->setQuery( $query )->loadObject();
+		}
+		return $this->item;
 	}
 	
 	public function onRegisterSearchFilters()

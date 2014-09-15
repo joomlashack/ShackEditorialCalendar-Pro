@@ -58,7 +58,7 @@ class PlgPixPublishModule extends PixPublishPlugin implements iPixPublishPlugin
 		return true;
 	}
 	
-	public function onGetDialog( $source, $id, &$html, &$extra )
+	public function onGetDialog( $source, $id, $form, &$extra )
 	{
 		if( $source === $this->getName() )
 		{
