@@ -1,16 +1,23 @@
 <?php
 /**
-* @copyright	Copyright (C) 2014 Johan Sundell. All rights reserved.
-* @license		GNU General Public License version 2 or later; see LICENSE.txt
-*/
+ * @package         PixPublish
+ * @author          Johan Sundell <johan@pixpro.net>
+ * @link            http://www.pixpro.net/labs
+ * @copyright       Copyright ©2014-2015 Pixpro Stockholm AB All Rights Reserved.
+ * @license         GNU General Public License version 2 or later; see LICENSE.txt
+ */
 
 // No direct access.
 defined('_JEXEC') or die;
 
 class PixPublishViewPanel extends JViewLegacy
+
 {
+
 	public function display( $tpl = null )
+
 	{
+
 		JHtml::_( 'jquery.framework', true );
 		JHtml::_( 'bootstrap.framework' );
 		
