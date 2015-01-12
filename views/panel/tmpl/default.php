@@ -169,4 +169,3 @@ JFactory::getDocument()->addScriptDeclaration( $script );
 </div>
 
 
-
