@@ -110,7 +110,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 	
 	protected function logThis( $message )
 	{
-		jimport( 'joomla.log.log' );
+		/*jimport( 'joomla.log.log' );
 	
 		JLog::addLogger
 			(
@@ -121,6 +121,6 @@ class PixPublishControllerPanel extends JControllerLegacy
 					JLog::ALL,
 					'com_pixpublish'
 			);
-		JLog::add( $message, JLog::WARNING, 'com_pixpublish' );
+		JLog::add( $message, JLog::WARNING, 'com_pixpublish' );*/
 	}
 }

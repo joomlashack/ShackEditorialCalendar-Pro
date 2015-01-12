@@ -11,13 +11,10 @@
 defined('_JEXEC') or die;
 
 class PixPublishViewPanel extends JViewLegacy
-
 {
 
 	public function display( $tpl = null )
-
 	{
-
 		JHtml::_( 'jquery.framework', true );
 		JHtml::_( 'bootstrap.framework' );
 		

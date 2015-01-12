@@ -12,8 +12,6 @@ defined('_JEXEC') or die;
 
 jimport('joomla.form.formfield');
 
-
-
 class JFormFieldTime extends JFormField
 {
 	protected $type = 'time';
