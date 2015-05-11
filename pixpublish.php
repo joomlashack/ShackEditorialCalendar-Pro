@@ -19,5 +19,5 @@ if( !JLoader::import( 'pixpublish', JPATH_COMPONENT.'/helpers' ) )
 
 // Execute the task.
 $controller	= JControllerLegacy::getInstance( 'PixPublish' );
-$controller->execute( JRequest::getCmd( 'task' ) );
+$controller->execute( JFactory::getApplication()->input->get('task') );
 $controller->redirect();
