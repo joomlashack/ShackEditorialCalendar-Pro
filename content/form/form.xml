@@ -18,8 +18,8 @@
 			label="PLG_PIXPUBLISH_CONTENT_START_LABEL"
 		/>
 		<field name="state" type="list" label="JSTATUS"
-			description="JFIELD_PUBLISHED_DESC" class="chzn-color-state"
-			filter="intval" size="1" default="1"
+			description="JFIELD_PUBLISHED_DESC" class="inputbox"
+			filter="intval" default="1"
 		>
 			<option value="1">
 				JPUBLISHED</option>

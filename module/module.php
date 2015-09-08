@@ -12,6 +12,12 @@ JLoader::import( 'pixpublishplugin', JPATH_COMPONENT_ADMINISTRATOR.'/classes' );
 class PlgPixPublishModule extends PixPublishPlugin implements iPixPublishPlugin
 {
 	protected $autoloadLanguage = true;
+	
+	public function onPageLoad()
+	{
+		$doc->addScript( 'media/js/module.js' );
+	}
+	
 	/**
 	 *
 	 * @param JDate $start
@@ -58,7 +64,7 @@ class PlgPixPublishModule extends PixPublishPlugin implements iPixPublishPlugin
 		return true;
 	}
 	
-	public function onGetDialog( $source, $id, $form, &$extra )
+	public function onGetDialog( $source, $id, $form/*, &$extra*/ )
 	{
 		if( $source === $this->getName() )
 		{
@@ -101,6 +107,10 @@ class PlgPixPublishModule extends PixPublishPlugin implements iPixPublishPlugin
 			$arr = array( $result );
 			$arr = self::fixDates( $arr, 'start' );
 			$result = $arr[0];
+			
+			// NEw
+			JForm::addFormPath( __DIR__ . '/form' );
+			$form->loadFile( 'form', false );
 			
 			return $result;
 		}
@@ -145,6 +155,14 @@ class PlgPixPublishModule extends PixPublishPlugin implements iPixPublishPlugin
 		return true;
 	}
 	
+	public function onCreateNew( $source, $id, $form )
+	{
+		if( $source === $this->getName() )
+		{
+			
+		}
+	}
+	
 	public function onRegisterSearchFilters()
 	{
 		JLoader::import( 'modules', JPATH_ADMINISTRATOR.'/components/com_modules/helpers' );
@@ -154,6 +172,8 @@ class PlgPixPublishModule extends PixPublishPlugin implements iPixPublishPlugin
 			'filter_position',
 			JHtml::_('select.options', ModulesHelper::getPositions( 0 ), 'value', 'text' )
 		);
+		
+		JFactory::getDocument()->addScript( JUri::root().'plugins/pixpublish/module/media/js/module.js' );
 	}
 	
 	public function onItemReseize( $source, $id, $dayd, $mind )
@@ -172,6 +192,11 @@ class PlgPixPublishModule extends PixPublishPlugin implements iPixPublishPlugin
 				return false;
 		}
 		return true;
+	}
+	
+	public function onNewSave( $source, $id, $date, $data  )
+	{
+		// TOOD: Implement
 	}
 	
 	protected function getName()
