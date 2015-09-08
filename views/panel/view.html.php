@@ -17,6 +17,9 @@ class PixPublishViewPanel extends JViewLegacy
 	{
 		JHtml::_( 'jquery.framework', true );
 		JHtml::_( 'bootstrap.framework' );
+		JHtml::_('formbehavior.chosen', 'select');
+		JHtml::_('behavior.keepalive');
+		
 		
 		$doc = JFactory::getDocument();
 		// Fullcalendar
@@ -32,7 +35,11 @@ class PixPublishViewPanel extends JViewLegacy
 		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/lib/test/bootstrap-timepicker.min.js' );
 		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/lib/test/bootstrap-timepicker.min.css' );
 		
+		// Component
+		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/js/pixpublish.js' );
+		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/css/pixpublish.css' );
 		
+
 		$this->addToolbar();
 		
 		$dispatcher = $this->importPlugins();
@@ -41,15 +48,12 @@ class PixPublishViewPanel extends JViewLegacy
 		$results = $dispatcher->trigger( 'onRegisterSearchFilters' );
 		$this->sidebar = JHtmlSidebar::render();
 		
-		JHtml::_('formbehavior.chosen', 'select');
-		JHtml::_('behavior.keepalive');
-		
 		parent::display( $tpl );
 	}
 	
 	protected function addToolbar()
 	{
-		JToolBarHelper::title( JText::_( 'COM_PIXPUBLISH_MANAGER_PANEL' ) );
+		JToolBarHelper::title( JText::_( 'COM_PIXPUBLISH_MANAGER_PANEL' ), 'calendar' );
 	}
 	
 	/**

@@ -25,7 +25,7 @@ $html = <<<HTML
 <div class="input-append bootstrap-timepicker">
 	<input id="$this->id" name="$this->name" type="text" class="input-small timepicker" value="$start->hour:$start->minute">
 	<!-- <span class="add-on"><i class="icon-calendar"></i></span>-->
-	<i class="icon-calendar"></i>
+	<span class="pp-btn"><i class="icon-clock"></i></span>
 </div>
 HTML;
 		return $html;
