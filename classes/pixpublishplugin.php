@@ -40,6 +40,11 @@ abstract class PixPublishPlugin extends JPlugin
 			$row->$fieldname = JFactory::getDate( $row->start, 'UTC' )->setTimezone( new DateTimeZone( $config->get( 'offset' ) ) )->format( 'Y-m-d H:i:s', true, false );
 		return $arr;
 	}
+	
+	public function getInfoText()
+	{
+		return '';
+	}
 }
 
 class ColorFixer

@@ -48,6 +48,9 @@ class PixPublishViewPanel extends JViewLegacy
 		$results = $dispatcher->trigger( 'onRegisterSearchFilters' );
 		$this->sidebar = JHtmlSidebar::render();
 		
+		$infotexts = $dispatcher->trigger( 'getInfoText' );
+		$this->infotexts = $infotexts;
+		
 		parent::display( $tpl );
 	}
 	

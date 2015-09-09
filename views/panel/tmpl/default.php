@@ -28,6 +28,13 @@ $base_url = JRoute::_( 'index.php?option=com_pixpublish&format=json', false );
 <?php else : ?>
 <div id="j-main-container">
 <?php endif;?>
+	<?php if( count( $this->infotexts ) > 0 ):?>
+	<div>
+		<?php foreach( $this->infotexts as $row ): ?>
+		<?php echo $row;?>
+		<?php endforeach; ?>
+	</div>
+	<?php endif;?>
 	<div id='calendar' style='margin:3em 0;font-size:13px' data-base-url="<?php echo $base_url; ?>">
 	</div>
 
