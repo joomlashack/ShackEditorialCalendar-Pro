@@ -218,6 +218,11 @@ class PlgPixPublishContentFree extends PixPublishPlugin implements iPixPublishPl
 		);
 	}
 	
+	public function getInfoText()
+	{
+		return JText::_( 'PLG_PIXPUBLISH_CONTENTFREE_INFOTEXT' );
+	}
+	
 	protected function logThis( $message )
 	{
 		/*jimport( 'joomla.log.log' );
