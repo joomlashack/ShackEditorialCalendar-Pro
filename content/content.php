@@ -111,8 +111,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			JForm::addFormPath( __DIR__ . '/form' );
 			$form->loadFile( 'form', false );
 			
-			if( $form->setFieldAttribute( 'articletext', 'id', time() ) )
-				$this->logThis( 'field not found' );
+			$form->setFieldAttribute( 'articletext', 'id', time() );
 			
 			return $result;
 		}
@@ -122,6 +121,8 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	{
 		if( $source === $this->getName() )
 		{
+			$this->logThis( print_r( $data, true ) );
+			
 			$canEdit = $this->getAuth( $id )->get( 'core.edit' );
 			if( !$canEdit )
 				$canEdit = $this->canEditOwn( $id );
@@ -136,6 +137,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			
 			$time = $data->start;
 			$title = $data->title;
+			$articletext = $data->articletext;
 
 			if( $time )
 			{
@@ -145,7 +147,10 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 					$query->set( 'publish_up = TIMESTAMP( DATE( publish_up ),'.$query->q( $time ).' )' );
 			}
 			if( $title && $canEdit )
+			{
 				$query->set( 'title = '.$query->q( $title ) );
+				$query->set( 'introtext = '.$query->q( $articletext ) );
+			}
 			
 			if( $canEditState )
 				$query->set( 'state = '.(int)$data->state );
