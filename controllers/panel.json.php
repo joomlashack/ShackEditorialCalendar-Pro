@@ -70,11 +70,28 @@ class PixPublishControllerPanel extends JControllerLegacy
 		if( count( $results ) != 0 )
 		{
 			$item = $results[0];
-			
+			//$this->logThis( 'test' );
 			if( $item != null )
 			{
 				$form->bind( $item );
 				echo '<form action="" method="post" id="pixsubmit_form">'.$form->renderFieldset('').'</form>';
+				$lines = array();
+				foreach( $form->getFieldset() as $row )
+				{
+					if( $row->type ==  'Editor' )
+					{
+						$lines[] = $row->save();
+						$this->logThis( print_r( $row->save(), true ) );
+					}
+				}
+				if( count( $lines ) > 0 )
+				{
+					echo '<script type="text/javascript">';
+					echo 'function toggleMe(){';
+					foreach( $lines as $row )
+						echo  $row;
+					echo '};</script>';
+				}
 			}
 		}
 		else
@@ -185,7 +202,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 	
 	protected function logThis( $message )
 	{
-		/*jimport( 'joomla.log.log' );
+		jimport( 'joomla.log.log' );
 	
 		JLog::addLogger
 			(
@@ -196,6 +213,6 @@ class PixPublishControllerPanel extends JControllerLegacy
 					JLog::ALL,
 					'com_pixpublish'
 			);
-		JLog::add( $message, JLog::WARNING, 'com_pixpublish' );*/
+		JLog::add( $message, JLog::WARNING, 'com_pixpublish' );
 	}
 }

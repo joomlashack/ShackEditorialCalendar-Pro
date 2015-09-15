@@ -17,7 +17,11 @@ JHTML::_('behavior.modal');
 $base_url = JRoute::_( 'index.php?option=com_pixpublish&format=json', false );
 
 ?>
+<script type="text/javascript">
+<!--
 
+//-->
+</script>
 <?php if( !empty( $this->sidebar ) ) : ?>
 <div id="j-sidebar-container" class="span2">
 	<form id="pixpublish_search" method="POST" onsubmit="" action="javascript:(function($) { $('#calendar').fullCalendar( 'refetchEvents' ); }(jQuery));">

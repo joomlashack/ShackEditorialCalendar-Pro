@@ -76,6 +76,17 @@ jQuery(function($) {
 				   buttons: [{id: 0, label: 'Save', val: 'Y', class: 'btn-success'}, {id: 1, label: 'Cancel', val: 'N'}],
 				   callback: function(val)
 				   {
+					  // console.debug( $('#pixsubmit_form') );
+					   if( typeof( toggleMe ) == 'function' )
+					   {
+						   console.debug("Found");
+						   try{
+						   toggleMe();
+						   }
+						   catch( ex) 
+						   {}
+					   }
+					   //toggleMe();
 					   var form_data = JSON.stringify( $('#pixsubmit_form').serializeObject() );
 					   if( val == 'Y' )
 					   {
@@ -100,6 +111,11 @@ jQuery(function($) {
 							defaultTime: false,
 							showMeridian: false,
 						});
+					    /*if( typeof( toggleMe ) == 'function' )
+					    {
+						    console.debug("Found");
+						    toggleMe();
+					    }*/
 					}
 				});
 		    },
@@ -212,7 +228,9 @@ jQuery(function($) {
 	$.fn.serializeObject = function()
 	{
 	    var o = {};
+	    console.debug( this );
 	    var a = this.serializeArray();
+	    console.debug( a );
 	    $.each(a, function() {
 	        if (o[this.name] !== undefined) {
 	            if (!o[this.name].push) {
@@ -223,7 +241,7 @@ jQuery(function($) {
 	            o[this.name] = this.value || '';
 	        }
 	    });
-	    //console.debug( o );
+	    console.debug( o );
 	    return o;
 	};
 
