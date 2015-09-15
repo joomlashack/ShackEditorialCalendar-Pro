@@ -48,7 +48,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		
 		if( $data->filter_access != '' )
 		{
-			// TODO: Add the query for access
+			$query->where( 'access = '.(int)$data->filter_access );
 		}
 		
 		if( $data->filter_language != '' )
