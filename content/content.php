@@ -17,6 +17,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	protected $autoloadLanguage = true;
 	protected $item = null;
 	
+	/* Seems not to be triggered at all; see onRegisterSearchFilters */
 	public function onPageLoad()
 	{
 		$doc->addScript( 'media/js/content.js' );
@@ -440,6 +441,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			JHtml::_('select.options', JHtml::_('category.options', 'com_content'), 'value', 'text', '' )
 		);
 		
+		JFactory::getDocument()->addScriptDeclaration('var contentTypeName = "'.JText::_('PLG_PIXPUBLISH_CONTENT_TYPE_NAME').'";');
 		JFactory::getDocument()->addScript( JUri::root().'plugins/pixpublish/content/media/js/content.js' );
 	}
 	
