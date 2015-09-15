@@ -110,6 +110,9 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			JForm::addFormPath( __DIR__ . '/form' );
 			$form->loadFile( 'form', false );
 			
+			if( $form->setFieldAttribute( 'articletext', 'id', time() ) )
+				$this->logThis( 'field not found' );
+			
 			return $result;
 		}
 	}
@@ -152,8 +155,13 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		}
 		return true;
 	}
-
+	
 	public function onCreateNew( $source, $id, $form )
+	{
+		return $this->onGetDialog( $source, $id, $form );
+	}
+
+	public function onCreateNewTEST( $source, $id, $form )
 	{
 /*
 		JForm::addFieldPath( JURI::Base().'components/com_categories/models/fields/categoryedit.php' );
@@ -312,6 +320,11 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	
 	public function onNewSave( $source, $id, $date, $data  )
 	{
+		
+	}
+	
+	public function onNewSaveOLD( $source, $id, $date, $data  )
+	{
 
 		if( $source === $this->getName() )
 		{
@@ -432,7 +445,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	
 	protected function logThis( $message )
 	{
-		/*jimport( 'joomla.log.log' );
+		jimport( 'joomla.log.log' );
 	
 		JLog::addLogger
 		(
@@ -443,7 +456,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 				JLog::ALL,
 				'com_pixpublish'
 		);
-		JLog::add( $message, JLog::WARNING, 'com_pixpublish' );*/
+		JLog::add( $message, JLog::WARNING, 'com_pixpublish' );
 	}
 }
 
