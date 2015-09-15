@@ -38,7 +38,7 @@ class PixPublishViewPanel extends JViewLegacy
 		// Component
 		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/js/pixpublish.js' );
 		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/css/pixpublish.css' );
-		
+		$doc->addScriptDeclaration('var addNew = "'.JText::_('COM_PIXPUBLISH_ADD_NEW').'";');
 
 		$this->addToolbar();
 		

@@ -70,7 +70,7 @@ jQuery(function($) {
 		    {
 			   Messi.load( $('#calendar').data('base-url') + "&task=panel.edit"  + '&id=' + calEvent.id + "&plugin=" + calEvent.plugin,
 				{
-				   title: 'Edit',
+				   title: 'Edit ' + calEvent.plugin,
 				   modal: true,
 				   unload : false,
 				   buttons: [{id: 0, label: 'Save', val: 'Y', class: 'btn-success'}, {id: 1, label: 'Cancel', val: 'N'}],
@@ -133,7 +133,7 @@ jQuery(function($) {
 
 			Messi.load( $('#calendar').data('base-url') + "&task=panel.create&plugin=" + plugin,
 			{
-			   title: 'New',
+			   title: 'New ' + plugin,
 			   modal: true,
 			   unload : false,
 			   buttons: [{id: 0, label: 'Save', val: 'Y', class: 'btn-success'}, {id: 1, label: 'Cancel', val: 'N'}],
