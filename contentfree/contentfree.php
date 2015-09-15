@@ -45,16 +45,6 @@ class PlgPixPublishContentFree extends PixPublishPlugin implements iPixPublishPl
 			$query->where( 'catid = '.(int)$data->filter_category_id );
 		}
 		
-		if( $data->filter_access != '' )
-		{
-			$query->where( 'access = '.(int)$data->filter_access );
-		}
-		
-		if( $data->filter_language != '' )
-		{
-			$query->where( 'language = '.$query->q( $data->filter_language ) );
-		}
-		
 		ColorFixer::$st_color = $this->params->get( 'background_colour', '#08C' ); // #3a87ad
 		$result = $db->setQuery( $query )->loadObjectList( '', 'ColorFixer' );
 		
