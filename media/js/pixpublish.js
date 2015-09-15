@@ -181,6 +181,9 @@ jQuery(function($) {
 				}
 			});			
 		});
+		
+		// Activate Bootstrap Tooltip
+		$('.hasTooltip').tooltip({"html": true,"container": "body"});
 	
 	// End Document Ready
 	});
