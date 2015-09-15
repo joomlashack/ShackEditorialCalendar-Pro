@@ -94,6 +94,27 @@ class PixPublishControllerPanel extends JControllerLegacy
 		$form = new JForm( 'com_pixpublish' );
 		$extra = '';
 
+		$results = $dispatcher->trigger( 'onGetDialog', array( $source, $id, $form ) );
+		$form->bind( $item );
+		echo '<form action="" method="post" id="pixsubmit_form">'.$form->renderFieldset('').'</form>';
+		/*$item = null;
+		if( count( $results ) != 0 )
+		{
+			$item = $results[0];
+				
+			if( $item != null )
+			{
+				$form->bind( $item );
+				echo '<form action="" method="post" id="pixsubmit_form">'.$form->renderFieldset('').'</form>';
+			}
+		}
+		else
+		{
+			throw new Exception('Whoops, something happened!', 500);
+			JFactory::getApplication()->close();
+		}*/
+		JFactory::getApplication()->close();
+		return;
 /*
 		TODO
 		Source is set correct, but the function triggered is still always the one in plugin content..?
