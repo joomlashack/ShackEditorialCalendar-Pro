@@ -96,7 +96,7 @@ jQuery(function($) {
 					                $('#calendar').fullCalendar( 'refetchEvents' );
 					            },
 					            error: function(){
-					                revertFunc();
+					                //revertFunc();
 					            }
 						   });
 					   }
@@ -172,7 +172,7 @@ jQuery(function($) {
 				                $('#calendar').fullCalendar( 'refetchEvents' );
 				            },
 				            error: function(){
-				                revertFunc();
+				                //revertFunc();
 				            }
 					   });
 				   }
@@ -187,57 +187,6 @@ jQuery(function($) {
 						showMeridian: false,
 					});
 				}
-			
-			/*
-			Messi.load( $('#calendar').data('base-url') + "&task=panel.create&plugin=" + plugin,
-			{
-			   title: 'New ' + plugin,
-			   modal: true,
-			   unload : false,
-			   buttons: [{id: 0, label: 'Save', val: 'Y', class: 'btn-success'}, {id: 1, label: 'Cancel', val: 'N'}],
-			   callback: function(val)
-			   {
-				   var form_data = JSON.stringify( $('#pixsubmit_form').serializeObject() );
-				   if( val == 'Y' )
-				   {
-					   var url = $('#calendar').data('base-url') + "&task=panel.savecreated" + "&mind=" + 0 + "&plugin=" + plugin + "&date=" + date + "&data=" + form_data;
-					   $.ajax({
-				            url: url,
-				            success: function(response){
-				                $('#calendar').fullCalendar( 'refetchEvents' );
-								//console.log(response);
-				            },
-				            error: function(jqXHR, textStatus, errorThrown){
-								revertFunc(); // TODO: Does't exsist...
-								//console.log(errorThrown);
-				            }
-					   });
-				   }
-				   else
-				   {
-					   
-				   }
-				},
-				onopen: function()
-				{
-					$('.timepicker').timepicker({
-						template: false,
-						showInputs: false,
-						minuteStep: 5,
-						defaultTime: false,
-						showMeridian: false,
-					});
-					
-					// Bootstrap tabs
-					$('#pixTabContent > div').each( function (){
-						var li_class = '';
-						if ( $(this).hasClass('active') ) {
-							li_class = ' class="active"';
-						}
-						$('#pixTabTabs').append('<li' + li_class + '><a href="#' + $(this).attr('id') + '" data-toggle="tab" style="text-transform:capitalize;">' + $(this).attr('id').substring(3) + '</a></li>');
-					});
-				}
-				*/
 			});			
 		});
 		
