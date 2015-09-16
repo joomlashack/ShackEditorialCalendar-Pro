@@ -195,171 +195,13 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	
 	public function onCreateNew( $source, $id, $form )
 	{
-		return $this->onGetDialog( $source, $id, $form );
-	}
-
-	public function onCreateNewTEST( $source, $id, $form )
-	{
-/*
-		JForm::addFieldPath( JURI::Base().'components/com_categories/models/fields/categoryedit.php' );
-		Not working, using custom class with require_once()
-*/
-		if( $source === $this->getName() )
-		{
-			JForm::addFormPath( __DIR__ . '/form' );
-			$form->loadFile( 'create', false );
-	
-			$html = '';
-			$html .= '<form action="" method="post" id="pixsubmit_form">';
-	
-			$fieldsets = $form->getFieldsets();
-	
-			if( !empty($fieldsets) && $form->getAttribute('tabs') == "true" )
-			{
-				$active_fieldset = reset($fieldsets);
-				$active_fieldset = 'pp-'.$active_fieldset->name;
-				$active_fieldset = $form->getAttribute('active-tab', $active_fieldset);
-				$html .= JHtml::_('bootstrap.startTabSet', 'pixTab', array('active' => $active_fieldset));
-			}
-	
-			foreach ($form->getFieldsets() as $fieldset)
-			{
-				$fields = $form->getFieldset($fieldset->name);
-	
-				if( $form->getAttribute('tabs') == "true" )
-				{
-					$html .= JHtml::_('bootstrap.addTab', 'pixTab', 'pp-'.$fieldset->name, $fieldset->label);
-				}
-	
-				if (isset($fieldset->class))
-				{
-					$class = 'class="' . $fieldset->class . '"';
-				}
-				else
-				{
-					$class = '';
-				}
-	
-				$html .= "\t" . '<div ' . $class . '>' . PHP_EOL;
-	
-				if (isset($fieldset->label) && !empty($fieldset->label) && $form->getAttribute('tabs') != "true" )
-				{
-					$html .= "\t\t" . '<h3>' . JText::_($fieldset->label) . '</h3>' . PHP_EOL;
-				}
-	
-				foreach ($fields as $field)
-				{
-					$required	 = $field->required;
-					$labelClass	 = $field->labelClass;
-					$groupClass	 = $form->getFieldAttribute($field->fieldname, 'groupclass', '', $field->group);
-	
-					// Auto-generate label and description if needed
-					// Field label
-					$title 		 = $form->getFieldAttribute($field->fieldname, 'label', '', $field->group);
-					$emptylabel  = $form->getFieldAttribute($field->fieldname, 'emptylabel', false, $field->group);
-	
-					if ($field->type == 'editor' || $field->type == 'Editor')
-					{
-	/*
-						TODO
-						Editor (TinyMCE, CodeMirror is activated!) doesn't activate on load (need to toggle manually)
-						 - Maybe due to AJAX load so document ready doesn't trigger it?
-						Text entered in the editor (any) will not save unless editor is toggled off before saving
-						 - Look into JS triggering data copy from editor to form field
-	*/
-						// Load editor field
-						$editor = JFactory::getEditor();
-						$params = array( 'smilies'=> '0' ,
-										 'style'  => '1' ,
-										 'layer'  => '0' ,
-										 'table'  => '0' ,
-										 'clear_entities'=>'0'
-									 );
-						$inputField = $editor->display( $field->name,
-														'',
-														$field->width,
-														$field->height,
-														( is_int($field->columns) ? $field->columns : 0 ),
-														$field->rows,
-														$field->buttons,
-														time(),
-														'',
-														'',
-														'');
-					}
-					elseif (false)//$formType == 'read')
-					{
-						$inputField = $field->static;
-					}
-					elseif (true)//$formType == 'edit')
-					{
-						$inputField = $field->input;
-					}
-	
-					if (empty($title))
-					{
-						$html .= "\t\t\t" . $inputField . PHP_EOL;
-	
-						if (!empty($description) && $formType == 'edit')
-						{
-							$html .= "\t\t\t\t" . '<span class="help-block">';
-							$html .= JText::_($description) . '</span>' . PHP_EOL;
-						}
-					}
-					else
-					{
-						$html .= "\t\t\t" . '<div class="control-group ' . $groupClass . '">' . PHP_EOL;
-						$html .= "\t\t\t\t" . '<label class="control-label ' . $labelClass . '" for="' . $field->id . '">' . PHP_EOL;
-						$html .= "\t\t\t\t" . JText::_($title) . PHP_EOL;
-	
-						if ($required)
-						{
-							$html .= ' *';
-						}
-	
-						$html .= "\t\t\t\t" . '</label>' . PHP_EOL;
-						$html .= "\t\t\t\t" . '<div class="controls">' . PHP_EOL;
-						$html .= "\t\t\t\t" . $inputField . PHP_EOL;
-	
-						if (!empty($description))
-						{
-							$html .= "\t\t\t\t" . '<span class="help-block">';
-							$html .= JText::_($description) . '</span>' . PHP_EOL;
-						}
-	
-						$html .= "\t\t\t\t" . '</div>' . PHP_EOL;
-						$html .= "\t\t\t" . '</div>' . PHP_EOL;
-					}
-				}
-	
-				$html .= "\t" . '</div>' . PHP_EOL;
-	
-				if( $form->getAttribute('tabs')=="true" )
-				{
-					$html .= JHtml::_('bootstrap.endTab');
-				}
-			}
-	
-			if( !empty($fieldsets) && $form->getAttribute('tabs') == "true" )
-			{
-				$html .= JHtml::_('bootstrap.endTabSet');
-			}
-	
-			$html .= '</form>';
-		
-			echo $html;
-		}
-/*
-		JFactory::getApplication()->close();
-*/
-//		return $html;
 	}
 	
 	public function onNewSave( $source, $id, $date, $data  )
 	{
 	}
 	
-	public function onNewSaveOLD( $source, $id, $date, $data  )
+	/*public function onNewSaveOLD( $source, $id, $date, $data  )
 	{
 
 		if( $source === $this->getName() )
@@ -419,7 +261,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		}
 
 		return false;
-	}
+	}*/
 
 	protected function getName()
 	{
