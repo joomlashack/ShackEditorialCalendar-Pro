@@ -41,14 +41,6 @@ $base_url = JRoute::_( 'index.php?option=com_pixpublish&format=json', false );
 	<?php endif;?>
 	<div id='calendar' style='margin:3em 0;font-size:13px' data-base-url="<?php echo $base_url; ?>">
 	</div>
-
-	<div class="hidden">
-		<?php
-		/* Loading the Editor resources */
-		$editor = JFactory::getEditor();
-		echo $editor->display( 'loader', 10, 10, 0, 1, 1, 'loader', '', '', '');
-		?>
-	</div>
 </div>
 
 

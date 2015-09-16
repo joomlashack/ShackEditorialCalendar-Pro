@@ -76,12 +76,14 @@ class PixPublishControllerPanel extends JControllerLegacy
 				$form->bind( $item );
 				echo '<form action="" method="post" id="pixsubmit_form">'.$form->renderFieldset('').'</form>';
 				$lines = array();
+				$inits = array();
 				foreach( $form->getFieldset() as $row )
 				{
-					if( $row->type ==  'Editor' )
+					if( $row->type ==  'fixed' )
 					{
 						$lines[] = $row->save();
-						$this->logThis( print_r( $row->save(), true ) );
+						$inits[] = $row->getInit();
+						$this->logThis( print_r( $row->getInit(), true ) );
 					}
 				}
 				if( count( $lines ) > 0 )
@@ -92,6 +94,9 @@ class PixPublishControllerPanel extends JControllerLegacy
 						echo  $row;
 					echo '};</script>';
 				}
+				foreach( $inits as $row )
+					echo $row;
+				
 			}
 		}
 		else
