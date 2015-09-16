@@ -193,14 +193,6 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		return true;
 	}
 	
-	public function onCreateNew( $source, $id, $form )
-	{
-	}
-	
-	public function onNewSave( $source, $id, $date, $data  )
-	{
-	}
-	
 	/*public function onNewSaveOLD( $source, $id, $date, $data  )
 	{
 
