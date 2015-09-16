@@ -69,7 +69,7 @@ jQuery(function($) {
 		    eventClick: function(calEvent, jsEvent, view)
 		    {
 			   Messi.load( $('#calendar').data('base-url') + "&task=panel.edit"  + '&id=' + calEvent.id + "&plugin=" + calEvent.plugin,
-				{
+			   {
 				   title: 'Edit ' + calEvent.plugin,
 				   modal: true,
 				   unload : false,
@@ -79,7 +79,6 @@ jQuery(function($) {
 					  // console.debug( $('#pixsubmit_form') );
 					   if( typeof( toggleMe ) == 'function' )
 					   {
-						   console.debug("Found");
 						   try{
 						   toggleMe();
 						   }
@@ -111,11 +110,6 @@ jQuery(function($) {
 							defaultTime: false,
 							showMeridian: false,
 						});
-					    /*if( typeof( toggleMe ) == 'function' )
-					    {
-						    console.debug("Found");
-						    toggleMe();
-					    }*/
 					}
 				});
 		    },
@@ -147,6 +141,54 @@ jQuery(function($) {
 			var date = $(this).parent().parent().parent().data('date');
 			var plugin = $(this).data('plugin');
 
+			Messi.load( $('#calendar').data('base-url') + "&task=panel.edit"  + '&id=' + 0 + "&plugin=" + plugin,
+		   {
+			   title: 'New ' + plugin,
+			   modal: true,
+			   unload : false,
+			   buttons: [{id: 0, label: 'Save', val: 'Y', class: 'btn-success'}, {id: 1, label: 'Cancel', val: 'N'}],
+			   callback: function(val)
+			   {
+				  // console.debug( $('#pixsubmit_form') );
+				   if( typeof( toggleMe ) == 'function' )
+				   {
+					   try{
+					   toggleMe();
+					   }
+					   catch( ex) 
+					   {}
+				   }
+				   //toggleMe();
+				   var data =  $('#pixsubmit_form').serializeObject();
+				   data["publish_up"] = date;
+				   //console.debug( data ); return;
+				   var form_data = JSON.stringify( data );
+				   if( val == 'Y' )
+				   {
+					   var url = $('#calendar').data('base-url') + "&task=panel.save" + "&id=" + 0 + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + plugin + "&title=" + $('#pixtest_title').val() + "&data=" + form_data;
+					   $.ajax({
+				            url: url,
+				            success: function(){
+				                $('#calendar').fullCalendar( 'refetchEvents' );
+				            },
+				            error: function(){
+				                revertFunc();
+				            }
+					   });
+				   }
+				},
+				onopen: function()
+				{
+					$('.timepicker').timepicker({
+						template: false,
+						showInputs: false,
+						minuteStep: 5,
+						defaultTime: false,
+						showMeridian: false,
+					});
+				}
+			
+			/*
 			Messi.load( $('#calendar').data('base-url') + "&task=panel.create&plugin=" + plugin,
 			{
 			   title: 'New ' + plugin,
@@ -195,6 +237,7 @@ jQuery(function($) {
 						$('#pixTabTabs').append('<li' + li_class + '><a href="#' + $(this).attr('id') + '" data-toggle="tab" style="text-transform:capitalize;">' + $(this).attr('id').substring(3) + '</a></li>');
 					});
 				}
+				*/
 			});			
 		});
 		
@@ -228,9 +271,9 @@ jQuery(function($) {
 	$.fn.serializeObject = function()
 	{
 	    var o = {};
-	    console.debug( this );
+	   // console.debug( this );
 	    var a = this.serializeArray();
-	    console.debug( a );
+	   // console.debug( a );
 	    $.each(a, function() {
 	        if (o[this.name] !== undefined) {
 	            if (!o[this.name].push) {
@@ -241,7 +284,7 @@ jQuery(function($) {
 	            o[this.name] = this.value || '';
 	        }
 	    });
-	    console.debug( o );
+	    //console.debug( o );
 	    return o;
 	};
 

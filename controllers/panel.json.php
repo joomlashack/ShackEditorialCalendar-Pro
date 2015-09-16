@@ -67,11 +67,13 @@ class PixPublishControllerPanel extends JControllerLegacy
 		$extra = '';
 		$results = $dispatcher->trigger( 'onGetDialog', array( $source, $id, $form ) );
 		$item = null;
-		if( count( $results ) != 0 )
+		//$this->logThis( 'sudde 2: '.$id );
+		if( count( $results ) != 0 || (int)$id == 0 )
 		{
-			$item = $results[0];
-			//$this->logThis( 'test' );
-			if( $item != null )
+			if( count( $results ) != 0 )
+				$item = $results[0];
+			
+			if( $item != null || (int)$id == 0 )
 			{
 				$form->bind( $item );
 				echo '<form action="" method="post" id="pixsubmit_form">'.$form->renderFieldset('').'</form>';
@@ -109,6 +111,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 
 	public function create()
 	{
+		return;
 		$input = JFactory::getApplication()->input;
 		$id = $input->getCmd( 'id', '' );
 		$source = $input->getCmd( 'plugin', '' );
@@ -170,6 +173,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 	
 	public function savecreated()
 	{
+		return;
 		$input = JFactory::getApplication()->input;
 		$id = $input->getCmd( 'id', '' );
 		$date = $input->getCmd( 'date', date('YYYY-MM-DD') );
