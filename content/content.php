@@ -93,6 +93,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	{
 		if( $source === $this->getName() )
 		{
+			JForm::addFieldPath( JPATH_ADMINISTRATOR.'/components/com_categories/models/fields' );
 			JForm::addFormPath( __DIR__ . '/form' );
 			$form->loadFile( 'form', false );
 				
@@ -102,7 +103,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			{
 				$db = JFactory::getDbo();
 				$query = $db->getQuery( true );
-				$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext as articletext, tbl.alias, "'.$this->getName().'" as plugin' )
+				$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext as articletext, tbl.language, tbl.access, tbl.catid, tbl.alias, "'.$this->getName().'" as plugin' )
 					->from( '#__content tbl' )
 					->where( 'tbl.id = '.(int)$id );
 				
@@ -173,6 +174,9 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 				else
 					$alias = JFilterOutput::stringURLSafe( $alias );
 				$query->set( 'alias = '.$query->q( $alias ) );
+				$query->set( 'language = '.$query->q( $data->language ) );
+				$query->set( 'access = '.$query->q( $data->access ) );
+				$query->set( 'catid = '.$query->q( $data->catid ) );
 			}
 			
 			if( $canEditState )

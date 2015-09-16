@@ -25,9 +25,14 @@
 			id="start"
 			label="PLG_PIXPUBLISH_CONTENT_START_LABEL"
 		/>
-		<field name="state" type="list" label="JSTATUS"
-			description="JFIELD_PUBLISHED_DESC" class="inputbox"
-			filter="intval" default="1"
+		<field
+			name="state"
+			type="list"
+			label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC"
+			class="inputbox"
+			filter="intval"
+			default="1"
 		>
 			<option value="1">
 				JPUBLISHED</option>
@@ -37,6 +42,31 @@
 				JARCHIVED</option>
 			<option value="-2">
 				JTRASHED</option>
+		</field>
+		<field 
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			description="JFIELD_LANGUAGE_DESC"
+		>
+			<option value="*">JALL</option>
+		</field>
+		<field
+			name="access"
+			type="accesslevel"
+			label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC"
+			size="1"
+			default="1"
+		/>
+		<field 
+			name="catid"
+			type="categoryedit"
+			label="JCATEGORY"
+			description="JFIELD_CATEGORY_DESC"
+			required="true"
+			extension="com_content"
+		>
 		</field>
 		<field
 			name="articletext"
