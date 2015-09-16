@@ -19,13 +19,6 @@ interface iPixPublishPlugin
 	public function onGetDialog( $source, $id, $form );
 	
 	public function onItemSave( $source, $id, $data  );
-
-/*
-	TODO
-	Which functions should be listed here?!
-*/
-	public function onNewSave( $source, $id, $date, $data  );
-	public function onCreateNew( $source, $id, $form );
 	
 	public function onRegisterSearchFilters();
 }
