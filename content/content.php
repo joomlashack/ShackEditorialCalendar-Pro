@@ -95,7 +95,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		{
 			$db = JFactory::getDbo();
 			$query = $db->getQuery( true );
-			$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, "'.$this->getName().'" as plugin' )
+			$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext as articletext, "'.$this->getName().'" as plugin' )
 				->from( '#__content tbl' )
 				->where( 'tbl.id = '.(int)$id );
 			

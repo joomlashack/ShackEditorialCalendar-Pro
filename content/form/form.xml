@@ -32,7 +32,7 @@
 		</field>
 		<field
 			name="articletext"
-			type="editor"
+			type="fixed"
 			buttons="false"
 			label="CONTENT_TEXT_LABEL"
 			description="CONTENT_TEXT_DESC"
