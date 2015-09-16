@@ -93,26 +93,27 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	{
 		if( $source === $this->getName() )
 		{
-			$db = JFactory::getDbo();
-			$query = $db->getQuery( true );
-			$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext as articletext, "'.$this->getName().'" as plugin' )
-				->from( '#__content tbl' )
-				->where( 'tbl.id = '.(int)$id );
+			JForm::addFormPath( __DIR__ . '/form' );
+			$form->loadFile( 'form', false );
+				
+			$form->setFieldAttribute( 'articletext', 'id', time() );
 			
-			$result = $db->setQuery( $query )->loadObject();
-			
+			if( (int)$id > 0 )
+			{
+				$db = JFactory::getDbo();
+				$query = $db->getQuery( true );
+				$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext as articletext, tbl.alias, "'.$this->getName().'" as plugin' )
+					->from( '#__content tbl' )
+					->where( 'tbl.id = '.(int)$id );
+				
+				$result = $db->setQuery( $query )->loadObject();
+			}
 			if( $result )
 			{
 				$arr = array( $result );
 				$arr = self::fixDates( $arr, 'start' );
 				$result = $arr[0];
 			}
-			
-			JForm::addFormPath( __DIR__ . '/form' );
-			$form->loadFile( 'form', false );
-			
-			$form->setFieldAttribute( 'articletext', 'id', time() );
-			
 			return $result;
 		}
 	}
@@ -123,39 +124,69 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		{
 			$this->logThis( print_r( $data, true ) );
 			
-			$canEdit = $this->getAuth( $id )->get( 'core.edit' );
+			$canEdit = $this->getAuth( $id )->get( 'core.edit' ); // create
 			if( !$canEdit )
 				$canEdit = $this->canEditOwn( $id );
 			$canEditState = $this->canEditState( $id );
 			
-			if( !$canEdit && !$canEditState )
+			if( !$this->getAuth()->get( 'core.create' ) && (int)$id == 0 )
+				return false;
+			
+			if( !$canEdit && !$canEditState  && (int)$id > 0 )
 				return false;
 			
 			$db = JFactory::getDbo();
 			$query = $db->getQuery( true );
-			$query->update( '#__content' );
+			if( (int)$id > 0 )
+				$query->update( '#__content' );
+			else
+				$query->insert( '#__content' );
 			
 			$time = $data->start;
 			$title = $data->title;
 			$articletext = $data->articletext;
+			$alias = $data->alias;
 
 			if( $time )
 			{
 				$offset = JFactory::getConfig()->get('offset');
 				$time = JFactory::getDate( $time, $offset )->format( 'H:i', false );
-				if( $canEdit )
+				if( $canEdit && (int)$id > 0 )
 					$query->set( 'publish_up = TIMESTAMP( DATE( publish_up ),'.$query->q( $time ).' )' );
 			}
-			if( $title && $canEdit )
+			if( ($title && $canEdit) || ($title && (int)$id == 0) )
 			{
 				$query->set( 'title = '.$query->q( $title ) );
 				$query->set( 'introtext = '.$query->q( $articletext ) );
+				
+				if( trim( $alias ) == '' )
+				{
+					if( JFactory::getConfig()->get( 'unicodeslugs' ) == 1 )
+					{
+						$alias = JFilterOutput::stringURLUnicodeSlug( $title );
+					}
+					else
+					{
+						$alias = JFilterOutput::stringURLSafe( $title );
+					}
+				}
+				else
+					$alias = JFilterOutput::stringURLSafe( $alias );
+				$query->set( 'alias = '.$query->q( $alias ) );
 			}
 			
 			if( $canEditState )
 				$query->set( 'state = '.(int)$data->state );
 			
-			$query->where( 'id = '.(int)$id );
+			if( (int)$id > 0 )
+				$query->where( 'id = '.(int)$id );
+			else
+			{
+				$query->set( 'publish_up = '.$query->q( $data->publish_up.' '.$time ) );
+			}
+			
+			$this->logThis( (string)$query );
+			
 			if( !$db->setQuery($query)->execute() )
 				return false;
 		}
@@ -326,7 +357,6 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	
 	public function onNewSave( $source, $id, $date, $data  )
 	{
-		
 	}
 	
 	public function onNewSaveOLD( $source, $id, $date, $data  )

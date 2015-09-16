@@ -12,6 +12,14 @@
 			size="30"
 		/>
 		<field
+			name="alias"
+			type="text"
+			id="alias"
+			description="JFIELD_ALIAS_DESC"
+			label="JFIELD_ALIAS_LABEL"
+			size="30"
+		/>
+		<field
 			name="start"
 			type="time"
 			id="start"
