@@ -17,6 +17,7 @@
 		<file plugin="contentfree">contentfree.php</file>
     	<folder>language</folder>
     	<folder>form</folder>
+    	<folder>media</folder>
 	</files>
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_contentfree.ini</language>
