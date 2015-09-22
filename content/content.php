@@ -187,12 +187,20 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			else
 			{
 				$query->set( 'publish_up = '.$query->q( $data->publish_up.' '.$time ) );
+				$user = JFactory::getUser();
+				$query->set( 'created_by = '.(int)$user->id );
+				$query->set( 'created_by_alias = '.$query->q( $user->name ) );
+				$query->set( 'created = '.$query->q( JFactory::getDate()->toSql() ) );
 			}
 			
+			if( trim( $title ) == '' )
+				return;
 			$this->logThis( (string)$query );
 			
 			if( !$db->setQuery($query)->execute() )
+			{
 				return false;
+			}
 		}
 		return true;
 	}
