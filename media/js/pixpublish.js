@@ -206,13 +206,6 @@ jQuery(function($) {
 			var method = PixPublishPlugins[i];
 			$(this)[method]();
 		}
-		// set toggle
-		$(this).find('.fc-day').mouseenter(function() {
-			$(this).find('.pp-new').removeClass('pp-hide');
-		})
-		.mouseleave(function() {
-			$(this).find('.pp-new').addClass('pp-hide');
-  		});
 
 		return this;
 	}

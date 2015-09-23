@@ -50,10 +50,18 @@ table thead tr { /* set Isis gradient to table head */
 	color: #FFF;
 	border-color: #08C;
 }
-.pp-new { /* new article icon wrapper */
+.pp-new a { /* new article icon wrapper */
 	display: block;
 	float: left;
 	font-size: 12px;
+	color: #EDEDED;
+}
+.fc-day:hover:not(.fc-today) .pp-new a {
+	color: #08C;
+}
+.fc-day:not(.fc-today) .pp-new a:hover,
+.fc-day:not(.fc-today) .pp-new a:focus {
+	color: #005580;
 }
 .fc-today .pp-new a,
 .fc-today .pp-new a:hover,
@@ -65,10 +73,6 @@ table thead tr { /* set Isis gradient to table head */
 	height: 13px;
 	line-height: 13px;
 }
-.pp-hide { /* new article icon wrapper toggle class */
-	display: none;
-}
-
 
 /* Events */
 .fc-event { /* event block */
