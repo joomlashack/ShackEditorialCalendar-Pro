@@ -11,7 +11,8 @@
  */
  
 (function($, undefined) {
-
+/* Adding on ready load */
+	$(document).ready(function(){
 
 ;;
 
@@ -6107,4 +6108,6 @@ function HorizontalPositionCache(getElement) {
 
 ;;
 
+/* Adding on ready load */
+	});
 })(jQuery);
