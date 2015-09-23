@@ -24,7 +24,7 @@ class PixPublishViewPanel extends JViewLegacy
 		$doc = JFactory::getDocument();
 		// Fullcalendar
 		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/lib/jquery/jquery-ui.custom.min.js' );
-		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.min.js','text/javascript',false,true );
+		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.min.js','text/javascript' );
 		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.css' );
 		
 		// Popup
