@@ -210,68 +210,6 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		return true;
 	}
 	
-	/*public function onNewSaveOLD( $source, $id, $date, $data  )
-	{
-
-		if( $source === $this->getName() )
-		{
-			$article = JTable::getInstance('content');
-			
-			$article->id				= $data->id;
-			$article->asset_id			= $data->asset_id;
-			$article->title				= $data->title;
-			$article->alias				= $data->alias;
-			$article->introtext			= $data->articletext;
-//			$article->fulltext			= $data->articletext;
-			$article->state				= $data->state;
-			$article->catid				= $data->catid;
-//			$article->created			= $data->created;
-//			$article->created_by		= $data->created_by;
-//			$article->created_by_alias	= $data->created_by_alias;
-			$article->publish_up		= $date.' '.$data->start;
-//			$article->publish_down		= $data->publish_down;
-			$article->images			= '\'{"image_intro":'.( !empty($data->images['image_intro']) ? $data->images['image_intro'] : '""' )
-										.',"image_intro_alt":'.( !empty($data->images['image_intro_alt']) ? $data->images['image_intro_alt'] : '""' )
-										.',"image_intro_caption":'.( !empty($data->images['image_intro_caption']) ? $data->images['image_intro_caption'] : '""' )
-										.',"image_fulltext":'.( !empty($data->images['image_fulltext']) ? $data->images['image_fulltext'] : '""' )
-										.',"image_fulltext_alt":'.( !empty($data->images['image_fulltext_alt']) ? $data->images['image_fulltext_alt'] : '""' )
-										.',"image_fulltext_caption":'.( !empty($data->images['image_fulltext_caption']) ? $data->images['image_fulltext_caption'] : '""' )
-										.',"float_fulltext":'.( !empty($data->images['float_fulltext']) ? $data->images['float_fulltext'] : '""' )
-										.'}\'';
-//			$article->urls				= $data->urls;
-			$article->metakey			= $data->metakey;
-			$article->metadesc			= $data->metadesc;
-//			$article->access			= $data->access;
-			$article->metadata			= '\'{"robots":'.( !empty($data->metadata['robots']) ? $data->metadata['robots'] : '""' )
-									   	.',"author":'.( !empty($data->metadata['author']) ? $data->metadata['author'] : '""' )
-										.',"rights":'.( !empty($data->metadata['rights']) ? $data->metadata['rights'] : '""' )
-										.',"xreference":'.( !empty($data->metadata['xreference']) ? $data->metadata['xreference'] : '""' )
-										.'}\'';
-			$article->featured			= $data->featured;
-			
-			$user = JFactory::getUser();
-			$article->language			= $user->getParam('language', '*');
-
-			// Check to make sure our data is valid, raise notice if it's not.
-			if (!$article->check()) {
-				JError::raiseNotice(500, $article->getError());
-
-				return false;
-			}
-			
-			// Now store the article, raise notice if it doesn't get stored.
-			if (!$article->store(TRUE)) {
-				JError::raiseNotice(500, $article->getError());
- 
-				return false;
-			}
-			
-			return true;
-		}
-
-		return false;
-	}*/
-
 	protected function getName()
 	{
 		return 'content';
