@@ -40,6 +40,7 @@ table thead tr { /* set Isis gradient to table head */
 .pp-day-head { /* cell head */
 	background: #FFFFFF;
 	font-weight: bold;
+	border-bottom: 1px solid #EDEDED;
 }
 .fc-past .pp-day-head { /* past day cell head */
 	background: #EDEDED;
@@ -47,6 +48,7 @@ table thead tr { /* set Isis gradient to table head */
 .fc-today .pp-day-head { /* today cell head */
 	background: #08C;
 	color: #FFF;
+	border-color: #08C;
 }
 .pp-new { /* new article icon wrapper */
 	display: block;
