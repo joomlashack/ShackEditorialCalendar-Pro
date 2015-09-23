@@ -265,7 +265,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			JHtml::_('select.options', JHtml::_('category.options', 'com_content'), 'value', 'text', '' )
 		);
 		
-		JFactory::getDocument()->addScriptDeclaration('var contentTypeName = "'.JText::_('PLG_PIXPUBLISH_CONTENT_TYPE_NAME').'";');
+		JFactory::getDocument()->addScriptDeclaration('PLUGIN["content"] = "'.JText::_('PLG_PIXPUBLISH_CONTENT_TYPE_NAME').'";');
 		JFactory::getDocument()->addScript( JUri::root().'plugins/pixpublish/content/media/js/content.js' );
 	}
 	

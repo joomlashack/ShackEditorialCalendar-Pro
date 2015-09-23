@@ -174,7 +174,7 @@ class PlgPixPublishModule extends PixPublishPlugin implements iPixPublishPlugin
 			JHtml::_('select.options', ModulesHelper::getPositions( 0 ), 'value', 'text' )
 		);
 		
-		JFactory::getDocument()->addScriptDeclaration('var moduleTypeName = "'.JText::_('PLG_PIXPUBLISH_MODULE_TYPE_NAME').'";');
+		JFactory::getDocument()->addScriptDeclaration('PLUGIN["module"] = "'.JText::_('PLG_PIXPUBLISH_MODULE_TYPE_NAME').'";');
 		JFactory::getDocument()->addScript( JUri::root().'plugins/pixpublish/module/media/js/module.js' );
 	}
 	
