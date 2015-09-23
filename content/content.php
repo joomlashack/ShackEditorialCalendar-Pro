@@ -182,15 +182,20 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			if( $canEditState )
 				$query->set( 'state = '.(int)$data->state );
 			
-			if( (int)$id > 0 )
+			if( (int)$id > 0 ) {
+				$query->set( 'modified = '.$query->q( JFactory::getDate()->toSql() ) );
+				$user = JFactory::getUser();
+				$query->set( 'modified_by = '.(int)$user->id );
+				$query->set( 'version = version + 1' );
 				$query->where( 'id = '.(int)$id );
+			}
 			else
 			{
 				$query->set( 'publish_up = '.$query->q( $data->publish_up.' '.$time ) );
 				$user = JFactory::getUser();
 				$query->set( 'created_by = '.(int)$user->id );
-				$query->set( 'created_by_alias = '.$query->q( $user->name ) );
 				$query->set( 'created = '.$query->q( JFactory::getDate()->toSql() ) );
+				$query->set( 'modified = '.$query->q( JFactory::getDate()->toSql() ) );
 			}
 			
 			if( trim( $title ) == '' )
