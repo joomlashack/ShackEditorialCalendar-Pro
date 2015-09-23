@@ -38,7 +38,11 @@ class PixPublishViewPanel extends JViewLegacy
 		// Component
 		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/js/pixpublish.js' );
 		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/css/pixpublish.css' );
-		$doc->addScriptDeclaration('var addNew = "'.JText::_('COM_PIXPUBLISH_ADD_NEW').'";
+		$doc->addScriptDeclaration('var ADDNEW = "'.JText::_('COM_PIXPUBLISH_ADD_NEW').'";
+									var EDIT = "'.JText::_('COM_PIXPUBLISH_EDIT').'";
+									var PLUGIN = [];
+									var SAVE = "'.JText::_('JSAVE').'";
+									var CANCEL = "'.JText::_('JCANCEL').'";
 									var JANUARY = "'.JText::_('JANUARY').'";
 									var FEBRUARY = "'.JText::_('FEBRUARY').'";
 									var MARCH = "'.JText::_('MARCH').'";
@@ -78,7 +82,8 @@ class PixPublishViewPanel extends JViewLegacy
 									var SAT = "'.JText::_('SAT').'";
 									var SUN = "'.JText::_('SUN').'";
 									var TODAY = "'.JText::_('JLIB_HTML_BEHAVIOR_TODAY').'";
-									var MONTH = "'.JText::_('COM_PIXPUBLISH_MONTH').'";');
+									var MONTH = "'.JText::_('COM_PIXPUBLISH_MONTH').'";
+									');
 
 		$this->addToolbar();
 		
