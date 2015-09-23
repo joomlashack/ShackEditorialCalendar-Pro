@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fieldset
-		addfieldpath="/administrator/components/com_pixpublish/models/fields"
-	>
+	<fieldset name="params">
 		<field
 			name="title"
 			type="text"
@@ -57,7 +55,6 @@
 			type="accesslevel"
 			label="JFIELD_ACCESS_LABEL"
 			description="JFIELD_ACCESS_DESC"
-			size="1"
 			default="1"
 		/>
 		<field 
@@ -69,6 +66,8 @@
 			extension="com_content"
 		>
 		</field>
+	</fieldset>
+	<fieldset name="editor">
 		<field
 			name="articletext"
 			type="fixed"
@@ -79,7 +78,6 @@
 			filter="JComponentHelper::filterText"
 			asset_id="com_content"
 			rows="5"
-			groupclass="pp-ctrl-block"
 			repeat="true"
 			/>
 	</fieldset>

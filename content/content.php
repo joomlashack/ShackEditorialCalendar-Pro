@@ -94,6 +94,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		if( $source === $this->getName() )
 		{
 			JForm::addFieldPath( JPATH_ADMINISTRATOR.'/components/com_categories/models/fields' );
+			JForm::addFieldPath( JPATH_ADMINISTRATOR.'/components/com_pixpublish/models/fields' );
 			JForm::addFormPath( __DIR__ . '/form' );
 			$form->loadFile( 'form', false );
 				
@@ -108,14 +109,23 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 					->where( 'tbl.id = '.(int)$id );
 				
 				$result = $db->setQuery( $query )->loadObject();
+
+				if( $result )
+				{
+					$arr = array( $result );
+					$arr = self::fixDates( $arr, 'start' );
+					$result = $arr[0];
+				}
+				return $result;
 			}
-			if( $result )
+			else
 			{
-				$arr = array( $result );
-				$arr = self::fixDates( $arr, 'start' );
-				$result = $arr[0];
+				return false;
 			}
-			return $result;
+		}
+		else
+		{
+			return false;
 		}
 	}
 
@@ -186,7 +196,9 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 				$query->set( 'modified = '.$query->q( JFactory::getDate()->toSql() ) );
 				$user = JFactory::getUser();
 				$query->set( 'modified_by = '.(int)$user->id );
+				/* No versions handled
 				$query->set( 'version = version + 1' );
+				*/
 				$query->where( 'id = '.(int)$id );
 			}
 			else
