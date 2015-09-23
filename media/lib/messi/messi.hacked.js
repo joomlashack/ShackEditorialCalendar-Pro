@@ -128,7 +128,7 @@ Messi.prototype = {
     show: true,                              // show message after load
     unload: true,                            // unload message after hide
     viewport: {top: '0px', left: '0px'},     // if not center message, sets X and Y position
-    width: '500px',                          // message width
+//    width: '500px',                          // message width
     zIndex: 44444                            // message z-index
   },
   template: '<div class="messi"><div class="messi-box"><div class="messi-wrapper"><div class="messi-titlebox"><span class="messi-title"></span></div><div class="messi-content"></div><div class="messi-footbox"><div class="messi-actions"></div></div></div></div></div>',
@@ -152,7 +152,9 @@ Messi.prototype = {
 
     if(this.visible) return;
     
-    
+    // Block background scrolling
+	document.body.style.overflow = 'hidden';
+	
     if(this.options.modal && this.modal != null) this.modal.show();
     this.messi.appendTo(document.body);
     
@@ -175,6 +177,9 @@ Messi.prototype = {
     
     if (!this.visible) return;
     var _this = this;
+	
+	// Remove block background scrolling
+	document.body.style.overflow = 'auto';
     
     this.messi.animate({opacity: 0}, 300, function() {
 	if (after) after.call();
