@@ -86,10 +86,11 @@ jQuery(function($) {
 						   {}
 					   }
 					   //toggleMe();
-					   var form_data = JSON.stringify( $('#pixsubmit_form').serializeObject() );
+					   //var form_data = JSON.stringify( $('#pixsubmit_form').serializeObject() );
+					   //console.debug( $.param( { data: JSON.stringify( $('#pixsubmit_form').serializeObject() ) } ) );
 					   if( val == 'Y' )
 					   {
-						   var url = $('#calendar').data('base-url') + "&task=panel.save" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&data=" + form_data;
+						   var url = $('#calendar').data('base-url') + "&task=panel.save" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify( $('#pixsubmit_form').serializeObject() ) } );
 						   $.ajax({
 					            url: url,
 					            success: function(){
@@ -162,10 +163,10 @@ jQuery(function($) {
 				   var data =  $('#pixsubmit_form').serializeObject();
 				   data["publish_up"] = date;
 				   //console.debug( data ); return;
-				   var form_data = JSON.stringify( data );
+				   //var form_data = JSON.stringify( data );
 				   if( val == 'Y' )
 				   {
-					   var url = $('#calendar').data('base-url') + "&task=panel.save" + "&id=" + 0 + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + plugin + "&title=" + $('#pixtest_title').val() + "&data=" + form_data;
+					   var url = $('#calendar').data('base-url') + "&task=panel.save" + "&id=" + 0 + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify(data) } );
 					   $.ajax({
 				            url: url,
 				            success: function(){

@@ -85,7 +85,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 					{
 						$lines[] = $row->save();
 						$inits[] = $row->getInit();
-						$this->logThis( print_r( $row->getInit(), true ) );
+						//$this->logThis( print_r( $row->getInit(), true ) );
 					}
 				}
 				if( count( $lines ) > 0 )
@@ -114,7 +114,8 @@ class PixPublishControllerPanel extends JControllerLegacy
 		$input = JFactory::getApplication()->input;
 		$id = $input->getCmd( 'id', '' );
 		$source = $input->getCmd( 'plugin', '' );
-		$data = json_decode( $input->get( 'data', '', 'raw' ) );
+		$data = json_decode( urldecode( $input->get( 'data', '', 'raw' ) ) );
+		$this->logThis( urldecode( $input->get( 'data', '', 'raw' ) ) );
 		
 		$dispatcher = $this->importPlugins();
 		$results = $dispatcher->trigger( 'onItemSave', array( $source, $id, $data ) );
