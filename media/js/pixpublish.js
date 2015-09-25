@@ -199,13 +199,15 @@ jQuery(function($) {
 	
 	$.fn.pixifyCalendar = function()
 	{
-		// create day header
-		$(this).find('.fc-day .fc-day-number').wrap('<div class="pp-day-head clearfix"></div>');
+		if ( !$(this).find('.fc-today .fc-day-number').parent().hasClass('pp-day-head') ) {
+			// create day header
+			$(this).find('.fc-day .fc-day-number').wrap('<div class="pp-day-head clearfix"></div>');
 
-		// add plugin new buttons
-		for ( var i = 0; i < PixPublishPlugins.length; i++ ) {
-			var method = PixPublishPlugins[i];
-			$(this)[method]();
+			// add plugin new buttons
+			for ( var i = 0; i < PixPublishPlugins.length; i++ ) {
+				var method = PixPublishPlugins[i];
+				$(this)[method]();
+			}
 		}
 
 		return this;
