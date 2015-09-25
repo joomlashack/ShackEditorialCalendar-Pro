@@ -12,7 +12,7 @@
 	<authorEmail>johan@pixpro.net</authorEmail>
 	<authorUrl>www.pixpro.net/labs</authorUrl>
 	<version>1.0.0</version>
-	<description>PLG_PIXPUBLISH_CONTENTFREE_INFOTEXT</description>
+	<description>PLG_PIXPUBLISH_CONTENTFREE_DESCRIPTION</description>
 	<files>
 		<file plugin="contentfree">contentfree.php</file>
     	<folder>language</folder>
