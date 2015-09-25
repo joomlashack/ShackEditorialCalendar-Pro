@@ -238,6 +238,7 @@ class PlgPixPublishContentFree extends PixPublishPlugin implements iPixPublishPl
 		);
 		
 		JFactory::getDocument()->addScriptDeclaration('PLUGIN["contentfree"] = "'.JText::_('PLG_PIXPUBLISH_CONTENT_TYPE_NAME').'";');
+		JFactory::getDocument()->addScript( JUri::root().'plugins/pixpublish/contentfree/media/js/contentfree.js' );
 	}
 	
 	public function getInfoText()
