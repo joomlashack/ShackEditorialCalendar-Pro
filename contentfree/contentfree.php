@@ -96,6 +96,8 @@ class PlgPixPublishContentFree extends PixPublishPlugin implements iPixPublishPl
 				$result = $arr[0];
 			}
 			
+			JForm::addFieldPath( JPATH_ADMINISTRATOR.'/components/com_categories/models/fields' );
+			JForm::addFieldPath( JPATH_ADMINISTRATOR.'/components/com_pixpublish/models/fields' );
 			JForm::addFormPath( __DIR__ . '/form' );
 			$form->loadFile( 'form', false );
 			
@@ -140,16 +142,6 @@ class PlgPixPublishContentFree extends PixPublishPlugin implements iPixPublishPl
 				return false;
 		}
 		return true;
-	}
-
-	public function onCreateNew( $source, $id, $form )
-	{
-		return;
-	}
-	
-	public function onNewSave( $source, $id, $date, $data  )
-	{
-		return;
 	}
 
 	protected function getName()

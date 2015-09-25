@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fieldset name="params">
+	<fieldset name="params" class="pp-50">
 		<field
 			name="title"
 			type="text"
@@ -67,7 +67,7 @@
 		>
 		</field>
 	</fieldset>
-	<fieldset name="editor">
+	<fieldset name="editor" class="pp-100">
 		<field
 			name="articletext"
 			type="fixed"
