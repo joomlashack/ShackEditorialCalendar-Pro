@@ -90,9 +90,11 @@ jQuery(function($) {
 					   //console.debug( $.param( { data: JSON.stringify( $('#pixsubmit_form').serializeObject() ) } ) );
 					   if( val == 'Y' )
 					   {
-						   var url = $('#calendar').data('base-url') + "&task=panel.save" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify( $('#pixsubmit_form').serializeObject() ) } );
+						   var url = $('#calendar').data('base-url'); // + "&task=panel.save" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify( $('#pixsubmit_form').serializeObject() ) } );
 						   $.ajax({
 					            url: url,
+					            method: "POST",
+					            data: "&task=panel.save" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify( $('#pixsubmit_form').serializeObject() ) } ),
 					            success: function(){
 					                $('#calendar').fullCalendar( 'refetchEvents' );
 					            },
@@ -166,9 +168,11 @@ jQuery(function($) {
 				   //var form_data = JSON.stringify( data );
 				   if( val == 'Y' )
 				   {
-					   var url = $('#calendar').data('base-url') + "&task=panel.save" + "&id=" + 0 + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify(data) } );
+					   var url = $('#calendar').data('base-url'); // + "&task=panel.save" + "&id=" + 0 + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify(data) } );
 					   $.ajax({
 				            url: url,
+				            method: "POST",
+				            data: "&task=panel.save" + "&id=" + 0 + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify(data) } ),
 				            success: function(){
 				                $('#calendar').fullCalendar( 'refetchEvents' );
 				            },
