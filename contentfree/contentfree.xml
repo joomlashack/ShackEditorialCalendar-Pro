@@ -11,7 +11,7 @@
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
 	<authorEmail>johan@pixpro.net</authorEmail>
 	<authorUrl>www.pixpro.net/labs</authorUrl>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<description>PLG_PIXPUBLISH_CONTENTFREE_DESCRIPTION</description>
 	<files>
 		<file plugin="contentfree">contentfree.php</file>
