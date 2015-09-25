@@ -70,10 +70,10 @@ jQuery(function($) {
 		    {
 			   Messi.load( $('#calendar').data('base-url') + "&task=panel.edit"  + '&id=' + calEvent.id + "&plugin=" + calEvent.plugin,
 			   {
-				   title: EDIT + ' ' + PLUGIN[calEvent.plugin].toLowerCase(),
+				   title: Joomla.JText._('COM_PIXPUBLISH_EDIT') + ' ' + PLUGIN[calEvent.plugin].toLowerCase(),
 				   modal: true,
 				   unload : false,
-				   buttons: [{id: 0, label: SAVE, val: 'Y', class: 'btn-success'}, {id: 1, label: CANCEL, val: 'N'}],
+				   buttons: [{id: 0, label: Joomla.JText._('JSAVE'), val: 'Y', class: 'btn-success'}, {id: 1, label: Joomla.JText._('JCANCEL'), val: 'N'}],
 				   callback: function(val)
 				   {
 					  // console.debug( $('#pixsubmit_form') );
@@ -146,10 +146,10 @@ jQuery(function($) {
 
 			Messi.load( $('#calendar').data('base-url') + "&task=panel.edit"  + '&id=' + 0 + "&plugin=" + plugin,
 		   {
-			   title: ADDNEW + ' ' + PLUGIN[plugin].toLowerCase(),
+			   title: Joomla.JText._('COM_PIXPUBLISH_ADD_NEW') + ' ' + PLUGIN[plugin].toLowerCase(),
 			   modal: true,
 			   unload : false,
-			   buttons: [{id: 0, label: SAVE, val: 'Y', class: 'btn-success'}, {id: 1, label: CANCEL, val: 'N'}],
+			   buttons: [{id: 0, label: Joomla.JText._('JSAVE'), val: 'Y', class: 'btn-success'}, {id: 1, label: Joomla.JText._('JCANCEL'), val: 'N'}],
 			   callback: function(val)
 			   {
 				  // console.debug( $('#pixsubmit_form') );
