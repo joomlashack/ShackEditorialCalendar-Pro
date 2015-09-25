@@ -9,7 +9,7 @@
 	<authorUrl>www.pixpro.net/labs</authorUrl>
 	<version>0.0.8</version>
 	<description>An Editorial Calendar for Joomla!</description>
-	<administration folder="admin">
+	<administration>
 		<menu>COM_PIXPUBLISH_MENU</menu>
 		<files>
 			<folder>classes</folder>
@@ -25,7 +25,7 @@
 			<filename>index.html</filename>
 			<filename>pixpublish.php</filename>
 		</files>
-		<languages folder="admin">
+		<languages folder="language">
 			<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.ini</language>
 			<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.sys.ini</language>
 		</languages>
