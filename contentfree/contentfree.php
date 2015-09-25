@@ -83,7 +83,7 @@ class PlgPixPublishContentFree extends PixPublishPlugin implements iPixPublishPl
 		{
 			$db = JFactory::getDbo();
 			$query = $db->getQuery( true );
-			$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, "'.$this->getName().'" as plugin' )
+			$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext as articletext, tbl.language, tbl.access, tbl.catid, tbl.alias, "'.$this->getName().'" as plugin' )
 				->from( '#__content tbl' )
 				->where( 'tbl.id = '.(int)$id );
 			
@@ -109,10 +109,15 @@ class PlgPixPublishContentFree extends PixPublishPlugin implements iPixPublishPl
 	{
 		if( $source === $this->getName() )
 		{
-			$canEdit = $this->getAuth( $id )->get( 'core.edit' );
+			$this->logThis( print_r( $data, true ) );
+			
+			$canEdit = $this->getAuth( $id )->get( 'core.edit' ); // create
 			if( !$canEdit )
 				$canEdit = $this->canEditOwn( $id );
 			$canEditState = $this->canEditState( $id );
+			
+			if( (int)$id == 0 )
+				return false;
 			
 			if( !$canEdit && !$canEditState )
 				return false;
@@ -123,23 +128,56 @@ class PlgPixPublishContentFree extends PixPublishPlugin implements iPixPublishPl
 			
 			$time = $data->start;
 			$title = $data->title;
+			$articletext = $data->articletext;
+			$alias = $data->alias;
 
 			if( $time )
 			{
-				$offset = JFactory::getConfig()->get('offset');
-				$time = JFactory::getDate( $time, $offset )->format( 'H:i', false );
+				$time = JFactory::getDate( $time, self::getUserTimeoffset() )->format( 'H:i', false );
 				if( $canEdit )
 					$query->set( 'publish_up = TIMESTAMP( DATE( publish_up ),'.$query->q( $time ).' )' );
 			}
 			if( $title && $canEdit )
+			{
 				$query->set( 'title = '.$query->q( $title ) );
+				$query->set( 'introtext = '.$query->q( $articletext ) );
+				
+				if( trim( $alias ) == '' )
+				{
+					if( JFactory::getConfig()->get( 'unicodeslugs' ) == 1 )
+					{
+						$alias = JFilterOutput::stringURLUnicodeSlug( $title );
+					}
+					else
+					{
+						$alias = JFilterOutput::stringURLSafe( $title );
+					}
+				}
+				else
+					$alias = JFilterOutput::stringURLSafe( $alias );
+				$query->set( 'alias = '.$query->q( $alias ) );
+				$query->set( 'language = '.$query->q( $data->language ) );
+				$query->set( 'access = '.$query->q( $data->access ) );
+				$query->set( 'catid = '.$query->q( $data->catid ) );
+			}
+			
+			$user = JFactory::getUser();
+			$query->set( 'modified = '.$query->q( JFactory::getDate( 'now', self::getUserTimeoffset() )->toSql() ) );
+			$query->set( 'modified_by = '.(int)$user->id );
 			
 			if( $canEditState )
 				$query->set( 'state = '.(int)$data->state );
 			
 			$query->where( 'id = '.(int)$id );
+			
+			if( trim( $title ) == '' )
+				return;
+			$this->logThis( (string)$query );
+			
 			if( !$db->setQuery($query)->execute() )
+			{
 				return false;
+			}
 		}
 		return true;
 	}
