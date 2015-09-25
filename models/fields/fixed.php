@@ -25,8 +25,11 @@ class JFormFieldFixed extends JFormFieldEditor
 	
 	public function save()
 	{
-		return $this->getEditor()->save($this->id);
-		//return 'sudde';
+		$str = $this->getEditor()->save( $this->id );
+		// Hack to fix the problem with 3.4.4 update, see https://github.com/joomla/joomla-cms/pull/7263
+		if( $this->getEditor()->getEditorType() == 'PlgEditorTinymce' )
+			$str .= ' tinyMCE.get("' . $this->id . '").save();';
+		return $str;
 	}
 	
 	/**

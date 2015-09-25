@@ -35,6 +35,17 @@ class PixEditor extends JEditor
 		return $return;
 	}
 	
+	public function getEditorType()
+	{
+		// Check if editor is already loaded
+		if (is_null(($this->_editor)))
+		{
+			return;
+		}
+		
+		return get_class( $this->_editor );
+	}
+	
 	/**
 	 * Returns the global Editor object, only creating it
 	 * if it doesn't already exist.
