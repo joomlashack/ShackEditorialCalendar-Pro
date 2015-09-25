@@ -5,9 +5,13 @@ jQuery(function($) {
 	
 	$.fn.newContent = function()
 	{
+		var thisPlugin	= 'content';
+		var thisIcon	= 'stack';
+		var $headers	= $(this).find('.fc-day:not(.fc-past) .pp-day-head');
+		
 		// add create new article-link
-		$(this).find('.fc-day:not(.fc-past) .pp-day-head').prepend('<div class="pp-new" data-plugin="content"><a href="javascript:void(0)" class="hasTooltip" data-original-title="<strong>' + ADDNEW + '</strong><br />' + PLUGIN["content"] + '"><span class="icon-stack"></span></a></div>');
-
+		$headers.prepend('<div class="pp-new" data-plugin="' + thisPlugin + '"><a href="javascript:void(0)" class="hasTooltip" data-original-title="<strong>' + ADDNEW + '</strong><br />' + PLUGIN[thisPlugin] + '"><span class="icon-' + thisIcon + '"></span></a></div>');
+	
 		return this;
 	}
 	
