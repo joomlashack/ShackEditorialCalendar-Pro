@@ -206,6 +206,8 @@ class PlgPixPublishContentFree extends PixPublishPlugin implements iPixPublishPl
 			'filter_category_id',
 			JHtml::_('select.options', JHtml::_('category.options', 'com_content'), 'value', 'text', '' )
 		);
+		
+		JFactory::getDocument()->addScriptDeclaration('PLUGIN["contentfree"] = "'.JText::_('PLG_PIXPUBLISH_CONTENT_TYPE_NAME').'";');
 	}
 	
 	public function getInfoText()
