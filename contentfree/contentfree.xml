@@ -22,8 +22,6 @@
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_contentfree.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_contentfree.sys.ini</language>
-		<language tag="sv-SE">language/sv-SE/sv-SE.plg_pixpublish_contentfree.ini</language>
-		<language tag="sv-SE">language/sv-SE/sv-SE.plg_pixpublish_contentfree.sys.ini</language>
 	</languages>
 	<config>
 		<fields name="params">
