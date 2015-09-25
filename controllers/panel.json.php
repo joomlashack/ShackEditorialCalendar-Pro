@@ -76,7 +76,16 @@ class PixPublishControllerPanel extends JControllerLegacy
 			if( $item != null || (int)$id == 0 )
 			{
 				$form->bind( $item );
-				echo '<form action="" method="post" id="pixsubmit_form"><fieldset class="pp-50">'.$form->renderFieldset('params').'</fieldset><fieldset class="pp-100">'.$form->renderFieldset('editor').'</fieldset></form>';
+				
+				// Output form (XML fieldsets must have name attribute set!)
+				echo '<form action="" method="post" id="pixsubmit_form">';
+				$fieldsets = $form->getFieldsets();
+				foreach( $fieldsets as $fieldset )
+				{
+					echo '<fieldset class="'.$fieldset->class.'">'.$form->renderFieldset( $fieldset->name ).'</fieldset>';
+				}
+				echo '</form>';
+
 				$lines = array();
 				$inits = array();
 				foreach( $form->getFieldset() as $row )
