@@ -160,8 +160,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 
 			if( $time )
 			{
-				$offset = JFactory::getConfig()->get('offset');
-				$time = JFactory::getDate( $time, $offset )->format( 'H:i', false );
+				$time = JFactory::getDate( $time, self::getUserTimeoffset() )->format( 'H:i', false );
 				if( $canEdit && (int)$id > 0 )
 					$query->set( 'publish_up = TIMESTAMP( DATE( publish_up ),'.$query->q( $time ).' )' );
 			}
@@ -193,7 +192,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 				$query->set( 'state = '.(int)$data->state );
 			
 			if( (int)$id > 0 ) {
-				$query->set( 'modified = '.$query->q( JFactory::getDate()->toSql() ) );
+				$query->set( 'modified = '.$query->q( JFactory::getDate( 'now', self::getUserTimeoffset() )->toSql() ) );
 				$user = JFactory::getUser();
 				$query->set( 'modified_by = '.(int)$user->id );
 				/* No versions handled
@@ -206,8 +205,8 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 				$query->set( 'publish_up = '.$query->q( $data->publish_up.' '.$time ) );
 				$user = JFactory::getUser();
 				$query->set( 'created_by = '.(int)$user->id );
-				$query->set( 'created = '.$query->q( JFactory::getDate()->toSql() ) );
-				$query->set( 'modified = '.$query->q( JFactory::getDate()->toSql() ) );
+				$query->set( 'created = '.$query->q( JFactory::getDate( 'now', self::getUserTimeoffset() )->toSql() ) );
+				$query->set( 'modified = '.$query->q( JFactory::getDate( 'now', self::getUserTimeoffset() )->toSql() ) );
 			}
 			
 			if( trim( $title ) == '' )
