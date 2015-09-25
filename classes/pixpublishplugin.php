@@ -27,16 +27,21 @@ abstract class PixPublishPlugin extends JPlugin
 {
 	protected static function fixDates( &$arr, $fieldname )
 	{
-		$config = JFactory::getConfig();
-		$user = JFactory::getUser();
 		foreach( $arr as $row )
-			$row->$fieldname = JFactory::getDate( $row->start, 'UTC' )->setTimezone( new DateTimeZone( $config->get( 'offset' ) ) )->format( 'Y-m-d H:i:s', true, false );
+			$row->$fieldname = JFactory::getDate( $row->start, 'UTC' )->setTimezone( new DateTimeZone( self::getUserTimeoffset() ) )->format( 'Y-m-d H:i:s', true, false );
 		return $arr;
 	}
 	
 	public function getInfoText()
 	{
 		return '';
+	}
+	
+	protected static function getUserTimeoffset()
+	{
+		$config = JFactory::getConfig();
+		$user = JFactory::getUser();
+		return $user->getParam( 'timezone', $config->get('offset', 'UTC' ) );
 	}
 }
 
