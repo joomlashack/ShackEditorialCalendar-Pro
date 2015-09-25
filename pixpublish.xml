@@ -28,8 +28,6 @@
 		<languages folder="admin">
 			<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.ini</language>
 			<language tag="en-GB">language/en-GB/en-GB.com_pixpublish.sys.ini</language>
-			<language tag="sv-SE">language/sv-SE/sv-SE.com_pixpublish.ini</language>
-			<language tag="sv-SE">language/sv-SE/sv-SE.com_pixpublish.sys.ini</language>
 		</languages>
 	</administration>
 </extension>
