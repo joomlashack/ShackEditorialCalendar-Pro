@@ -188,25 +188,22 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 				$query->set( 'catid = '.$query->q( $data->catid ) );
 			}
 			
+			$user = JFactory::getUser();
+			$query->set( 'modified = '.$query->q( JFactory::getDate( 'now', self::getUserTimeoffset() )->toSql() ) );
+			$query->set( 'modified_by = '.(int)$user->id );
+			
 			if( $canEditState )
 				$query->set( 'state = '.(int)$data->state );
 			
-			if( (int)$id > 0 ) {
-				$query->set( 'modified = '.$query->q( JFactory::getDate( 'now', self::getUserTimeoffset() )->toSql() ) );
-				$user = JFactory::getUser();
-				$query->set( 'modified_by = '.(int)$user->id );
-				/* No versions handled
-				$query->set( 'version = version + 1' );
-				*/
+			if( (int)$id > 0 )
+			{
 				$query->where( 'id = '.(int)$id );
 			}
 			else
 			{
 				$query->set( 'publish_up = '.$query->q( $data->publish_up.' '.$time ) );
-				$user = JFactory::getUser();
 				$query->set( 'created_by = '.(int)$user->id );
 				$query->set( 'created = '.$query->q( JFactory::getDate( 'now', self::getUserTimeoffset() )->toSql() ) );
-				$query->set( 'modified = '.$query->q( JFactory::getDate( 'now', self::getUserTimeoffset() )->toSql() ) );
 			}
 			
 			if( trim( $title ) == '' )
