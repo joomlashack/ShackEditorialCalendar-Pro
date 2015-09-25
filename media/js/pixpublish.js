@@ -31,7 +31,7 @@ jQuery(function($) {
 				},
 				error: function(a,b,c)
 				{
-					console.log(a.responseText);
+					//console.log(a.responseText);
 	                alert( 'there was an error while fetching events!' );
 	            },
 			},
