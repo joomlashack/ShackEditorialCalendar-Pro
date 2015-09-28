@@ -41,8 +41,8 @@ class PixPublishfreeViewPanel extends JViewLegacy
 		$doc->addScriptDeclaration('var PLUGIN = [];');
 		
 		// Language strings
-		JText::Script('COM_PIXPUBLISH_ADD_NEW');
-		JText::Script('COM_PIXPUBLISH_EDIT');
+		JText::Script('COM_PIXPUBLISHFREE_ADD_NEW');
+		JText::Script('COM_PIXPUBLISHFREE_EDIT');
 		JText::Script('JSAVE');
 		JText::Script('JCANCEL');
 		JText::Script('JANUARY');
@@ -84,41 +84,20 @@ class PixPublishfreeViewPanel extends JViewLegacy
 		JText::Script('SAT');
 		JText::Script('SUN');
 		JText::Script('JLIB_HTML_BEHAVIOR_TODAY');
-		JText::Script('COM_PIXPUBLISH_MONTH');
+		JText::Script('COM_PIXPUBLISHFREE_MONTH');
 
 		$this->addToolbar();
-		
-		$dispatcher = $this->importPlugins();
 
 		PixPublishfreeHelper::addSubmenu( $this->getName() );
-		$results = $dispatcher->trigger( 'onRegisterSearchFilters' );
 		$this->sidebar = JHtmlSidebar::render();
 		
-		$infotexts = $dispatcher->trigger( 'getInfoText' );
-		$this->infotexts = $infotexts;
+		JFactory::getDocument()->addScriptDeclaration('PLUGIN["contentfree"] = "'.JText::_('PLG_PIXPUBLISHFREE_CONTENT_TYPE_NAME').'";');
 		
 		parent::display( $tpl );
 	}
 	
 	protected function addToolbar()
 	{
-		JToolBarHelper::title( JText::_( 'COM_PIXPUBLISH_MANAGER_PANEL' ), 'calendar' );
-	}
-	
-	/**
-
-	 * @return JDispatcher
-
-	 */
-	protected function importPlugins()
-
-	{
-
-		JPluginHelper::importPlugin( 'pixpublishfree' );
-
-		$dispatcher = JDispatcher::getInstance();
-
-		return $dispatcher;
-
+		JToolBarHelper::title( JText::_( 'COM_PIXPUBLISHFREE_MANAGER_PANEL' ), 'calendar' );
 	}
 }

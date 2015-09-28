@@ -70,7 +70,8 @@ jQuery(function($) {
 		    {
 			   Messi.load( $('#calendar').data('base-url') + "&task=panel.edit"  + '&id=' + calEvent.id + "&plugin=" + calEvent.plugin,
 			   {
-				   title: Joomla.JText._('COM_PIXPUBLISH_EDIT') + ' ' + PLUGIN[calEvent.plugin].toLowerCase(),
+				   // TODO LANG
+				   title: Joomla.JText._('COM_PIXPUBLISHFREE_EDIT') /*+ ' ' + PLUGIN[calEvent.plugin].toLowerCase()*/,
 				   modal: true,
 				   unload : false,
 				   buttons: [{id: 0, label: Joomla.JText._('JSAVE'), val: 'Y', class: 'btn-success'}, {id: 1, label: Joomla.JText._('JCANCEL'), val: 'N'}],
@@ -146,7 +147,7 @@ jQuery(function($) {
 
 			Messi.load( $('#calendar').data('base-url') + "&task=panel.edit"  + '&id=' + 0 + "&plugin=" + plugin,
 		   {
-			   title: Joomla.JText._('COM_PIXPUBLISH_ADD_NEW') + ' ' + PLUGIN[plugin].toLowerCase(),
+			   title: Joomla.JText._('COM_PIXPUBLISHFREE_ADD_NEW') + ' ' + PLUGIN[plugin].toLowerCase(),
 			   modal: true,
 			   unload : false,
 			   buttons: [{id: 0, label: Joomla.JText._('JSAVE'), val: 'Y', class: 'btn-success'}, {id: 1, label: Joomla.JText._('JCANCEL'), val: 'N'}],

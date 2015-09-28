@@ -30,7 +30,7 @@ abstract class PixPublishfreeHelper
 	{
 		if( JVERSION >= 3.0 )
 		{
-			JHtmlSidebar::addEntry( JText::_('COM_PIXPUBLISH_VIEW_PANEL'), 'index.php?option=com_pixpublishfree&view=panel', $view == 'panel' );
+			JHtmlSidebar::addEntry( JText::_('COM_PIXPUBLISHFREE_VIEW_PANEL'), 'index.php?option=com_pixpublishfree&view=panel', $view == 'panel' );
 			
 			JHtmlSidebar::addFilter(
 					JText::_('JOPTION_SELECT_PUBLISHED'),
@@ -39,15 +39,9 @@ abstract class PixPublishfreeHelper
 			);
 			
 			JHtmlSidebar::addFilter(
-					JText::_('JOPTION_SELECT_ACCESS'),
-					'filter_access',
-					JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', '' )
-			);
-			
-			JHtmlSidebar::addFilter(
-					JText::_('JOPTION_SELECT_LANGUAGE'),
-					'filter_language',
-					JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', '' )
+					JText::_('COM_PIXPUBLISHFREE_CONTENT_CATEGORY_LABEL'),
+					'filter_category_id',
+					JHtml::_('select.options', JHtml::_('category.options', 'com_content'), 'value', 'text', '' )
 			);
 		}
 	}

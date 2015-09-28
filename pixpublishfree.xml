@@ -10,7 +10,7 @@
 	<version>0.0.8</version>
 	<description>An Editorial Calendar for Joomla!</description>
 	<administration>
-		<menu>COM_PIXPUBLISH_MENU</menu>
+		<menu>COM_PIXPUBLISHFREE_MENU</menu>
 		<files>
 			<folder>classes</folder>
 			<folder>controllers</folder>
