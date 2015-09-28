@@ -19,7 +19,7 @@ abstract class PixPublishHelper
 		$query->select( 'enabled' )
 			->from( '#__extensions' )
 			->where( 'folder = "system"' )
-			->where( 'element = "pixpublish"' );
+			->where( 'element = "pixpublishfree"' );
 		$db->setQuery( $query );
 		
 		$result = (boolean) $db->loadResult();
@@ -30,7 +30,7 @@ abstract class PixPublishHelper
 	{
 		if( JVERSION >= 3.0 )
 		{
-			JHtmlSidebar::addEntry( JText::_('COM_PIXPUBLISH_VIEW_PANEL'), 'index.php?option=com_pixpublish&view=panel', $view == 'panel' );
+			JHtmlSidebar::addEntry( JText::_('COM_PIXPUBLISH_VIEW_PANEL'), 'index.php?option=com_pixpublishfree&view=panel', $view == 'panel' );
 			
 			JHtmlSidebar::addFilter(
 					JText::_('JOPTION_SELECT_PUBLISHED'),

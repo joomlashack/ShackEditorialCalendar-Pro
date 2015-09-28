@@ -11,10 +11,10 @@
 defined('_JEXEC') or die;
 
 // Access check.
-if( !JFactory::getUser()->authorise( 'core.manage', 'com_pixpublish' ) )
+if( !JFactory::getUser()->authorise( 'core.manage', 'com_pixpublishfree' ) )
 	return JError::raiseWarning( 404, JText::_( 'JERROR_ALERTNOAUTHOR' ) );
 
-if( !JLoader::import( 'pixpublish', JPATH_COMPONENT.'/helpers' ) )
+if( !JLoader::import( 'pixpublishfree', JPATH_COMPONENT.'/helpers' ) )
 	return JError::raiseWarning( 500, JText::_( 'COM_PIXPUBLISH_INC_FILES_NOT_FOUND' ) );
 
 // Execute the task.

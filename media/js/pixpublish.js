@@ -27,7 +27,7 @@ jQuery(function($) {
 				url: $('#calendar').data('base-url') + "&task=panel.getdata",
 				data: function()
 				{
-					return { data: JSON.stringify( $('#pixpublish_search').serializeObject() ) };
+					return { data: JSON.stringify( $('#pixpublishfree_search').serializeObject() ) };
 				},
 				error: function(a,b,c)
 				{
@@ -126,11 +126,11 @@ jQuery(function($) {
 	        showMeridian: false,
 	    });
 
-	    $('#pixpublish_search_submit').click(function() {
+	    $('#pixpublishfree_search_submit').click(function() {
 	    	$('#calendar').fullCalendar( 'refetchEvents' );
 	    });
 
-	    $( ".pixpublish_trigger" ).change(function() {
+	    $( ".pixpublishfree_trigger" ).change(function() {
 			$('#calendar').fullCalendar( 'refetchEvents' );
 	    });
 		

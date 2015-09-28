@@ -14,7 +14,7 @@ JHtml::_('behavior.keepalive');
 JHtml::_('formbehavior.chosen', 'select');
 JHTML::_('behavior.modal');
 
-$base_url = JRoute::_( 'index.php?option=com_pixpublish&format=json', false );
+$base_url = JRoute::_( 'index.php?option=com_pixpublishfree&format=json', false );
 
 ?>
 <script type="text/javascript">
@@ -24,7 +24,7 @@ $base_url = JRoute::_( 'index.php?option=com_pixpublish&format=json', false );
 </script>
 <?php if( !empty( $this->sidebar ) ) : ?>
 <div id="j-sidebar-container" class="span2">
-	<form id="pixpublish_search" method="POST" onsubmit="" action="javascript:(function($) { $('#calendar').fullCalendar( 'refetchEvents' ); }(jQuery));">
+	<form id="pixpublishfree_search" method="POST" onsubmit="" action="javascript:(function($) { $('#calendar').fullCalendar( 'refetchEvents' ); }(jQuery));">
 	<?php echo $this->sidebar; ?>
 	</form>
 </div>

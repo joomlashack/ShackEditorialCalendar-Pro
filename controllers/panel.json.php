@@ -63,7 +63,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 		$id = $input->getCmd( 'id', '' );
 		$source = $input->getCmd( 'plugin', '' );
 		$dispatcher = $this->importPlugins();
-		$form = new JForm( 'com_pixpublish' );
+		$form = new JForm( 'com_pixpublishfree' );
 		$extra = '';
 		$results = $dispatcher->trigger( 'onGetDialog', array( $source, $id, $form ) );
 		$item = null;
@@ -137,7 +137,7 @@ class PixPublishControllerPanel extends JControllerLegacy
 	 */
 	protected function importPlugins()
 	{
-		JPluginHelper::importPlugin( 'pixpublish' );
+		JPluginHelper::importPlugin( 'pixpublishfree' );
 		$dispatcher = JDispatcher::getInstance();
 		return $dispatcher;
 	}
@@ -150,11 +150,11 @@ class PixPublishControllerPanel extends JControllerLegacy
 			(
 					array
 					(
-							'text_file' => 'com_pixpublish.log.php'
+							'text_file' => 'com_pixpublishfree.log.php'
 					),
 					JLog::ALL,
-					'com_pixpublish'
+					'com_pixpublishfree'
 			);
-		JLog::add( $message, JLog::WARNING, 'com_pixpublish' );*/
+		JLog::add( $message, JLog::WARNING, 'com_pixpublishfree' );*/
 	}
 }

@@ -23,21 +23,21 @@ class PixPublishViewPanel extends JViewLegacy
 		
 		$doc = JFactory::getDocument();
 		// Fullcalendar
-		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/lib/jquery/jquery-ui.custom.min.js' );
-		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.min.js','text/javascript' );
-		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.css' );
+		$doc->addScript( JUri::root().'administrator/components/com_pixpublishfree/media/lib/jquery/jquery-ui.custom.min.js' );
+		$doc->addScript( JUri::root().'administrator/components/com_pixpublishfree/media/lib/fullcalendar/fullcalendar.min.js','text/javascript' );
+		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublishfree/media/lib/fullcalendar/fullcalendar.css' );
 		
 		// Popup
-		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/lib/messi/messi.hacked.js' );
-		$doc->addStyleSheet(JUri::root().'administrator/components/com_pixpublish/media/lib/messi/messi.hacked.min.css' );
+		$doc->addScript( JUri::root().'administrator/components/com_pixpublishfree/media/lib/messi/messi.hacked.js' );
+		$doc->addStyleSheet(JUri::root().'administrator/components/com_pixpublishfree/media/lib/messi/messi.hacked.min.css' );
 		
 		// Timepicker
-		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/lib/test/bootstrap-timepicker.min.js' );
-		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/lib/test/bootstrap-timepicker.min.css' );
+		$doc->addScript( JUri::root().'administrator/components/com_pixpublishfree/media/lib/test/bootstrap-timepicker.min.js' );
+		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublishfree/media/lib/test/bootstrap-timepicker.min.css' );
 		
 		// Component
-		$doc->addScript( JUri::root().'administrator/components/com_pixpublish/media/js/pixpublish.js' );
-		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/css/pixpublish.css' );
+		$doc->addScript( JUri::root().'administrator/components/com_pixpublishfree/media/js/pixpublishfree.js' );
+		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublishfree/media/css/pixpublishfree.css' );
 		$doc->addScriptDeclaration('var PLUGIN = [];');
 		
 		// Language strings
@@ -114,7 +114,7 @@ class PixPublishViewPanel extends JViewLegacy
 
 	{
 
-		JPluginHelper::importPlugin( 'pixpublish' );
+		JPluginHelper::importPlugin( 'pixpublishfree' );
 
 		$dispatcher = JDispatcher::getInstance();
 
