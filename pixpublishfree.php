@@ -1,6 +1,6 @@
 <?php
 /**
- * @package         PixPublish
+ * @package         PixPublishfree
  * @author          Johan Sundell <johan@pixpro.net>
  * @link            http://www.pixpro.net/labs
  * @copyright       Copyright ©2014-2015 Pixpro Stockholm AB All Rights Reserved.
@@ -18,6 +18,6 @@ if( !JLoader::import( 'pixpublishfree', JPATH_COMPONENT.'/helpers' ) )
 	return JError::raiseWarning( 500, JText::_( 'COM_PIXPUBLISH_INC_FILES_NOT_FOUND' ) );
 
 // Execute the task.
-$controller	= JControllerLegacy::getInstance( 'PixPublish' );
+$controller	= JControllerLegacy::getInstance( 'PixPublishfree' );
 $controller->execute( JFactory::getApplication()->input->get('task') );
 $controller->redirect();

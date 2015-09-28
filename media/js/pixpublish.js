@@ -1,5 +1,5 @@
 // Active plugins
-var PixPublishPlugins = new Array();
+var PixPublishfreePlugins = new Array();
 
 jQuery(function($) {
 	$.noConflict();
@@ -208,8 +208,8 @@ jQuery(function($) {
 			$(this).find('.fc-day .fc-day-number').wrap('<div class="pp-day-head clearfix"></div>');
 
 			// add plugin new buttons
-			for ( var i = 0; i < PixPublishPlugins.length; i++ ) {
-				var method = PixPublishPlugins[i];
+			for ( var i = 0; i < PixPublishfreePlugins.length; i++ ) {
+				var method = PixPublishfreePlugins[i];
 				$(this)[method]();
 			}
 		}

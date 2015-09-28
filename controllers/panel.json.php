@@ -1,6 +1,6 @@
 <?php
 /**
- * @package         PixPublish
+ * @package         PixPublishfree
  * @author          Johan Sundell <johan@pixpro.net>
  * @link            http://www.pixpro.net/labs
  * @copyright       Copyright ©2014-2015 Pixpro Stockholm AB All Rights Reserved.
@@ -10,7 +10,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-class PixPublishControllerPanel extends JControllerLegacy
+class PixPublishfreeControllerPanel extends JControllerLegacy
 {
 	public function getData()
 	{

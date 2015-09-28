@@ -1,6 +1,6 @@
 <?php
 /**
- * @package         PixPublish
+ * @package         PixPublishfree
  * @author          Johan Sundell <johan@pixpro.net>
  * @link            http://www.pixpro.net/labs
  * @copyright       Copyright ©2014-2015 Pixpro Stockholm AB All Rights Reserved.
@@ -10,7 +10,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-class PixPublishViewPanel extends JViewLegacy
+class PixPublishfreeViewPanel extends JViewLegacy
 {
 
 	public function display( $tpl = null )
@@ -90,7 +90,7 @@ class PixPublishViewPanel extends JViewLegacy
 		
 		$dispatcher = $this->importPlugins();
 
-		PixPublishHelper::addSubmenu( $this->getName() );
+		PixPublishfreeHelper::addSubmenu( $this->getName() );
 		$results = $dispatcher->trigger( 'onRegisterSearchFilters' );
 		$this->sidebar = JHtmlSidebar::render();
 		
