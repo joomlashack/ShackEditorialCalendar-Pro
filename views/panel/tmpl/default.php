@@ -32,6 +32,7 @@ $base_url = JRoute::_( 'index.php?option=com_pixpublishfree&format=json', false 
 <?php else : ?>
 <div id="j-main-container">
 <?php endif;?>
+	<?php echo JText::_('COM_PIXPUBLISHFREE_INFOTEXT'); ?>
 	<div id='calendar' style='margin:3em 0;font-size:13px' data-base-url="<?php echo $base_url; ?>">
 	</div>
 </div>

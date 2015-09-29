@@ -22,7 +22,7 @@
 			name="start"
 			type="time"
 			id="start"
-			label="PLG_PIXPUBLISH_CONTENT_START_LABEL"
+			label="COM_PIXPUBLISHFREE_CONTENT_START_LABEL"
 		/>
 		<field
 			name="state"
