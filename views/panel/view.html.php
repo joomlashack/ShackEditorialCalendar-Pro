@@ -106,19 +106,12 @@ class PixPublishViewPanel extends JViewLegacy
 	}
 	
 	/**
-
 	 * @return JDispatcher
-
 	 */
 	protected function importPlugins()
-
 	{
-
 		JPluginHelper::importPlugin( 'pixpublish' );
-
 		$dispatcher = JDispatcher::getInstance();
-
 		return $dispatcher;
-
 	}
 }
