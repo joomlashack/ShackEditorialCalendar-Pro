@@ -8,7 +8,7 @@
 	<authorEmail>johan@pixpro.net</authorEmail>
 	<authorUrl>www.pixpro.net/labs</authorUrl>
 	<version>0.0.8</version>
-	<description>An Editorial Calendar for Joomla!</description>
+	<description>COM_PIXPUBLISHFREE_XML_DESCRIPTION</description>
 	<administration>
 		<menu>COM_PIXPUBLISHFREE_MENU</menu>
 		<files>
@@ -25,8 +25,8 @@
 			<filename>pixpublishfree.php</filename>
 		</files>
 		<languages folder="language">
-			<language tag="en-GB">language/en-GB/en-GB.com_pixpublishfree.ini</language>
-			<language tag="en-GB">language/en-GB/en-GB.com_pixpublishfree.sys.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_pixpublishfree.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_pixpublishfree.sys.ini</language>
 		</languages>
 	</administration>
 </extension>
