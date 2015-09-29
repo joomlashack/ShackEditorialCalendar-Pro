@@ -12,7 +12,6 @@
 	<administration>
 		<menu>COM_PIXPUBLISHFREE_MENU</menu>
 		<files>
-			<folder>classes</folder>
 			<folder>controllers</folder>
 			<folder>helpers</folder>
 			<folder>language</folder>
