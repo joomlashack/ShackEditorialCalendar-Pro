@@ -55,6 +55,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		$result = $db->setQuery( $query )->loadObjectList( '', 'ColorFixer' );
 		
 		// Fix dates
+
 		$result = self::fixDates( $result, 'start' );
 		
 		return $result;
@@ -90,27 +91,36 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			JForm::addFieldPath( JPATH_ADMINISTRATOR.'/components/com_categories/models/fields' );
 			JForm::addFieldPath( JPATH_ADMINISTRATOR.'/components/com_pixpublish/models/fields' );
 			JForm::addFormPath( __DIR__ . '/form' );
+
 			$form->loadFile( 'form', false );
-				
+			
 			$form->setFieldAttribute( 'articletext', 'id', time() );
 			
 			if( (int)$id > 0 )
 			{
 				$db = JFactory::getDbo();
 				$query = $db->getQuery( true );
-				$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext as articletext, tbl.language, tbl.access, tbl.catid, tbl.alias, "'.$this->getName().'" as plugin' )
+
+				// $query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext as articletext, tbl.language, tbl.access, tbl.catid, tbl.alias, "'.$this->getName().'" as plugin' )
+				$query->select( 'tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext, tbl.fulltext, tbl.language, tbl.access, tbl.catid, tbl.alias, "'.$this->getName().'" as plugin' )
+
 					->from( '#__content tbl' )
 					->where( 'tbl.id = '.(int)$id );
 				
 				$result = $db->setQuery( $query )->loadObject();
 
+				// Added this row to load the {readmore} id
+ 				$result->articletext = trim($result->fulltext) != '' ? $result->introtext . "<hr id=\"system-readmore\" />" . $result->fulltext : $result->introtext;				
+				
 				if( $result )
 				{
 					$arr = array( $result );
 					$arr = self::fixDates( $arr, 'start' );
 					$result = $arr[0];
 				}
+				
 				return $result;
+				
 			}
 			else
 			{
@@ -151,7 +161,25 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			$title = $data->title;
 			$articletext = $data->articletext;
 			$alias = $data->alias;
+			
+			// Search for the {readmore} tag and split the text up accordingly.
+			if (isset($articletext))
+			{
+				$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
+				$tagPos = preg_match($pattern, $articletext);
 
+				if ($tagPos == 0)
+				{
+					$introtext = $articletext;
+					$fulltext = '';
+				}
+				else
+				{
+					list ($introtext, $fulltext) = preg_split($pattern, $articletext, 2);
+				}
+			}
+			// End Search for the {readmore} tag
+			
 			if( $time )
 			{
 				$time = JFactory::getDate( $time, self::getUserTimeoffset() )->format( 'H:i', false );
@@ -161,18 +189,30 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			if( ($title && $canEdit) || ($title && (int)$id == 0) )
 			{
 				$query->set( 'title = '.$query->q( $title ) );
-				$query->set( 'introtext = '.$query->q( $articletext ) );
+				$query->set( 'introtext = '.$query->q( $introtext ) );
+				$query->set( '`fulltext` = '.$query->q( $fulltext)  );
+				// fulltext alown caused an error so had to suround it with `` 
 				
 				if( trim( $alias ) == '' )
+
 				{
+
 					if( JFactory::getConfig()->get( 'unicodeslugs' ) == 1 )
+
 					{
+
 						$alias = JFilterOutput::stringURLUnicodeSlug( $title );
+
 					}
+
 					else
+
 					{
+
 						$alias = JFilterOutput::stringURLSafe( $title );
+
 					}
+
 				}
 				else
 					$alias = JFilterOutput::stringURLSafe( $alias );
@@ -184,6 +224,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			
 			$user = JFactory::getUser();
 			$query->set( 'modified = '.$query->q( JFactory::getDate( 'now', self::getUserTimeoffset() )->toSql() ) );
+
 			$query->set( 'modified_by = '.(int)$user->id );
 			
 			if( $canEditState )
@@ -201,6 +242,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 			}
 			
 			if( trim( $title ) == '' )
+
 				return;
 			$this->logThis( (string)$query );
 			
@@ -250,10 +292,15 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 		if( $this->item == null )
 		{
 			$db = JFactory::getDbo();
+
 			$query = $db->getQuery( true );
+
 			$query->select( '*' )
+
 				->from( '#__content' )
+
 				->where( 'id = '.(int)$id );
+
 			$this->item = $db->setQuery( $query )->loadObject();
 		}
 		return $this->item;
@@ -262,9 +309,13 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	public function onRegisterSearchFilters()
 	{
 		JHtmlSidebar::addFilter(
+
 			JText::_('PLG_PIXPUBLISH_CONTENT_CATEGORY_LABEL'),
+
 			'filter_category_id',
+
 			JHtml::_('select.options', JHtml::_('category.options', 'com_content'), 'value', 'text', '' )
+
 		);
 		
 		JFactory::getDocument()->addScriptDeclaration('PLUGIN["content"] = "'.JText::_('PLG_PIXPUBLISH_CONTENT_TYPE_NAME').'";');
@@ -272,19 +323,33 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
 	}
 	
 	protected function logThis( $message )
+
 	{
+
 		/*jimport( 'joomla.log.log' );
+
 	
+
 		JLog::addLogger
+
 		(
+
 				array
+
 				(
+
 						'text_file' => 'com_pixpublish.log.php'
+
 				),
+
 				JLog::ALL,
+
 				'com_pixpublish'
+
 		);
+
 		JLog::add( $message, JLog::WARNING, 'com_pixpublish' );*/
+
 	}
 }
 
