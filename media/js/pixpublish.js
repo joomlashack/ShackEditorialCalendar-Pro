@@ -17,7 +17,7 @@ jQuery(function($) {
 			{
 				left: 'prev,next, today',
 				center: 'title',
-				right: 'month'
+				right: 'month' // SUDDE
 			},
 			editable: true,
 			firstDay: 1,
@@ -146,7 +146,7 @@ jQuery(function($) {
 
 			Messi.load( $('#calendar').data('base-url') + "&task=panel.edit"  + '&id=' + 0 + "&plugin=" + plugin,
 		   {
-			   title: Joomla.JText._('COM_PIXPUBLISH_ADD_NEW') + ' ' + PLUGIN[plugin].toLowerCase(),
+			   title: Joomla.JText._('COM_PIXPUBLISH_ADD_NEW') + ' ' + PLUGIN[plugin].toLowerCase(), // SUDDE
 			   modal: true,
 			   unload : false,
 			   buttons: [{id: 0, label: Joomla.JText._('JSAVE'), val: 'Y', class: 'btn-success'}, {id: 1, label: Joomla.JText._('JCANCEL'), val: 'N'}],

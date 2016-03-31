@@ -15,7 +15,7 @@ JHtml::_('formbehavior.chosen', 'select');
 JHTML::_('behavior.modal');
 
 $base_url = JRoute::_( 'index.php?option=com_pixpublish&format=json', false );
-
+$ed = JFactory::getEditor();
 ?>
 <script type="text/javascript">
 <!--
@@ -42,5 +42,7 @@ $base_url = JRoute::_( 'index.php?option=com_pixpublish&format=json', false );
 	<div id='calendar' style='margin:3em 0;font-size:13px' data-base-url="<?php echo $base_url; ?>">
 	</div>
 </div>
-
+<div style="display: none;">
+<?php echo $ed->display('content', $this->content, '0', '0', '0', '0', false); ?>
+</div>
 

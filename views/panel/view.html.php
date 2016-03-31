@@ -40,6 +40,9 @@ class PixPublishViewPanel extends JViewLegacy
 		$doc->addStyleSheet( JUri::root().'administrator/components/com_pixpublish/media/css/pixpublish.css' );
 		$doc->addScriptDeclaration('var PLUGIN = [];');
 		
+		//JFactory::getLanguage()->load('com_pixpublish');
+		//echo JText::_('COM_PIXPUBLISH_VIEW_PANEL'); die();
+		
 		// Language strings
 		JText::Script('COM_PIXPUBLISH_ADD_NEW');
 		JText::Script('COM_PIXPUBLISH_EDIT');
