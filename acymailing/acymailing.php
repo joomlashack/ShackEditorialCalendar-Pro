@@ -129,14 +129,6 @@ class PlgPixPublishAcymailing extends PixPublishPlugin implements iPixPublishPlu
 		return $arr;
 	}
 	
-	protected static function getUserTimeoffset()
-	{
-		$config = JFactory::getConfig();
-		$user = JFactory::getUser();
-		self::logThis( print_r( $config, true ) );
-		return $config->get('offset', 'UTC' );
-	}
-	
 	protected function logThis( $message )
 	{
 		jimport( 'joomla.log.log' );
