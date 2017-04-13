@@ -89,6 +89,9 @@ class PlgPixPublishAcymailing extends PixPublishPlugin implements iPixPublishPlu
 			if( (int)$id > 0 )
 				$query->update( '#__acymailing_mail' );
 			
+			if( trim( $data->title ) != '' )
+				$query->set( 'subject = '.$query->q($data->title ) );
+			
 			$time = $data->start;
 			if( $time )
 			{
@@ -111,7 +114,7 @@ class PlgPixPublishAcymailing extends PixPublishPlugin implements iPixPublishPlu
 	{
 		$this->logThis( 'register' );
 		
-		JFactory::getDocument()->addScriptDeclaration('PLUGIN["acymailing"] = "'.JText::_('PLG_PIXPUBLISH_ACYMAILING_TYPE_NAME').'";');
+		JFactory::getDocument()->addScriptDeclaration( 'PLUGIN["acymailing"] = "'.JText::_( 'PLG_PIXPUBLISH_ACYMAILING_TYPE_NAME' ).'";' );
 		JFactory::getDocument()->addScript( JUri::root().'plugins/pixpublish/acymailing/media/js/acymailing.js' );
 	}
 	
@@ -124,7 +127,7 @@ class PlgPixPublishAcymailing extends PixPublishPlugin implements iPixPublishPlu
 	{
 		foreach( $arr as $row )
 		{
-			$row->$fieldname = acymailing_getDate( $row->$fieldname );
+			$row->$fieldname = acymailing_getDate( $row->$fieldname, 'Y-m-d H:i:s' );
 		}
 		return $arr;
 	}
@@ -132,14 +135,14 @@ class PlgPixPublishAcymailing extends PixPublishPlugin implements iPixPublishPlu
 	protected function logThis( $message )
 	{
 		jimport( 'joomla.log.log' );
-			JLog::addLogger
+		JLog::addLogger
 		(
-				array
-				(
-						'text_file' => 'com_pixpublish.log.php'
-				),
-				JLog::ALL,
-				'com_pixpublish'
+			array
+			(
+				'text_file' => 'com_pixpublish.log.php'
+			),
+			JLog::ALL,
+			'com_pixpublish'
 		);
 		JLog::add( $message, JLog::WARNING, 'com_pixpublish' );
 	}
