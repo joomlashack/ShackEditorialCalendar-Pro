@@ -67,14 +67,25 @@ class PixPublishControllerPanel extends JControllerLegacy
 		$extra = '';
 		$results = $dispatcher->trigger( 'onGetDialog', array( $source, $id, $form ) );
 		$item = null;
-		//$this->logThis( 'sudde 2: '.$id );
+		//$this->logThis( 'sudde 1: '.$id );
 		if( count( $results ) != 0 || (int)$id == 0 )
 		{
 			if( count( $results ) != 0 )
-				$item = $results[0];
-			
+			{
+				foreach( $results as $row )
+				{
+					if( $row )
+					{
+						$item = $row;
+					}
+				}
+			}
+				
+			//$this->logThis( 'sudde 2: '.$id );
+			//$this->logThis( print_r( $item, true ) );
 			if( $item != null || (int)$id == 0 )
 			{
+				//$this->logThis( 'sudde 3: '.$id );
 				$form->bind( $item );
 				
 				// Output form (XML fieldsets must have name attribute set!)
