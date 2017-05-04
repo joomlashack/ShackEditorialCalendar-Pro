@@ -15,7 +15,7 @@
 			name="start"
 			type="time"
 			id="start"
-			label="PLG_PIXPUBLISH_MODULE_START_LABEL"
+			label="PLG_PIXPUBLISH_ACYMAILING_START_LABEL"
 		/>
 	</fieldset>
 </form>
