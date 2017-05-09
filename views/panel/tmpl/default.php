@@ -42,10 +42,10 @@ $ed = JFactory::getEditor();
 	<div id='calendar' style='margin:3em 0;font-size:13px' data-base-url="<?php echo $base_url; ?>">
 	</div>
 </div>
-<div style="display: none;">
+<div style="display: none;" id="sudde">
 <?php
 if( $ed->get( '_name' ) != 'jce' )
-	echo $ed->display('content', $this->content, '0', '0', '0', '0', false);
+	echo $ed->display('content_sudde', '', '0', '0', '0', '0', false);
 ?>
 </div>
 
