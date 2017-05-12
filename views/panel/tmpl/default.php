@@ -39,7 +39,7 @@ $ed = JFactory::getEditor();
 <div style="display: none;">
 <?php
 if( $ed->get( '_name' ) != 'jce' )
-	echo $ed->display('content', $this->content, '0', '0', '0', '0', false);
+	echo $ed->display('content_sudde', $this->content, '0', '0', '0', '0', false);
 ?>
 </div>
 
