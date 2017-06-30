@@ -28,6 +28,10 @@
 		<languages folder="language">
 			<language tag="en-GB">en-GB/en-GB.com_pixpublish.ini</language>
 			<language tag="en-GB">en-GB/en-GB.com_pixpublish.sys.ini</language>
+			<language tag="de-DE">de-DE/de-DE.com_pixpublish.ini</language>
+			<language tag="de-DE">de-DE/de-DE.com_pixpublish.sys.ini</language>
+			<language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.ini</language>
+			<language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.sys.ini</language>
 		</languages>
 	</administration>
 </extension>
