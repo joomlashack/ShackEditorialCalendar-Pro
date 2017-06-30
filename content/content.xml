@@ -9,7 +9,7 @@
 	<creationDate>May 2014</creationDate>
 	<copyright>Copyright © You Rock AB 2003-2017 All Rights Reserved</copyright>
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
-	<authorEmail>johan@pixpro.net</authorEmail>
+	<authorEmail>labs@pixpro.net</authorEmail>
 	<authorUrl>www.pixpro.net/labs</authorUrl>
 	<version>1.0.3</version>
 	<description>PLG_PIXPUBLISH_CONTENT_DESCRIPTION</description>
@@ -22,6 +22,10 @@
 	<languages>
 		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_content.ini</language>
 		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_content.sys.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_content.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_content.sys.ini</language>
+		<language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_content.ini</language>
+		<language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_content.sys.ini</language>
 	</languages>
 	<config>
 		<fields name="params">
