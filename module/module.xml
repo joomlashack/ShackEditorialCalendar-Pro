@@ -7,10 +7,10 @@
 	<name>plg_pixpublish_module</name>
 	<author>Johan Sundell</author>
 	<creationDate>May 2014</creationDate>
-	<copyright>Copyright (C) 2014 Johan Sundell. All rights reserved.</copyright>
+	<copyright>Copyright © You Rock AB 2003-2017 All Rights Reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
-	<authorEmail>johan@pixpro.net</authorEmail>
-	<authorUrl>www.pixpro.net</authorUrl>
+	<authorEmail>labs@pixpro.net</authorEmail>
+	<authorUrl>www.pixpro.net/labs</authorUrl>
 	<version>0.0.2</version>
 	<description>TODO</description>
 	<files>

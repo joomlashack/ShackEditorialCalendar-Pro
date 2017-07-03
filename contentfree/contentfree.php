@@ -1,9 +1,9 @@
 <?php
 /**
  * @package         PixPublish
- * @author          Johan Sundell <johan@pixpro.net>
+ * @author          Johan Sundell <labs@pixpro.net>
  * @link            http://www.pixpro.net/labs
- * @copyright       Copyright ©2014-2015 Pixpro Stockholm AB All Rights Reserved.
+ * @copyright       Copyright © You Rock AB 2003-2017 All Rights Reserved.
  * @license         GNU General Public License version 2 or later; see LICENSE.txt
  */
 
