@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension 
+	version="2.5" 
+	type="plugin" 
+	group="pixpublish" 
+	method="upgrade">
+	<name>plg_pixpublish_content</name>
+	<author>Johan Sundell</author>
+	<creationDate>May 2014</creationDate>
+	<copyright>Copyright © You Rock AB 2003-2017 All Rights Reserved</copyright>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>labs@pixpro.net</authorEmail>
+	<authorUrl>www.pixpro.net/labs</authorUrl>
+	<version>1.0.3</version>
+	<description>PLG_PIXPUBLISH_CONTENT_DESCRIPTION</description>
+	<files>
+		<file plugin="content">content.php</file>
+    	<folder>language</folder>
+    	<folder>form</folder>
+    	<folder>media</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_content.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_content.sys.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_content.ini</language>
+		<language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_content.sys.ini</language>
+		<language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_content.ini</language>
+		<language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_content.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="background_colour"
+					type="color"
+					label="PLG_PIXPUBLISH_CONTENT_CONFIG_BGC"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

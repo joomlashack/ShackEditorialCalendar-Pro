@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension 
+	version="2.5" 
+	type="plugin" 
+	group="pixpublish" 
+	method="upgrade">
+	<name>plg_pixpublish_module</name>
+	<author>Johan Sundell</author>
+	<creationDate>May 2014</creationDate>
+	<copyright>Copyright © You Rock AB 2003-2017 All Rights Reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
+	<authorEmail>labs@pixpro.net</authorEmail>
+	<authorUrl>www.pixpro.net/labs</authorUrl>
+	<version>0.0.2</version>
+	<description>TODO</description>
+	<files>
+		<file plugin="module">module.php</file>
+    	<folder>language</folder>
+    	<folder>form</folder>
+    	<folder>media</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_module.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_module.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="background_colour"
+					type="color"
+					label="TODO"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+	
+	<updateservers>
+		<server type="extension" priority="1" name="PixPublish module">http://labs.pixpro.net/updates/plugins/plg_pixpublish_module.xml</server>
+	</updateservers>
+</extension>
