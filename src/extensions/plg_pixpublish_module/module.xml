@@ -5,13 +5,13 @@
 	group="pixpublish" 
 	method="upgrade">
 	<name>plg_pixpublish_module</name>
-	<author>Johan Sundell</author>
-	<creationDate>May 2014</creationDate>
-	<copyright>Copyright © You Rock AB 2003-2017 All Rights Reserved.</copyright>
+	<author>Joomlashack</author>
+	<creationDate>September 12 2018</creationDate>
+	<copyright>Copyright (C) 2018. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
-	<authorEmail>labs@pixpro.net</authorEmail>
-	<authorUrl>www.pixpro.net/labs</authorUrl>
-	<version>0.0.2</version>
+	<authorEmail>help@joomlashack.com</authorEmail>
+	<authorUrl>https://www.joomlashack.com</authorUrl>
+	<version>0.1.2</version>
 	<description>TODO</description>
 	<files>
 		<file plugin="module">module.php</file>
@@ -34,8 +34,4 @@
 			</fieldset>
 		</fields>
 	</config>
-	
-	<updateservers>
-		<server type="extension" priority="1" name="PixPublish module">http://labs.pixpro.net/updates/plugins/plg_pixpublish_module.xml</server>
-	</updateservers>
 </extension>

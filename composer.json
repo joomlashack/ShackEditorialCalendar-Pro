@@ -1,0 +1,23 @@
+{
+    "name"             : "joomlashack/shackeditorialcalendar-pro",
+    "description"      : "Shack Editorial Calendar Pro",
+    "minimum-stability": "stable",
+    "license"          : "GPL-2+",
+    "type"             : "joomla.component",
+    "extra"            : {
+        "element"        : "com_pixpublish",
+        "element-short"  : "pixpublish",
+        "name"           : "Shack Editorial Calendar Pro",
+        "client"         : "site",
+        "package-license": "pro"
+    },
+    "authors"          : [
+        {
+            "name" : "Joomlashack",
+            "email": "help@joomlashack.com"
+        }
+    ],
+    "require"          : {
+        "php"       : ">= 5.6"
+    }
+}

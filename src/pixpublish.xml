@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5" method="upgrade">
 	<name>com_pixpublish</name>
-	<author>Johan Sundell</author>
-	<creationDate>May 2014</creationDate>
-	<copyright>Copyright © You Rock AB 2003-2017 All Rights Reserved</copyright>
+	<author>Joomlashack</author>
+	<creationDate>September 12 2018</creationDate>
+	<copyright>Copyright (C) 2018. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
-	<authorEmail>labs@pixpro.net</authorEmail>
-	<authorUrl>www.pixpro.net/labs</authorUrl>
-	<version>1.1.0</version>
+	<authorEmail>help@joomlashack.com</authorEmail>
+	<authorUrl>https://www.joomlashack.com</authorUrl>
+	<version>1.2.0</version>
 	<description>COM_PIXPUBLISH_XML_DESCRIPTION</description>
+	<variant>PRO</variant>
+
 	<administration>
 		<menu>COM_PIXPUBLISH_MENU</menu>
 		<files>
@@ -34,4 +36,56 @@
 			<language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.sys.ini</language>
 		</languages>
 	</administration>
+
+	<updateservers>
+		<server type="extension" priority="1" name="Shack Editorial Calendar Pro"><![CDATA[https://deploy.ostraining.com/client/update/pro/stable/com_pixpublish]]></server>
+	</updateservers>
+
+	<alledia>
+		<element>pixpublish</element>
+		<namespace>PixPublish</namespace>
+		<license>pro</license>
+		<targetplatform>3.7</targetplatform>
+		<phpminimum>5.6</phpminimum>
+
+		<relatedExtensions uninstall="true" publish="true">
+			<extension type="library"
+					   element="allediaframework"
+					   uninstall="false">AllediaFramework</extension>
+
+			<extension type="plugin"
+					   group="system"
+					   element="ossystem"
+					   ordering="first"
+					   uninstall="false">OSSystem</extension>
+
+			<extension type="plugin"
+					   group="system"
+					   element="osmylicensesmanager"
+					   ordering="last"
+					   uninstall="false">OSMyLicensesManager</extension>
+
+			<extension type="component"
+					   element="pixpublishfree">com_pixpublishfree</extension>
+
+			<extension type="plugin"
+					   group="pixpublish"
+					   element="acymailing">plg_pixpublish_acymailing</extension>
+
+			<extension type="plugin"
+					   group="pixpublish"
+					   element="content">plg_pixpublish_content</extension>
+
+			<extension type="plugin"
+					   group="pixpublish"
+					   element="contentfre">plg_pixpublish_contentfree</extension>
+
+			<extension type="plugin"
+					   group="pixpublish"
+					   element="module">plg_pixpublish_module</extension>
+		</relatedExtensions>
+
+		<include>AllediaFreeDefaultFiles</include>
+
+	</alledia>
 </extension>

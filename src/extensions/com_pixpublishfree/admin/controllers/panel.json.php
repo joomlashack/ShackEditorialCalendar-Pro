@@ -1,9 +1,10 @@
 <?php
 /**
- * @package         PixPublishfree
- * @author          Johan Sundell <labs@pixpro.net>
- * @link            http://www.pixpro.net/labs
- * @copyright       Copyright © You Rock AB 2003-2017 All Rights Reserved.
+ * @package         ShackEditorialCalendarfree
+ * @copyright       Copyright (C) 2018. All rights reserved.
+ * @link            https://www.joomlashack.com/joomla-extensions/shack-editorial-calendar/
+ * @author       	You Rock AB 2003-2017 All Rights Reserved
+ * @author       	2018, Joomlashack <help@joomlashack.com> - https://www.joomlashack.com.
  * @license         GNU General Public License version 2 or later; see LICENSE.txt
  */
 
