@@ -20,7 +20,7 @@
             <folder>controllers</folder>
             <folder>helpers</folder>
             <folder>language</folder>
-			<folder>library</folder>
+            <folder>library</folder>
             <folder>media</folder>
             <folder>models</folder>
             <folder>views</folder>
