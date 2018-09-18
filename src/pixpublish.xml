@@ -13,7 +13,7 @@
 
     <administration>
         <menu>COM_PIXPUBLISH_MENU</menu>
-        <files>
+        <files folder="admin">
             <folder>classes</folder>
             <folder>controllers</folder>
             <folder>helpers</folder>
