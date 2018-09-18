@@ -13,12 +13,12 @@ defined('_JEXEC') or die;
 
 class PixPublishfreeController extends JControllerLegacy
 {
-	protected $default_view = 'panel';
-	
-	public function display($cachable = false, $urlparams = false)
-	{
-		parent::display( $cachable, $urlparams );
-		
-		return $this;
-	}
+    protected $default_view = 'panel';
+
+    public function display($cachable = false, $urlparams = false)
+    {
+        parent::display($cachable, $urlparams);
+
+        return $this;
+    }
 }

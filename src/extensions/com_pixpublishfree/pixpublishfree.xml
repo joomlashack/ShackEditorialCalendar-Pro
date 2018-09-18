@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5" method="upgrade">
-	<name>com_pixpublishfree</name>
-	<author>Joomlashack</author>
-	<creationDate>September 12 2018</creationDate>
-	<copyright>Copyright (C) 2018. All rights reserved.</copyright>
-	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
-	<authorEmail>help@joomlashack.com</authorEmail>
-	<authorUrl>https://www.joomlashack.com</authorUrl>
-	<version>1.2.0</version>
-	<description>COM_PIXPUBLISHFREE_XML_DESCRIPTION</description>
-	<administration>
-		<menu>COM_PIXPUBLISHFREE_MENU</menu>
-		<files>
-			<folder>controllers</folder>
-			<folder>helpers</folder>
-			<folder>language</folder>
-			<folder>media</folder>
-			<folder>models</folder>
-			<folder>views</folder>
-			<filename>access.xml</filename>
-			<filename>config.xml</filename>
-			<filename>controller.php</filename>
-			<filename>index.html</filename>
-			<filename>pixpublishfree.php</filename>
-		</files>
-		<languages folder="language">
-			<language tag="en-GB">en-GB/en-GB.com_pixpublishfree.ini</language>
-			<language tag="en-GB">en-GB/en-GB.com_pixpublishfree.sys.ini</language>
-			<language tag="de-DE">de-DE/de-DE.com_pixpublishfree.ini</language>
-			<language tag="de-DE">de-DE/de-DE.com_pixpublishfree.sys.ini</language>
-			<language tag="pl-PL">pl-PL/pl-PL.com_pixpublishfree.ini</language>
-			<language tag="pl-PL">pl-PL/pl-PL.com_pixpublishfree.sys.ini</language>
-		</languages>
-	</administration>
+    <name>com_pixpublishfree</name>
+    <author>Joomlashack</author>
+    <creationDate>September 12 2018</creationDate>
+    <copyright>Copyright (C) 2018. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>help@joomlashack.com</authorEmail>
+    <authorUrl>https://www.joomlashack.com</authorUrl>
+    <version>1.2.0</version>
+    <description>COM_PIXPUBLISHFREE_XML_DESCRIPTION</description>
+    <administration>
+        <menu>COM_PIXPUBLISHFREE_MENU</menu>
+        <files>
+            <folder>controllers</folder>
+            <folder>helpers</folder>
+            <folder>language</folder>
+            <folder>media</folder>
+            <folder>models</folder>
+            <folder>views</folder>
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <filename>controller.php</filename>
+            <filename>index.html</filename>
+            <filename>pixpublishfree.php</filename>
+        </files>
+        <languages folder="language">
+            <language tag="en-GB">en-GB/en-GB.com_pixpublishfree.ini</language>
+            <language tag="en-GB">en-GB/en-GB.com_pixpublishfree.sys.ini</language>
+            <language tag="de-DE">de-DE/de-DE.com_pixpublishfree.ini</language>
+            <language tag="de-DE">de-DE/de-DE.com_pixpublishfree.sys.ini</language>
+            <language tag="pl-PL">pl-PL/pl-PL.com_pixpublishfree.ini</language>
+            <language tag="pl-PL">pl-PL/pl-PL.com_pixpublishfree.sys.ini</language>
+        </languages>
+    </administration>
 </extension>

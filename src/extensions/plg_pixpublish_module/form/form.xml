@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
-	<fieldset name="general"
-		addfieldpath="/administrator/components/com_pixpublish/models/fields"
-	>
-		<field
-			name="title"
-			type="text"
-			id="title"
-			description="JFIELD_TITLE_DESC"
-			label="JGLOBAL_TITLE"
-			size="30"
-		/>
-		<field
-			name="start"
-			type="time"
-			id="start"
-			label="PLG_PIXPUBLISH_MODULE_START_LABEL"
-		/>
-	</fieldset>
+    <fieldset name="general"
+              addfieldpath="/administrator/components/com_pixpublish/models/fields"
+    >
+        <field
+            name="title"
+            type="text"
+            id="title"
+            description="JFIELD_TITLE_DESC"
+            label="JGLOBAL_TITLE"
+            size="30"
+        />
+        <field
+            name="start"
+            type="time"
+            id="start"
+            label="PLG_PIXPUBLISH_MODULE_START_LABEL"
+        />
+    </fieldset>
 </form>

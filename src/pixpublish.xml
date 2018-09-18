@@ -1,91 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5" method="upgrade">
-	<name>com_pixpublish</name>
-	<author>Joomlashack</author>
-	<creationDate>September 12 2018</creationDate>
-	<copyright>Copyright (C) 2018. All rights reserved.</copyright>
-	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
-	<authorEmail>help@joomlashack.com</authorEmail>
-	<authorUrl>https://www.joomlashack.com</authorUrl>
-	<version>1.2.0</version>
-	<description>COM_PIXPUBLISH_XML_DESCRIPTION</description>
-	<variant>PRO</variant>
+    <name>com_pixpublish</name>
+    <author>Joomlashack</author>
+    <creationDate>September 12 2018</creationDate>
+    <copyright>Copyright (C) 2018. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>help@joomlashack.com</authorEmail>
+    <authorUrl>https://www.joomlashack.com</authorUrl>
+    <version>1.2.0</version>
+    <description>COM_PIXPUBLISH_XML_DESCRIPTION</description>
+    <variant>PRO</variant>
 
-	<administration>
-		<menu>COM_PIXPUBLISH_MENU</menu>
-		<files>
-			<folder>classes</folder>
-			<folder>controllers</folder>
-			<folder>helpers</folder>
-			<folder>language</folder>
-			<folder>media</folder>
-			<folder>models</folder>
-			<folder>views</folder>
-			<filename>access.xml</filename>
-			<filename>config.xml</filename>
-			<filename>controller.php</filename>
-			<filename>index.html</filename>
-			<filename>pixpublish.php</filename>
-		</files>
-		<languages folder="language">
-			<language tag="en-GB">en-GB/en-GB.com_pixpublish.ini</language>
-			<language tag="en-GB">en-GB/en-GB.com_pixpublish.sys.ini</language>
-			<language tag="de-DE">de-DE/de-DE.com_pixpublish.ini</language>
-			<language tag="de-DE">de-DE/de-DE.com_pixpublish.sys.ini</language>
-			<language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.ini</language>
-			<language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.sys.ini</language>
-		</languages>
-	</administration>
+    <administration>
+        <menu>COM_PIXPUBLISH_MENU</menu>
+        <files>
+            <folder>classes</folder>
+            <folder>controllers</folder>
+            <folder>helpers</folder>
+            <folder>language</folder>
+            <folder>media</folder>
+            <folder>models</folder>
+            <folder>views</folder>
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <filename>controller.php</filename>
+            <filename>index.html</filename>
+            <filename>pixpublish.php</filename>
+        </files>
 
-	<updateservers>
-		<server type="extension" priority="1" name="Shack Editorial Calendar Pro"><![CDATA[https://deploy.ostraining.com/client/update/pro/stable/com_pixpublish]]></server>
-	</updateservers>
+        <languages folder="language">
+            <language tag="en-GB">en-GB/en-GB.com_pixpublish.ini</language>
+            <language tag="en-GB">en-GB/en-GB.com_pixpublish.sys.ini</language>
+            <language tag="de-DE">de-DE/de-DE.com_pixpublish.ini</language>
+            <language tag="de-DE">de-DE/de-DE.com_pixpublish.sys.ini</language>
+            <language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.ini</language>
+            <language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.sys.ini</language>
+        </languages>
+    </administration>
 
-	<alledia>
-		<element>pixpublish</element>
-		<namespace>PixPublish</namespace>
-		<license>pro</license>
-		<targetplatform>3.7</targetplatform>
-		<phpminimum>5.6</phpminimum>
+    <updateservers>
+        <server type="extension" priority="1" name="Shack Editorial Calendar Pro"><![CDATA[https://deploy.ostraining.com/client/update/pro/stable/com_pixpublish]]></server>
+    </updateservers>
 
-		<relatedExtensions uninstall="true" publish="true">
-			<extension type="library"
-					   element="allediaframework"
-					   uninstall="false">AllediaFramework</extension>
+    <alledia>
+        <element>pixpublish</element>
+        <namespace>PixPublish</namespace>
+        <license>pro</license>
+        <targetplatform>3.7</targetplatform>
+        <phpminimum>5.6</phpminimum>
 
-			<extension type="plugin"
-					   group="system"
-					   element="ossystem"
-					   ordering="first"
-					   uninstall="false">OSSystem</extension>
+        <relatedExtensions uninstall="true" publish="true">
+            <extension type="library"
+                       element="allediaframework"
+                       uninstall="false">AllediaFramework
+            </extension>
 
-			<extension type="plugin"
-					   group="system"
-					   element="osmylicensesmanager"
-					   ordering="last"
-					   uninstall="false">OSMyLicensesManager</extension>
+            <extension type="plugin"
+                       group="system"
+                       element="ossystem"
+                       ordering="first"
+                       uninstall="false">OSSystem
+            </extension>
 
-			<extension type="component"
-					   element="pixpublishfree">com_pixpublishfree</extension>
+            <extension type="plugin"
+                       group="system"
+                       element="osmylicensesmanager"
+                       ordering="last"
+                       uninstall="false">OSMyLicensesManager
+            </extension>
 
-			<extension type="plugin"
-					   group="pixpublish"
-					   element="acymailing">plg_pixpublish_acymailing</extension>
+            <extension type="component"
+                       element="pixpublishfree">com_pixpublishfree
+            </extension>
 
-			<extension type="plugin"
-					   group="pixpublish"
-					   element="content">plg_pixpublish_content</extension>
+            <extension type="plugin"
+                       group="pixpublish"
+                       element="acymailing">plg_pixpublish_acymailing
+            </extension>
 
-			<extension type="plugin"
-					   group="pixpublish"
-					   element="contentfre">plg_pixpublish_contentfree</extension>
+            <extension type="plugin"
+                       group="pixpublish"
+                       element="content">plg_pixpublish_content
+            </extension>
 
-			<extension type="plugin"
-					   group="pixpublish"
-					   element="module">plg_pixpublish_module</extension>
-		</relatedExtensions>
+            <extension type="plugin"
+                       group="pixpublish"
+                       element="contentfre">plg_pixpublish_contentfree
+            </extension>
 
-		<include>AllediaFreeDefaultFiles</include>
+            <extension type="plugin"
+                       group="pixpublish"
+                       element="module">plg_pixpublish_module
+            </extension>
+        </relatedExtensions>
 
-	</alledia>
+        <include>AllediaFreeDefaultFiles</include>
+
+    </alledia>
 </extension>

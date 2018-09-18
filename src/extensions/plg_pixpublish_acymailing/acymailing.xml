@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension 
-	version="2.5" 
-	type="plugin" 
-	group="pixpublish" 
-	method="upgrade">
-	<name>plg_pixpublish_acymailing</name>
-	<author>Joomlashack</author>
-	<creationDate>September 12 2018</creationDate>
-	<copyright>Copyright (C) 2018. All rights reserved.</copyright>
-	<license>GNU General Public License version 2 or later; see	LICENSE.txt</license>
-	<authorEmail>help@joomlashack.com</authorEmail>
-	<authorUrl>https://www.joomlashack.com</authorUrl>
-	<version>0.1.1</version>
-	<description>PLG_PIXPUBLISH_ACYMAILING_DESCRIPTION</description>
-	<files>
-		<file plugin="acymailing">acymailing.php</file>
-    	<folder>language</folder>
-    	<folder>form</folder>
-    	<folder>media</folder>
-	</files>
-	<languages>
-		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_acymailing.ini</language>
-		<language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_acymailing.sys.ini</language>
-		<language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_acymailing.ini</language>
-		<language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_acymailing.sys.ini</language>
-		<language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_acymailing.ini</language>
-		<language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_acymailing.sys.ini</language>
-	</languages>
-	<config>
-		<fields name="params">
-			<fieldset name="basic">
-				<field
-					name="background_colour"
-					type="color"
-					label="PLG_PIXPUBLISH_CONTENT_CONFIG_BGC"
-				/>
-			</fieldset>
-		</fields>
-	</config>
+<extension
+    version="2.5"
+    type="plugin"
+    group="pixpublish"
+    method="upgrade">
+    <name>plg_pixpublish_acymailing</name>
+    <author>Joomlashack</author>
+    <creationDate>September 12 2018</creationDate>
+    <copyright>Copyright (C) 2018. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <authorEmail>help@joomlashack.com</authorEmail>
+    <authorUrl>https://www.joomlashack.com</authorUrl>
+    <version>0.1.1</version>
+    <description>PLG_PIXPUBLISH_ACYMAILING_DESCRIPTION</description>
+    <files>
+        <file plugin="acymailing">acymailing.php</file>
+        <folder>language</folder>
+        <folder>form</folder>
+        <folder>media</folder>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_acymailing.ini</language>
+        <language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_acymailing.sys.ini</language>
+        <language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_acymailing.ini</language>
+        <language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_acymailing.sys.ini</language>
+        <language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_acymailing.ini</language>
+        <language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_acymailing.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="background_colour"
+                    type="color"
+                    label="PLG_PIXPUBLISH_CONTENT_CONFIG_BGC"
+                />
+            </fieldset>
+        </fields>
+    </config>
 </extension>
