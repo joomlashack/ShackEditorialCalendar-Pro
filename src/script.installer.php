@@ -25,8 +25,12 @@ use Alledia\Installer\AbstractScript;
 
 defined('_JEXEC') or die();
 
-require_once 'library/Installer/include.php';
-
+// Adapt for install and uninstall environments
+if (file_exists(__DIR__ . '/admin/library/Installer/AbstractScript.php')) {
+    require_once __DIR__ . '/admin/library/Installer/AbstractScript.php';
+} else {
+    require_once __DIR__ . '/library/Installer/AbstractScript.php';
+}
 /**
  * Custom installer script
  */
