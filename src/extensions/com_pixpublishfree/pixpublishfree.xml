@@ -11,7 +11,7 @@
     <description>COM_PIXPUBLISHFREE_XML_DESCRIPTION</description>
     <administration>
         <menu>COM_PIXPUBLISHFREE_MENU</menu>
-        <files>
+        <files folder="admin">
             <folder>controllers</folder>
             <folder>helpers</folder>
             <folder>language</folder>
@@ -24,7 +24,7 @@
             <filename>index.html</filename>
             <filename>pixpublishfree.php</filename>
         </files>
-        <languages folder="language">
+        <languages folder="admin/language">
             <language tag="en-GB">en-GB/en-GB.com_pixpublishfree.ini</language>
             <language tag="en-GB">en-GB/en-GB.com_pixpublishfree.sys.ini</language>
             <language tag="de-DE">de-DE/de-DE.com_pixpublishfree.ini</language>
