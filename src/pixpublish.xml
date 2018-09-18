@@ -20,6 +20,7 @@
             <folder>controllers</folder>
             <folder>helpers</folder>
             <folder>language</folder>
+			<folder>library</folder>
             <folder>media</folder>
             <folder>models</folder>
             <folder>views</folder>
@@ -54,46 +55,38 @@
         <relatedExtensions uninstall="true" publish="true">
             <extension type="library"
                        element="allediaframework"
-                       uninstall="false">AllediaFramework
-            </extension>
+                       uninstall="false">AllediaFramework</extension>
 
             <extension type="plugin"
                        group="system"
                        element="ossystem"
                        ordering="first"
-                       uninstall="false">OSSystem
-            </extension>
+                       uninstall="false">OSSystem</extension>
 
             <extension type="plugin"
                        group="system"
                        element="osmylicensesmanager"
                        ordering="last"
-                       uninstall="false">OSMyLicensesManager
-            </extension>
+                       uninstall="false">OSMyLicensesManager</extension>
 
             <extension type="component"
-                       element="pixpublishfree">com_pixpublishfree
-            </extension>
+                       element="pixpublishfree">com_pixpublishfree</extension>
 
             <extension type="plugin"
                        group="pixpublish"
-                       element="acymailing">plg_pixpublish_acymailing
-            </extension>
+                       element="acymailing">plg_pixpublish_acymailing</extension>
 
             <extension type="plugin"
                        group="pixpublish"
-                       element="content">plg_pixpublish_content
-            </extension>
+                       element="content">plg_pixpublish_content</extension>
 
             <extension type="plugin"
                        group="pixpublish"
-                       element="contentfre">plg_pixpublish_contentfree
-            </extension>
+                       element="contentfre">plg_pixpublish_contentfree</extension>
 
             <extension type="plugin"
                        group="pixpublish"
-                       element="module">plg_pixpublish_module
-            </extension>
+                       element="module">plg_pixpublish_module</extension>
         </relatedExtensions>
 
         <include>AllediaFreeDefaultFiles</include>
