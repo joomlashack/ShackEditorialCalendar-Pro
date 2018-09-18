@@ -10,6 +10,8 @@
     <version>1.2.0</version>
     <description>COM_PIXPUBLISH_XML_DESCRIPTION</description>
     <variant>PRO</variant>
+	
+	<scriptfile>script.installer.php</scriptfile>
 
     <administration>
         <menu>COM_PIXPUBLISH_MENU</menu>
