@@ -11,7 +11,7 @@
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>help@joomlashack.com</authorEmail>
     <authorUrl>https://www.joomlashack.com</authorUrl>
-    <version>1.2.1b1</version>
+    <version>1.2.1b2</version>
     <description>PLG_PIXPUBLISH_ACYMAILING_DESCRIPTION</description>
     <files>
         <file plugin="acymailing">acymailing.php</file>
