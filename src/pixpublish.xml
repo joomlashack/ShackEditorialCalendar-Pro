@@ -73,6 +73,7 @@
                        element="pixpublishfree">com_pixpublishfree</extension>
 
             <extension type="plugin"
+                       publish="false"
                        group="pixpublish"
                        element="acymailing">plg_pixpublish_acymailing</extension>
 
