@@ -10,7 +10,7 @@
     <version>1.2.1b2</version>
     <description>COM_PIXPUBLISH_XML_DESCRIPTION</description>
     <variant>PRO</variant>
-	
+
 	<scriptfile>script.installer.php</scriptfile>
 
     <administration>
@@ -84,6 +84,5 @@
         </relatedExtensions>
 
         <include>AllediaFreeDefaultFiles</include>
-
     </alledia>
 </extension>
