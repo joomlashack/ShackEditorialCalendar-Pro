@@ -69,9 +69,6 @@
                        ordering="last"
                        uninstall="false">OSMyLicensesManager</extension>
 
-            <extension type="component"
-                       element="pixpublishfree">com_pixpublishfree</extension>
-
             <extension type="plugin"
                        group="pixpublish"
                        element="acymailing">plg_pixpublish_acymailing</extension>
@@ -79,10 +76,6 @@
             <extension type="plugin"
                        group="pixpublish"
                        element="content">plg_pixpublish_content</extension>
-
-            <extension type="plugin"
-                       group="pixpublish"
-                       element="contentfre">plg_pixpublish_contentfree</extension>
 
             <extension type="plugin"
                        group="pixpublish"
