@@ -2,12 +2,12 @@
 <extension type="component" version="2.5" method="upgrade">
     <name>com_pixpublish</name>
     <author>Joomlashack</author>
-    <creationDate>September 12 2018</creationDate>
+    <creationDate>September 19 2018</creationDate>
     <copyright>Copyright (C) 2018. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>help@joomlashack.com</authorEmail>
     <authorUrl>https://www.joomlashack.com</authorUrl>
-    <version>1.2.0</version>
+    <version>1.2.1b1</version>
     <description>COM_PIXPUBLISH_XML_DESCRIPTION</description>
     <variant>PRO</variant>
 	
@@ -69,9 +69,6 @@
                        ordering="last"
                        uninstall="false">OSMyLicensesManager</extension>
 
-            <extension type="component"
-                       element="pixpublishfree">com_pixpublishfree</extension>
-
             <extension type="plugin"
                        publish="false"
                        group="pixpublish"
@@ -80,10 +77,6 @@
             <extension type="plugin"
                        group="pixpublish"
                        element="content">plg_pixpublish_content</extension>
-
-            <extension type="plugin"
-                       group="pixpublish"
-                       element="contentfre">plg_pixpublish_contentfree</extension>
 
             <extension type="plugin"
                        group="pixpublish"
