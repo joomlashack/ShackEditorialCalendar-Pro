@@ -11,7 +11,7 @@
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>help@joomlashack.com</authorEmail>
     <authorUrl>https://www.joomlashack.com</authorUrl>
-    <version>1.2.2</version>
+    <version>1.2.3b1</version>
     <description>TODO</description>
     <files>
         <file plugin="module">module.php</file>
