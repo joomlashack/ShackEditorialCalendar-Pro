@@ -13,6 +13,13 @@
 
 	<scriptfile>script.installer.php</scriptfile>
 
+    <media destination="com_pixpublish" folder="media">
+        <folder>css</folder>
+        <folder>fonts</folder>
+        <folder>images</folder>
+        <folder>js</folder>
+    </media>
+
     <administration>
         <menu>COM_PIXPUBLISH_MENU</menu>
         <files folder="admin">
