@@ -6,12 +6,12 @@
     method="upgrade">
     <name>plg_pixpublish_module</name>
     <author>Joomlashack</author>
-    <creationDate>September 19 2018</creationDate>
+    <creationDate>September 26 2018</creationDate>
     <copyright>Copyright (C) 2018. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>help@joomlashack.com</authorEmail>
     <authorUrl>https://www.joomlashack.com</authorUrl>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <description>TODO</description>
     <files>
         <file plugin="module">module.php</file>
