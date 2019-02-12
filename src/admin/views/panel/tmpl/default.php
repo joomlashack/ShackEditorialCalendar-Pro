@@ -22,8 +22,7 @@
  * along with ShackEditorialCalendar-Pro.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die();
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
 JHtml::_('formbehavior.chosen', 'select');

@@ -22,8 +22,7 @@
  * along with ShackEditorialCalendar-Pro.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// No direct access.
-defined('_JEXEC') or die;
+defined('_JEXEC') or die();
 
 jimport('joomla.form.editor');
 require_once JPATH_COMPONENT_ADMINISTRATOR . '/helpers/pixeditor.php';
