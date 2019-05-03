@@ -9,7 +9,9 @@
         "element-short"  : "pixpublish",
         "name"           : "Shack Editorial Calendar Pro",
         "client"         : "administrator",
-        "package-license": "pro"
+        "package-license": "pro",
+        "target-platform": "3.*",
+        "infourl"        : "/changelog/shack-editorial-calendar/"
     },
     "authors"          : [
         {
