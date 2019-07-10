@@ -91,5 +91,9 @@
         </relatedExtensions>
 
         <include>AllediaFreeDefaultFiles</include>
+
+        <obsolete>
+            <file>administrator/components/com_pixpublish/models/fields/fixed.php</file>
+        </obsolete>
     </alledia>
 </extension>

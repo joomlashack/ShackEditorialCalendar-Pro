@@ -24,16 +24,15 @@
 
 defined('_JEXEC') or die();
 
+JFormHelper::loadFieldClass('Editor');
 
-class JFormFieldFixed extends JFormFieldEditor
+class SecFormFieldEditor extends JFormFieldEditor
 {
-    public $type = 'fixed';
+    public $type = 'sec.editor';
 
     public function getInit()
     {
-        $editor = $this->getEditor();
-
-        return $editor->getInit();
+        $this->getEditor()->getInit();
     }
 
     public function save()

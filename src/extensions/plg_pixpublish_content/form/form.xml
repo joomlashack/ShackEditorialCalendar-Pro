@@ -74,7 +74,7 @@
     <fieldset name="editor" class="pp-100">
         <field
             name="articletext"
-            type="fixed"
+            type="sec.editor"
             buttons="false"
             label=""
             class="inputbox"
