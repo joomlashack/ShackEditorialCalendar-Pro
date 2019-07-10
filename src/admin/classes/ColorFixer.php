@@ -2,8 +2,7 @@
 /**
  * @package   ShackEditorialCalendar-Pro
  * @contact   www.joomlashack.com, help@joomlashack.com
- * @author    2003-2017 You Rock AB. All Rights Reserved
- * @copyright 2018-2019 Joomlashack.com. All rights reserved
+ * @copyright 2019 Joomlashack.com. All rights reserved
  * @license   http://www.gnu.org/licenses/gpl.html GNU/GPL
  *
  * This file is part of ShackEditorialCalendar-Pro.
@@ -24,41 +23,20 @@
 
 defined('_JEXEC') or die();
 
-abstract class PixPublishPlugin extends JPlugin
+class ColorFixer
 {
     /**
-     * @param object[] $arr
-     * @param string   $fieldname
-     *
-     * @return object[]
+     * @var string
      */
-    protected static function fixDates(&$arr, $fieldname)
-    {
-        foreach ($arr as $row) {
-            $row->$fieldname = JFactory::getDate($row->start, 'UTC')
-                ->setTimezone(new DateTimeZone(self::getUserTimeoffset()))
-                ->format('Y-m-d H:i:s', true, false);
-        }
-
-        return $arr;
-    }
+    public static $st_color = '';
 
     /**
-     * @return string
+     * @var string
      */
-    public function getInfoText()
-    {
-        return '';
-    }
+    public $color = null;
 
-    /**
-     * @return string
-     */
-    protected static function getUserTimeoffset()
+    public function __construct()
     {
-        $config = JFactory::getConfig();
-        $user   = JFactory::getUser();
-
-        return $user->getParam('timezone', $config->get('offset', 'UTC'));
+        $this->color = self::$st_color;
     }
 }

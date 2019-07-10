@@ -26,14 +26,11 @@ defined('_JEXEC') or die();
 
 // Access check.
 if (!JFactory::getUser()->authorise('core.manage', 'com_pixpublish')) {
-    return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+    throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'), 401);
 }
 
-if (!JLoader::import('pixpublish', JPATH_COMPONENT . '/helpers')) {
-    return JError::raiseWarning(500, JText::_('COM_PIXPUBLISH_INC_FILES_NOT_FOUND'));
-}
+require_once JPATH_COMPONENT_ADMINISTRATOR . '/include.php';
 
-// Execute the task.
 $controller = JControllerLegacy::getInstance('PixPublish');
 $controller->execute(JFactory::getApplication()->input->get('task'));
 $controller->redirect();

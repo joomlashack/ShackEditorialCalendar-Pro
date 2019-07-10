@@ -26,7 +26,66 @@ defined('_JEXEC') or die();
 
 class PixPublishViewPanel extends JViewLegacy
 {
+    protected $infotexts = null;
 
+    /**
+     * Language strings to be added to javascripts
+     *
+     * @var string[]
+     */
+    protected $jsLanguageStrings = array(
+        'COM_PIXPUBLISH_ADD_NEW',
+        'COM_PIXPUBLISH_EDIT',
+        'JSAVE',
+        'JCANCEL',
+        'JANUARY',
+        'FEBRUARY',
+        'MARCH',
+        'APRIL',
+        'MAY',
+        'JUNE',
+        'JULY',
+        'AUGUST',
+        'SEPTEMBER',
+        'OCTOBER',
+        'NOVEMBER',
+        'DECEMBER',
+        'JANUARY_SHORT',
+        'FEBRUARY_SHORT',
+        'MARCH_SHORT',
+        'APRIL_SHORT',
+        'MAY_SHORT',
+        'JUNE_SHORT',
+        'JULY_SHORT',
+        'AUGUST_SHORT',
+        'SEPTEMBER_SHORT',
+        'OCTOBER_SHORT',
+        'NOVEMBER_SHORT',
+        'DECEMBER_SHORT',
+        'MONDAY',
+        'TUESDAY',
+        'WEDNESDAY',
+        'THURSDAY',
+        'FRIDAY',
+        'SATURDAY',
+        'SUNDAY',
+        'MON',
+        'TUE',
+        'WED',
+        'THU',
+        'FRI',
+        'SAT',
+        'SUN',
+        'JLIB_HTML_BEHAVIOR_TODAY',
+        'COM_PIXPUBLISH_MONTH'
+    );
+
+    /**
+     * @param string $tpl
+     *
+     * @return void
+     * @throws Exception
+     */
     public function display($tpl = null)
     {
         JHtml::_('jquery.framework', true);
@@ -34,86 +93,40 @@ class PixPublishViewPanel extends JViewLegacy
         JHtml::_('formbehavior.chosen', 'select');
         JHtml::_('behavior.keepalive');
 
-
-        $doc = JFactory::getDocument();
         // Fullcalendar
-        $doc->addScript(JUri::root() . 'administrator/components/com_pixpublish/media/lib/jquery/jquery-ui.custom.min.js');
-        $doc->addScript(JUri::root() . 'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.min.js',
-            'text/javascript');
-        $doc->addStyleSheet(JUri::root() . 'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.css');
+        JHtml::_('script', 'administrator/components/com_pixpublish/media/lib/jquery/jquery-ui.custom.min.js');
+        JHtml::_('script', 'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.min.js');
+        JHtml::_('stylesheet', 'administrator/components/com_pixpublish/media/lib/fullcalendar/fullcalendar.css');
 
         // Popup
-        $doc->addScript(JUri::root() . 'administrator/components/com_pixpublish/media/lib/messi/messi.hacked.js');
-        $doc->addStyleSheet(JUri::root() . 'administrator/components/com_pixpublish/media/lib/messi/messi.hacked.min.css');
+        JHtml::_('script', 'administrator/components/com_pixpublish/media/lib/messi/messi.hacked.js');
+        JHtml::_('stylesheet', 'administrator/components/com_pixpublish/media/lib/messi/messi.hacked.min.css');
 
         // Timepicker
-        $doc->addScript(JUri::root() . 'administrator/components/com_pixpublish/media/lib/test/bootstrap-timepicker.min.js');
-        $doc->addStyleSheet(JUri::root() . 'administrator/components/com_pixpublish/media/lib/test/bootstrap-timepicker.min.css');
+        JHtml::_('script', 'administrator/components/com_pixpublish/media/lib/test/bootstrap-timepicker.min.js');
+        JHtml::_('stylesheet', 'administrator/components/com_pixpublish/media/lib/test/bootstrap-timepicker.min.css');
 
         // Component
-        $doc->addScript(JUri::root() . 'administrator/components/com_pixpublish/media/js/pixpublish.js');
-        $doc->addStyleSheet(JUri::root() . 'administrator/components/com_pixpublish/media/css/pixpublish.css');
-        $doc->addScriptDeclaration('var PLUGIN = [];');
-
-        //JFactory::getLanguage()->load('com_pixpublish');
-        //echo JText::_('COM_PIXPUBLISH_VIEW_PANEL'); die();
+        JHtml::_('script', 'administrator/components/com_pixpublish/media/js/pixpublish.js');
+        JHtml::_('stylesheet', 'administrator/components/com_pixpublish/media/css/pixpublish.css');
+        JFactory::getDocument()->addScriptDeclaration('var PLUGIN = [];');
 
         // Language strings
-        JText::Script('COM_PIXPUBLISH_ADD_NEW');
-        JText::Script('COM_PIXPUBLISH_EDIT');
-        JText::Script('JSAVE');
-        JText::Script('JCANCEL');
-        JText::Script('JANUARY');
-        JText::Script('FEBRUARY');
-        JText::Script('MARCH');
-        JText::Script('APRIL');
-        JText::Script('MAY');
-        JText::Script('JUNE');
-        JText::Script('JULY');
-        JText::Script('AUGUST');
-        JText::Script('SEPTEMBER');
-        JText::Script('OCTOBER');
-        JText::Script('NOVEMBER');
-        JText::Script('DECEMBER');
-        JText::Script('JANUARY_SHORT');
-        JText::Script('FEBRUARY_SHORT');
-        JText::Script('MARCH_SHORT');
-        JText::Script('APRIL_SHORT');
-        JText::Script('MAY_SHORT');
-        JText::Script('JUNE_SHORT');
-        JText::Script('JULY_SHORT');
-        JText::Script('AUGUST_SHORT');
-        JText::Script('SEPTEMBER_SHORT');
-        JText::Script('OCTOBER_SHORT');
-        JText::Script('NOVEMBER_SHORT');
-        JText::Script('DECEMBER_SHORT');
-        JText::Script('MONDAY');
-        JText::Script('TUESDAY');
-        JText::Script('WEDNESDAY');
-        JText::Script('THURSDAY');
-        JText::Script('FRIDAY');
-        JText::Script('SATURDAY');
-        JText::Script('SUNDAY');
-        JText::Script('MON');
-        JText::Script('TUE');
-        JText::Script('WED');
-        JText::Script('THU');
-        JText::Script('FRI');
-        JText::Script('SAT');
-        JText::Script('SUN');
-        JText::Script('JLIB_HTML_BEHAVIOR_TODAY');
-        JText::Script('COM_PIXPUBLISH_MONTH');
+        foreach ($this->jsLanguageStrings as $text) {
+            JText::script($text);
+        }
 
         $this->addToolbar();
 
         $dispatcher = $this->importPlugins();
 
         PixPublishHelper::addSubmenu($this->getName());
-        $results       = $dispatcher->trigger('onRegisterSearchFilters');
+
+        $dispatcher->trigger('onRegisterSearchFilters');
         $this->sidebar = JHtmlSidebar::render();
 
-        $infotexts       = $dispatcher->trigger('getInfoText');
-        $this->infotexts = $infotexts;
+        $this->infotexts = $dispatcher->trigger('getInfoText');
+
 
         parent::display($tpl);
     }
@@ -124,12 +137,13 @@ class PixPublishViewPanel extends JViewLegacy
     }
 
     /**
-     * @return JDispatcher
+     * @return JEventDispatcher
      */
     protected function importPlugins()
     {
         JPluginHelper::importPlugin('pixpublish');
-        $dispatcher = JDispatcher::getInstance();
+        $dispatcher = JEventDispatcher::getInstance();
+
         return $dispatcher;
     }
 }

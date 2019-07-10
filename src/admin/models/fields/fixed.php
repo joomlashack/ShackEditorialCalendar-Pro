@@ -24,8 +24,6 @@
 
 defined('_JEXEC') or die();
 
-jimport('joomla.form.editor');
-require_once JPATH_COMPONENT_ADMINISTRATOR . '/helpers/pixeditor.php';
 
 class JFormFieldFixed extends JFormFieldEditor
 {
@@ -34,16 +32,19 @@ class JFormFieldFixed extends JFormFieldEditor
     public function getInit()
     {
         $editor = $this->getEditor();
+
         return $editor->getInit();
     }
 
     public function save()
     {
+        // @TODO: See if this is really needed as of J!3.7.0
         $str = $this->getEditor()->save($this->id);
         // Hack to fix the problem with 3.4.4 update, see https://github.com/joomla/joomla-cms/pull/7263
         if ($this->getEditor()->getEditorType() == 'PlgEditorTinymce') {
             $str .= ' tinyMCE.get("' . $this->id . '").save();';
         }
+
         return $str;
     }
 
@@ -55,20 +56,13 @@ class JFormFieldFixed extends JFormFieldEditor
      */
     protected function getEditor()
     {
-        // Only create the editor if it is not already created.
         if (empty($this->editor)) {
             $editor = null;
 
             if ($this->editorType) {
-                // Get the list of editor types.
-                $types = $this->editorType;
-
-                // Get the database object.
                 $db = JFactory::getDbo();
 
-                // Iterate over teh types looking for an existing editor.
-                foreach ($types as $element) {
-                    // Build the query.
+                foreach ($this->editorType as $element) {
                     $query = $db->getQuery(true)
                         ->select('element')
                         ->from('#__extensions')
@@ -76,9 +70,7 @@ class JFormFieldFixed extends JFormFieldEditor
                         ->where('folder = ' . $db->quote('editors'))
                         ->where('enabled = 1');
 
-                    // Check of the editor exists.
-                    $db->setQuery($query, 0, 1);
-                    $editor = $db->loadResult();
+                    $editor = $db->setQuery($query, 0, 1)->loadResult();
 
                     // If an editor was found stop looking.
                     if ($editor) {
@@ -93,7 +85,6 @@ class JFormFieldFixed extends JFormFieldEditor
                 $editor = $conf->get('editor');
             }
 
-            //$this->editor = JEditor::getInstance($editor);
             $this->editor = PixEditor::getInstance($editor);
         }
 

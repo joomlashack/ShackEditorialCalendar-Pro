@@ -22,129 +22,194 @@
  * along with ShackEditorialCalendar-Pro.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+use Joomla\CMS\Date\Date;
+use Joomla\CMS\Form\Form;
+
 defined('_JEXEC') or die();
 
-JLoader::import('pixpublishplugin', JPATH_COMPONENT_ADMINISTRATOR . '/classes');
+require_once JPATH_ADMINISTRATOR . '/components/com_pixpublish/include.php';
 
-class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
+class PlgPixPublishContent extends PixPublishPlugin implements InterfacePixPublishPlugin
 {
+    /**
+     * @var bool
+     */
     protected $autoloadLanguage = true;
-    protected $item             = null;
 
     /**
+     * @var int
+     */
+    protected $item = null;
+
+    /**
+     * @param Date   $start
+     * @param Date   $stop
+     * @param object $data
      *
-     * @param JDate $start
-     * @param JDate $stop
+     * @return ColorFixer[]
      */
     public function onDataFetch($start, $stop, $data)
     {
-        $result = array();
-        $db     = JFactory::getDbo();
-        $query  = $db->getQuery(true);
-        $query->select('tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, "' . $this->getName() . '" as plugin')
+        $db = JFactory::getDbo();
+
+        $query = $db->getQuery(true)
+            ->select(
+                array(
+                    'tbl.id AS id',
+                    'tbl.title AS title',
+                    'tbl.publish_up AS start',
+                    'tbl.state',
+                    $db->quoteName($this->getName()) . ' AS plugin'
+                )
+            )
             ->from('#__content tbl')
-            ->where('tbl.publish_up >= ' . $query->q($start->toSql()))
-            ->where('tbl.publish_up <= ' . $query->q($stop->toSql()));
-        if ($data->filter_state != '') {
+            ->where(
+                array(
+                    'tbl.publish_up >= ' . $db->quoteName($start->toSql()),
+                    'tbl.publish_up <= ' . $db->quote($stop->toSql())
+                )
+            );
+
+        if (!empty($data->filter_state)) {
             $query->where('state = ' . (int)$data->filter_state);
         }
 
-        if ($data->filter_category_id != '') {
+        if (!empty($data->filter_category_id)) {
             $query->where('catid = ' . (int)$data->filter_category_id);
         }
 
-        if ($data->filter_access != '') {
+        if (!empty($data->filter_access)) {
             $query->where('access = ' . (int)$data->filter_access);
         }
 
-        if ($data->filter_language != '') {
-            $query->where('language = ' . $query->q($data->filter_language));
+        if (!empty($data->filter_language)) {
+            $query->where('language = ' . $db->quote($data->filter_language));
         }
 
-        ColorFixer::$st_color = $this->params->get('background_colour', '#08C'); // #3a87ad
-        $result               = $db->setQuery($query)->loadObjectList('', 'ColorFixer');
+        ColorFixer::$st_color = $this->params->get('background_colour', '#08C');
 
-        // Fix dates
+        /** @var ColorFixer[] $result */
+        $result = $db->setQuery($query)->loadObjectList('', 'ColorFixer');
         $result = self::fixDates($result, 'start');
 
         return $result;
     }
 
+    /**
+     * @param string $source
+     * @param int    $id
+     * @param int    $dayd
+     * @param int    $mind
+     *
+     * @return bool
+     */
     public function onItemMove($source, $id, $dayd, $mind)
     {
         if ($source === $this->getName()) {
-            if (!$this->getAuth($id)->get('core.edit')) {
-                if (!$this->canEditOwn($id)) {
-                    return false;
-                }
-            }
-
-            $db    = JFactory::getDbo();
-            $query = $db->getQuery(true);
-            $query->update('#__content');
-            $query->set('publish_up = DATE_ADD( ADDDATE( publish_up, ' . (int)$dayd . ' ), INTERVAL "' . (int)$mind . '" MINUTE )');
-
-            $query->where('id = ' . (int)$id);
-
-            if (!$db->setQuery($query)->execute()) {
+            if (!$this->getAuth('core.edit', $id)
+                && !$this->canEditOwn($id)
+            ) {
                 return false;
             }
+
+            $db = JFactory::getDbo();
+
+            $query = $db->getQuery(true)
+                ->update('#__content')
+                ->set(
+                    sprintf(
+                        'publish_up = DATE_ADD(ADDDATE(publish_up, %s), INTERVAL %s MINUTE )',
+                        (int)$dayd,
+                        $db->quote((int)$mind)
+                    )
+                )
+                ->where('id = ' . (int)$id);
+
+            return (bool)$db->setQuery($query)->execute();
         }
+
         return true;
     }
 
+    /**
+     * @param string $source
+     * @param int    $id
+     * @param Form   $form
+     *
+     * @return object
+     */
     public function onGetDialog($source, $id, $form)
     {
         if ($source === $this->getName()) {
             JForm::addFieldPath(JPATH_ADMINISTRATOR . '/components/com_categories/models/fields');
-            JForm::addFieldPath(JPATH_ADMINISTRATOR . '/components/com_pixpublish/models/fields');
             JForm::addFormPath(__DIR__ . '/form');
 
             $form->loadFile('form', false);
 
             $form->setFieldAttribute('articletext', 'id', time());
 
-            if ((int)$id > 0) {
-                $db    = JFactory::getDbo();
-                $query = $db->getQuery(true);
+            $id = (int)$id;
+            if ($id > 0) {
+                $db = JFactory::getDbo();
 
-                $query->select('tbl.id AS id, tbl.title AS title, tbl.publish_up AS start, tbl.state, tbl.introtext, tbl.fulltext, tbl.language, tbl.access, tbl.catid, tbl.alias, "' . $this->getName() . '" as plugin')
+                $query = $db->getQuery(true)
+                    ->select(
+                        array(
+                            'tbl.id AS id',
+                            'tbl.title AS title',
+                            'tbl.publish_up AS start',
+                            'tbl.state',
+                            'tbl.introtext',
+                            'tbl.fulltext',
+                            'tbl.language',
+                            'tbl.access',
+                            'tbl.catid',
+                            'tbl.alias',
+                            $db->quoteName($this->getName()) . 'AS plugin'
+                        )
+                    )
                     ->from('#__content tbl')
-                    ->where('tbl.id = ' . (int)$id);
+                    ->where('tbl.id = ' . $id);
 
                 $result = $db->setQuery($query)->loadObject();
 
-                // Added this row to load the {readmore} id
-                $result->articletext = trim($result->fulltext) != '' ? $result->introtext . "<hr id=\"system-readmore\" />" . $result->fulltext : $result->introtext;
+                $result->articletext = trim($result->fulltext) != ''
+                    ? $result->introtext . "<hr id=\"system-readmore\" />" . $result->fulltext
+                    : $result->introtext;
 
                 if ($result) {
-                    $arr    = array($result);
-                    $arr    = self::fixDates($arr, 'start');
-                    $result = $arr[0];
+                    $arr = array($result);
+                    $arr = self::fixDates($arr, 'start');
+
+                    return array_shift($arr);
                 }
-
-                return $result;
-
-            } else {
-                return false;
             }
-        } else {
-            return false;
         }
+
+        return null;
     }
 
+    /**
+     * @param string $source
+     * @param int    $id
+     * @param object $data
+     *
+     * @return bool
+     */
     public function onItemSave($source, $id, $data)
     {
-        if ($source === $this->getName()) {
-            $this->logThis(print_r($data, true));
+        $title = empty($data->title) ? null : trim($data->title);
 
-            $canEdit = $this->getAuth($id)->get('core.edit'); // create
+        if ($source === $this->getName() && $title) {
+            $id = (int)$id;
+
+            $canEdit = $this->getAuth('core.edit', $id);
             if (!$canEdit) {
                 $canEdit = $this->canEditOwn($id);
             }
             $canEditState = $this->canEditState($id);
 
-            if (!$this->getAuth()->get('core.create') && (int)$id == 0) {
+            if (!$this->getAuth('core.create', $id)) {
                 return false;
             }
 
@@ -152,119 +217,128 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
                 return false;
             }
 
-            $db    = JFactory::getDbo();
+            $db = JFactory::getDbo();
+
             $query = $db->getQuery(true);
-            if ((int)$id > 0) {
+            if ($id > 0) {
                 $query->update('#__content');
+
             } else {
                 $query->insert('#__content');
             }
 
             $time        = $data->start;
-            $title       = $data->title;
             $articletext = $data->articletext;
             $alias       = $data->alias;
 
             // Search for the {readmore} tag and split the text up accordingly.
-            if (isset($articletext)) {
-                $pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
-                $tagPos  = preg_match($pattern, $articletext);
+            $allContent = preg_split('#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i', $articletext);
 
-                if ($tagPos == 0) {
-                    $introtext = $articletext;
-                    $fulltext  = '';
-                } else {
-                    list ($introtext, $fulltext) = preg_split($pattern, $articletext, 2);
-                }
-            }
-            // End Search for the {readmore} tag
+            $introtext = array_shift($allContent);
+            $fulltext  = array_shift($allContent);
 
             if ($time) {
                 $time = JFactory::getDate($time, self::getUserTimeoffset())->format('H:i', false);
-                if ($canEdit && (int)$id > 0) {
-                    $query->set('publish_up = TIMESTAMP( DATE( publish_up ),' . $query->q($time) . ' )');
+                if ($canEdit && $id > 0) {
+                    $query->set(
+                        sprintf(
+                            'publish_up = TIMESTAMP(DATE(publish_up ), %s)',
+                            $db->quote($time)
+                        )
+                    );
                 }
             }
-            if (($title && $canEdit) || ($title && (int)$id == 0)) {
-                $query->set('title = ' . $query->q($title));
-                $query->set('introtext = ' . $query->q($introtext));
-                $query->set('`fulltext` = ' . $query->q($fulltext));
-                // fulltext alown caused an error so had to suround it with ``
 
+            if ($canEdit || $id == 0) {
                 if (trim($alias) == '') {
-                    if (JFactory::getConfig()->get('unicodeslugs') == 1) {
-                        $alias = JFilterOutput::stringURLUnicodeSlug($title);
-                    } else {
-                        $alias = JFilterOutput::stringURLSafe($title);
-                    }
+                    $alias = $title;
+                }
+
+                if (JFactory::getConfig()->get('unicodeslugs') == 1) {
+                    $alias = JFilterOutput::stringURLUnicodeSlug($alias);
 
                 } else {
                     $alias = JFilterOutput::stringURLSafe($alias);
                 }
-                $query->set('alias = ' . $query->q($alias));
-                $query->set('language = ' . $query->q($data->language));
-                $query->set('access = ' . $query->q($data->access));
-                $query->set('catid = ' . $query->q($data->catid));
+
+                $query->set(
+                    array(
+                        $db->quoteName('title') . ' = ' . $db->quote($title),
+                        $db->quoteName('introtext') . ' = ' . $db->quote($introtext),
+                        $db->quoteName('fulltext') . ' = ' . $db->quote($fulltext),
+                        $db->quoteName('alias') . ' = ' . $db->quote($alias),
+                        $db->quoteName('language') . ' = ' . $db->quote($data->language),
+                        $db->quoteName('access') . ' = ' . $db->quote($data->access),
+                        $db->quoteName('catid') . ' = ' . $db->quote($data->catid)
+                    )
+                );
             }
 
-            $user = JFactory::getUser();
-            $query->set('modified = ' . $query->q(JFactory::getDate('now', self::getUserTimeoffset())->toSql()));
-            $query->set('modified_by = ' . (int)$user->id);
+            $user         = JFactory::getUser();
+            $userDatetime = JFactory::getDate('now', static::getUserTimeoffset())->toSql();
+            $query->set(
+                array(
+                    'modified = ' . $db->quote($userDatetime),
+                    'modified_by = ' . (int)$user->id
+                )
+            );
 
             if ($canEditState) {
                 $query->set('state = ' . (int)$data->state);
             }
 
-            if ((int)$id > 0) {
-                $query->where('id = ' . (int)$id);
+            if ($id > 0) {
+                $query->where('id = ' . $id);
+
             } else {
-                $query->set('publish_up = ' . $query->q($data->publish_up . ' ' . $time));
-                $query->set('created_by = ' . (int)$user->id);
-                $query->set('created = ' . $query->q(JFactory::getDate('now', self::getUserTimeoffset())->toSql()));
+                $query->set(
+                    array(
+                        'publish_up = ' . $db->quote($data->publish_up . ' ' . $time),
+                        'created_by = ' . (int)$user->id,
+                        'created = ' . $db->quote($userDatetime)
+                    )
+                );
             }
 
-            if (trim($title) == '') {
-                return;
-            }
-            $this->logThis((string)$query);
-
-            if (!$db->setQuery($query)->execute()) {
-                return false;
-            }
+            return (bool)$db->setQuery($query)->execute();
         }
+
         return true;
     }
 
+    /**
+     * @return string
+     */
     protected function getName()
     {
         return 'content';
     }
 
-    protected function getAuth($id = 0)
-    {
-        return PixPublishHelper::getActions('com_content', 'article', $id);
-    }
-
+    /**
+     * @param int $id
+     *
+     * @return bool
+     */
     protected function canEditOwn($id)
     {
-        if ($this->getAuth($id)->get('core.edit.own')) {
-            $created_by = (int)$this->getItem($id)->created_by;
-            $user       = JFactory::getUser();
-            $user_id    = (int)$user->id;
-            if ($user_id != 0) {
-                if ($user_id == $created_by) {
-                    return true;
-                }
-            }
-            return false;
+        if ($this->getAuth('core.edit.own', $id)) {
+            $user      = JFactory::getUser();
+            $createdBy = (int)$this->getItem($id)->created_by;
 
+            return ($user->id && $user->id == $createdBy);
         }
+
         return false;
     }
 
     protected function canEditState($id)
     {
-        return JFactory::getUser()->authorise('core.edit.state', 'com_content.article.' . (int)$id);
+        return $this->getAuth('core.edit.state', $id);
+    }
+
+    protected function getAuth($id, $action)
+    {
+        return JFactory::getUser()->authorise($action, 'com_content.article.' . (int)$id);
     }
 
     protected function getItem($id)
@@ -292,23 +366,11 @@ class PlgPixPublishContent extends PixPublishPlugin implements iPixPublishPlugin
         );
 
         JFactory::getDocument()
-            ->addScriptDeclaration('PLUGIN["content"] = "' . JText::_('PLG_PIXPUBLISH_CONTENT_TYPE_NAME') . '";');
-        JFactory::getDocument()->addScript(JUri::root() . 'plugins/pixpublish/content/media/js/content.js');
-    }
+            ->addScriptDeclaration(
+                sprintf("PLUGIN['content'] = '%s';", JText::_('PLG_PIXPUBLISH_CONTENT_TYPE_NAME'))
+            );
 
-    protected function logThis($message)
-    {
-        /*jimport( 'joomla.log.log' );
-        JLog::addLogger
-        (
-                array
-                (
-                        'text_file' => 'com_pixpublish.log.php'
-                ),
-                JLog::ALL,
-                'com_pixpublish'
-        );
-        JLog::add( $message, JLog::WARNING, 'com_pixpublish' );*/
+        JHtml::_('script', 'plugins/pixpublish/content/media/js/content.js');
     }
 }
 

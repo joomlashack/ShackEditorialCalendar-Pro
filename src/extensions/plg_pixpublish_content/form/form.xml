@@ -20,7 +20,7 @@
         />
         <field
             name="start"
-            type="time"
+            type="sec.time"
             id="start"
             label="PLG_PIXPUBLISH_CONTENT_START_LABEL"
         />

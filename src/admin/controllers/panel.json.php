@@ -28,17 +28,16 @@ class PixPublishControllerPanel extends JControllerLegacy
 {
     public function getData()
     {
-        $input = JFactory::getApplication()->input;
-        $start = $input->getUint('start', 0);
-        $end   = $input->getUint('end', 0);
-        $data  = json_decode($input->get('data', '', 'raw'));
-        //$this->logThis( 'data: '.print_r( $data, true ) );
-        $result = array();
+        $start = $this->input->getUint('start', 0);
+        $end   = $this->input->getUint('end', 0);
+        $data  = json_decode($this->input->get('data', '', 'raw'));
 
         if ($start != 0 && $end != 0) {
             $dispatcher = $this->importPlugins();
-            $results    = $dispatcher->trigger('onDataFetch',
-                array(JDate::getInstance($start), JDate::getInstance($end), $data));
+            $results    = $dispatcher->trigger(
+                'onDataFetch',
+                array(JDate::getInstance($start), JDate::getInstance($end), $data)
+            );
 
             $rows = array();
             foreach ($results as $result) {
@@ -46,41 +45,37 @@ class PixPublishControllerPanel extends JControllerLegacy
             }
         }
         echo json_encode($rows);
-        JFactory::getApplication()->close();
+
+        jexit();
     }
 
     public function updateEndTime()
     {
-        JFactory::getApplication()->close();
+        jexit();
     }
 
     public function move()
     {
-        $input  = JFactory::getApplication()->input;
-        $id     = $input->getCmd('id', '');
-        $source = $input->getCmd('plugin', '');
-        $dayd   = $input->getInt('dayd', 0);
-        $mind   = $input->getInt('mind', 0);
-        //$this->logThis( 'id:'.$id.' source:'.$source );
+        $id     = $this->input->getCmd('id', '');
+        $source = $this->input->getCmd('plugin', '');
+        $dayd   = $this->input->getInt('dayd', 0);
+        $mind   = $this->input->getInt('mind', 0);
 
         $dispatcher = $this->importPlugins();
-        $results    = $dispatcher->trigger('onItemMove', array($source, $id, $dayd, $mind, ''));
+        $dispatcher->trigger('onItemMove', array($source, $id, $dayd, $mind, ''));
 
-        //throw new Exception('Whoops, something happened!', 404);
-        JFactory::getApplication()->close();
+        jexit();
     }
 
     public function edit()
     {
-        $input      = JFactory::getApplication()->input;
-        $id         = $input->getCmd('id', '');
-        $source     = $input->getCmd('plugin', '');
+        $id         = $this->input->getCmd('id', '');
+        $source     = $this->input->getCmd('plugin', '');
         $dispatcher = $this->importPlugins();
         $form       = new JForm('com_pixpublish');
         $extra      = '';
         $results    = $dispatcher->trigger('onGetDialog', array($source, $id, $form));
         $item       = null;
-        //$this->logThis( 'sudde 1: '.$id );
         if (count($results) != 0 || (int)$id == 0) {
             if (count($results) != 0) {
                 foreach ($results as $row) {
@@ -90,17 +85,19 @@ class PixPublishControllerPanel extends JControllerLegacy
                 }
             }
 
-            //$this->logThis( 'sudde 2: '.$id );
-            //$this->logThis( print_r( $item, true ) );
             if ($item != null || (int)$id == 0) {
-                //$this->logThis( 'sudde 3: '.$id );
                 $form->bind($item);
 
                 // Output form (XML fieldsets must have name attribute set!)
                 echo '<form action="" method="post" id="pixsubmit_form">';
+
                 $fieldsets = $form->getFieldsets();
                 foreach ($fieldsets as $fieldset) {
-                    echo '<fieldset class="' . $fieldset->class . '">' . $form->renderFieldset($fieldset->name) . '</fieldset>';
+                    echo sprintf(
+                        '<fieldset class="%s">%s</fieldset>',
+                        $fieldset->class,
+                        $form->renderFieldset($fieldset->name)
+                    );
                 }
                 echo '</form>';
 
@@ -110,7 +107,6 @@ class PixPublishControllerPanel extends JControllerLegacy
                     if ($row->type == 'fixed') {
                         $lines[] = $row->save();
                         $inits[] = $row->getInit();
-                        //$this->logThis( print_r( $row->getInit(), true ) );
                     }
                 }
                 if (count($lines) > 0) {
@@ -128,48 +124,31 @@ class PixPublishControllerPanel extends JControllerLegacy
             }
         } else {
             throw new Exception('Whoops, something happened!', 500);
-            JFactory::getApplication()->close();
         }
-        JFactory::getApplication()->close();
+
+        jexit();
     }
 
     public function save()
     {
-        $input  = JFactory::getApplication()->input;
-        $id     = $input->getCmd('id', '');
-        $source = $input->getCmd('plugin', '');
-        $data   = json_decode(urldecode($input->get('data', '', 'raw')));
-        $this->logThis(urldecode($input->get('data', '', 'raw')));
+        $id     = $this->input->getCmd('id', '');
+        $source = $this->input->getCmd('plugin', '');
+        $data   = json_decode(urldecode($this->input->get('data', '', 'raw')));
 
         $dispatcher = $this->importPlugins();
-        $results    = $dispatcher->trigger('onItemSave', array($source, $id, $data));
+        $dispatcher->trigger('onItemSave', array($source, $id, $data));
 
-        JFactory::getApplication()->close();
+        jexit();
     }
 
     /**
-     * @return JDispatcher
+     * @return JEventDispatcher
      */
     protected function importPlugins()
     {
         JPluginHelper::importPlugin('pixpublish');
-        $dispatcher = JDispatcher::getInstance();
+        $dispatcher = JEventDispatcher::getInstance();
+
         return $dispatcher;
-    }
-
-    protected function logThis($message)
-    {
-        /*jimport( 'joomla.log.log' );
-
-        JLog::addLogger
-            (
-                    array
-                    (
-                            'text_file' => 'com_pixpublish.log.php'
-                    ),
-                    JLog::ALL,
-                    'com_pixpublish'
-            );
-        JLog::add( $message, JLog::WARNING, 'com_pixpublish' );*/
     }
 }
