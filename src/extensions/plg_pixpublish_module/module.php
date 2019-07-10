@@ -82,7 +82,7 @@ class PlgPixPublishModule extends PixPublishPlugin implements InterfacePixPublis
 
     /**
      * @param string $source
-     * @param int    $id
+     * @param string $id
      * @param int    $dayd
      * @param int    $mind
      *

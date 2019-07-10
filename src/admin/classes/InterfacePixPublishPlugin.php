@@ -39,9 +39,9 @@ interface InterfacePixPublishPlugin
 
     /**
      * @param string $source
-     * @param int $id
-     * @param int $dayd
-     * @param int $mind
+     * @param string $id
+     * @param int    $dayd
+     * @param int    $mind
      *
      * @return bool
      */

@@ -97,7 +97,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements InterfacePixPubli
 
     /**
      * @param string $source
-     * @param int    $id
+     * @param string $id
      * @param int    $dayd
      * @param int    $mind
      *

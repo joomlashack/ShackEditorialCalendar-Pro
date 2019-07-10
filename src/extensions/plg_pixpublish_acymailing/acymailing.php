@@ -70,10 +70,10 @@ class PlgPixPublishAcymailing extends PixPublishPlugin implements InterfacePixPu
     }
 
     /**
-     * @param $source
-     * @param $id
-     * @param $dayd
-     * @param $mind
+     * @param string $source
+     * @param string $id
+     * @param int    $dayd
+     * @param int    $mind
      *
      * @return bool
      */
