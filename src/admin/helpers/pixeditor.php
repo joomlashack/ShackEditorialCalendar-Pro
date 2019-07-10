@@ -36,7 +36,6 @@ class PixEditor extends JEditor
         $args['event'] = 'onInit';
 
         $results[] = $this->_editor->update($args);
-        //return print_r( $results, true );
         foreach ($results as $result) {
             if (trim($result)) {
                 // @todo remove code: $return .= $result;
