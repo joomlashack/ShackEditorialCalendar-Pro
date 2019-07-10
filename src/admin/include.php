@@ -31,6 +31,7 @@ if (!defined('SECAL_LOADED')) {
     define('SECAL_HELPERS', SECAL_ADMIN . '/helpers');
 
     JLoader::register('PixEditor', SECAL_HELPERS . '/pixeditor.php');
+    JLoader::register('PixPublishHelper', SECAL_HELPERS . '/pixpublish.php');
 
     JLoader::register('InterfacePixPublishPlugin', SECAL_CLASSES . '/InterfacePixPublishPlugin.php');
     JLoader::register('PixPublishPlugin', SECAL_CLASSES . '/pixpublishplugin.php');
