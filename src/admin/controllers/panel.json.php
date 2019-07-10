@@ -68,63 +68,18 @@ class PixPublishControllerPanel extends JControllerLegacy
 
     public function edit()
     {
-        $id         = $this->input->getCmd('id', '');
-        $source     = $this->input->getCmd('plugin', '');
-        $dispatcher = $this->importPlugins();
-        $form       = new JForm('com_pixpublish');
-        $extra      = '';
-        $results    = $dispatcher->trigger('onGetDialog', array($source, $id, $form));
-        $item       = null;
-        if (count($results) != 0 || (int)$id == 0) {
-            if (count($results) != 0) {
-                foreach ($results as $row) {
-                    if ($row) {
-                        $item = $row;
-                    }
-                }
-            }
+        $source = $this->input->getCmd('plugin', '');
+        $id     = $this->input->getCmd('id', '');
+        $form   = new JForm('com_pixpublish');
 
-            if ($item != null || (int)$id == 0) {
-                $form->bind($item);
+        $items = array_filter($this->getDispatcher()->trigger('onGetDialog', array($source, $id, $form)));
+        $form->bind(array_shift($items));
 
-                // Output form (XML fieldsets must have name attribute set!)
-                echo '<form action="" method="post" id="pixsubmit_form">';
+        $displayData = array(
+            'form' => $form,
+        );
 
-                $fieldsets = $form->getFieldsets();
-                foreach ($fieldsets as $fieldset) {
-                    echo sprintf(
-                        '<fieldset class="%s">%s</fieldset>',
-                        $fieldset->class,
-                        $form->renderFieldset($fieldset->name)
-                    );
-                }
-                echo '</form>';
-
-                $lines = array();
-                $inits = array();
-                foreach ($form->getFieldset() as $row) {
-                    if ($row->type == 'fixed') {
-                        $lines[] = $row->save();
-                        $inits[] = $row->getInit();
-                    }
-                }
-                if (count($lines) > 0) {
-                    echo '<script type="text/javascript">';
-                    echo 'function toggleMe(){';
-                    foreach ($lines as $row) {
-                        echo $row;
-                    }
-                    echo '};</script>';
-                }
-                foreach ($inits as $row) {
-                    echo $row;
-                }
-
-            }
-        } else {
-            throw new Exception('Whoops, something happened!', 500);
-        }
-
+        echo JLayoutHelper::render('sec.form.modal', $displayData, SECAL_LAYOUTS);
         jexit();
     }
 

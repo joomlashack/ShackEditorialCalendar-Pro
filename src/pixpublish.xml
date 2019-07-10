@@ -27,6 +27,7 @@
             <folder>controllers</folder>
             <folder>helpers</folder>
             <folder>language</folder>
+            <folder>layouts</folder>
             <folder>library</folder>
             <folder>media</folder>
             <folder>models</folder>

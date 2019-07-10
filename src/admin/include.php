@@ -29,6 +29,7 @@ if (!defined('SECAL_LOADED')) {
     define('SECAL_ADMIN', JPATH_ADMINISTRATOR . '/components/com_pixpublish');
     define('SECAL_CLASSES', SECAL_ADMIN . '/classes');
     define('SECAL_HELPERS', SECAL_ADMIN . '/helpers');
+    define('SECAL_LAYOUTS', SECAL_ADMIN . '/layouts');
 
     JLoader::register('PixEditor', SECAL_HELPERS . '/pixeditor.php');
     JLoader::register('PixPublishHelper', SECAL_HELPERS . '/pixpublish.php');
