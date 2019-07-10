@@ -26,11 +26,9 @@
     <config>
         <fields name="params">
             <fieldset name="basic">
-                <field
-                    name="background_colour"
+                <field name="background_colour"
                     type="color"
-                    label="TODO"
-                />
+                    label="PLG_PIXPUBLISH_MODULE_CONFIG_BACKGROUND_COLOUR"/>
             </fieldset>
         </fields>
     </config>
