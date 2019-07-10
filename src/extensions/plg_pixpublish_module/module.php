@@ -56,7 +56,7 @@ class PlgPixPublishModule extends PixPublishPlugin implements InterfacePixPublis
                     'tbl.title AS title',
                     'tbl.publish_up AS start',
                     'tbl.published',
-                    $db->quoteName($this->getName()) . ' AS plugin'
+                    $db->quote($this->getName()) . ' AS plugin'
                 )
             )
             ->from('#__modules tbl')
@@ -140,7 +140,7 @@ class PlgPixPublishModule extends PixPublishPlugin implements InterfacePixPublis
                         'tbl.title AS title',
                         'tbl.publish_up AS start',
                         'tbl.published AS state',
-                        $db->quoteName($this->getName()) . ' AS plugin',
+                        $db->quote($this->getName()) . ' AS plugin',
                         'tbl.position'
                     )
                 )

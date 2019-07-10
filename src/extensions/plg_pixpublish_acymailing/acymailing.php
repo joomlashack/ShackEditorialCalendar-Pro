@@ -49,7 +49,7 @@ class PlgPixPublishAcymailing extends PixPublishPlugin implements InterfacePixPu
                     'tbl.mailid AS id',
                     'tbl.subject AS title',
                     'tbl.senddate AS start',
-                    $db->quoteName($this->getName()) . ' as plugin'
+                    $db->quote($this->getName()) . ' as plugin'
                 )
             )
             ->from('#__acymailing_mail tbl')
@@ -119,7 +119,7 @@ class PlgPixPublishAcymailing extends PixPublishPlugin implements InterfacePixPu
                         'tbl.mailid AS id',
                         'tbl.subject AS title',
                         'tbl.senddate AS start',
-                        $db->quoteName($this->getName()) . ' AS plugin'
+                        $db->quote($this->getName()) . ' AS plugin'
                     )
                 )
                 ->from('#__acymailing_mail tbl')

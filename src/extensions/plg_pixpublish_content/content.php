@@ -59,13 +59,13 @@ class PlgPixPublishContent extends PixPublishPlugin implements InterfacePixPubli
                     'tbl.title AS title',
                     'tbl.publish_up AS start',
                     'tbl.state',
-                    $db->quoteName($this->getName()) . ' AS plugin'
+                    $db->quote($this->getName()) . ' AS plugin'
                 )
             )
-            ->from('#__content tbl')
+            ->from('#__content AS tbl')
             ->where(
                 array(
-                    'tbl.publish_up >= ' . $db->quoteName($start->toSql()),
+                    'tbl.publish_up >= ' . $db->quote($start->toSql()),
                     'tbl.publish_up <= ' . $db->quote($stop->toSql())
                 )
             );
@@ -165,7 +165,7 @@ class PlgPixPublishContent extends PixPublishPlugin implements InterfacePixPubli
                             'tbl.access',
                             'tbl.catid',
                             'tbl.alias',
-                            $db->quoteName($this->getName()) . 'AS plugin'
+                            $db->quote($this->getName()) . 'AS plugin'
                         )
                     )
                     ->from('#__content tbl')
