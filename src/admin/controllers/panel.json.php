@@ -32,19 +32,19 @@ class PixPublishControllerPanel extends JControllerLegacy
         $end   = $this->input->getUint('end', 0);
         $data  = json_decode($this->input->get('data', '', 'raw'));
 
-        if ($start != 0 && $end != 0) {
-            $dispatcher = $this->importPlugins();
-            $results    = $dispatcher->trigger(
+        if ($start && $end) {
+            $results = $this->getDispatcher()->trigger(
                 'onDataFetch',
                 array(JDate::getInstance($start), JDate::getInstance($end), $data)
             );
 
             $rows = array();
             foreach ($results as $result) {
-                $rows = array_merge((array)$rows, (array)$result);
+                $rows = array_merge($rows, (array)$result);
             }
+
+            echo json_encode($rows);
         }
-        echo json_encode($rows);
 
         jexit();
     }
@@ -56,13 +56,12 @@ class PixPublishControllerPanel extends JControllerLegacy
 
     public function move()
     {
-        $id     = $this->input->getCmd('id', '');
         $source = $this->input->getCmd('plugin', '');
+        $id     = $this->input->getCmd('id', '');
         $dayd   = $this->input->getInt('dayd', 0);
         $mind   = $this->input->getInt('mind', 0);
 
-        $dispatcher = $this->importPlugins();
-        $dispatcher->trigger('onItemMove', array($source, $id, $dayd, $mind, ''));
+        $this->getDispatcher()->trigger('onItemMove', array($source, $id, $dayd, $mind, ''));
 
         jexit();
     }
@@ -135,7 +134,7 @@ class PixPublishControllerPanel extends JControllerLegacy
         $source = $this->input->getCmd('plugin', '');
         $data   = json_decode(urldecode($this->input->get('data', '', 'raw')));
 
-        $dispatcher = $this->importPlugins();
+        $dispatcher = $this->getDispatcher();
         $dispatcher->trigger('onItemSave', array($source, $id, $data));
 
         jexit();
@@ -144,7 +143,7 @@ class PixPublishControllerPanel extends JControllerLegacy
     /**
      * @return JEventDispatcher
      */
-    protected function importPlugins()
+    protected function getDispatcher()
     {
         JPluginHelper::importPlugin('pixpublish');
         $dispatcher = JEventDispatcher::getInstance();
