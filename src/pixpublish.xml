@@ -2,12 +2,12 @@
 <extension type="component" version="2.5" method="upgrade">
     <name>com_pixpublish</name>
     <author>Joomlashack</author>
-    <creationDate>February 12 2019</creationDate>
+    <creationDate>July 10 2019</creationDate>
     <copyright>Copyright 2018-2019 Joomlashack.com. All rights reserved</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>help@joomlashack.com</authorEmail>
     <authorUrl>https://www.joomlashack.com</authorUrl>
-    <version>1.2.3</version>
+    <version>1.2.4b1</version>
     <description>COM_PIXPUBLISH_XML_DESCRIPTION</description>
     <variant>PRO</variant>
 
