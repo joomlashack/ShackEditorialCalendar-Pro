@@ -34,6 +34,7 @@
             <filename>access.xml</filename>
             <filename>config.xml</filename>
             <filename>controller.php</filename>
+            <filename>include.php</filename>
             <filename>pixpublish.php</filename>
         </files>
 
