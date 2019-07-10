@@ -26,40 +26,32 @@ defined('_JEXEC') or die();
 
 class PixEditor extends JEditor
 {
+    /**
+     * @return void
+     */
     public function getInit()
     {
-        // Check if editor is already loaded
-        if (is_null(($this->_editor))) {
-            return;
+        if ($this->_editor) {
+            $args['event'] = 'onInit';
+            $this->_editor->update($args);
         }
 
-        $args['event'] = 'onInit';
-
-        $results[] = $this->_editor->update($args);
-        foreach ($results as $result) {
-            if (trim($result)) {
-                // @todo remove code: $return .= $result;
-                $return = $result;
-            }
-        }
-        return $return;
+        return null;
     }
 
+    /**
+     * @return string
+     */
     public function getEditorType()
     {
-        // Check if editor is already loaded
-        if (is_null(($this->_editor))) {
-            return;
-        }
-
-        return get_class($this->_editor);
+        return $this->_editor ? get_class($this->_editor) : null;
     }
 
     /**
      * Returns the global Editor object, only creating it
      * if it doesn't already exist.
      *
-     * @param   string $editor The editor to use.
+     * @param string $editor The editor to use.
      *
      * @return  PixEditor The Editor object.
      *
