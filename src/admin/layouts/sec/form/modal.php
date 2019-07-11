@@ -61,5 +61,5 @@ if ($lines = array_filter($lines)) :
     }
     $jScript[] = '}';
 
-    JFactory::getDocument()->addScriptDeclaration(join("\n", $jScript));
+    echo sprintf('<script>%s</script>', join("\n", $jScript));
 endif;

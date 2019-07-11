@@ -57,3 +57,13 @@ endif;
     <div id='calendar' style='margin:3em 0;font-size:13px' data-base-url="<?php echo $base_url; ?>">
     </div>
 </div>
+
+<div style="display: none;" id="sudde">
+    <?php
+    $editor = JEditor::getInstance(JFactory::getApplication()->get('editor'));
+
+    if ($editor->get('_name') != 'jce') {
+        echo $editor->display('content_sudde', '', '0', '0', '0', '0', false);
+    }
+    ?>
+</div>
