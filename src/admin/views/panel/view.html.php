@@ -120,13 +120,10 @@ class PixPublishViewPanel extends JViewLegacy
 
         $dispatcher = $this->importPlugins();
 
-        PixPublishHelper::addSubmenu($this->getName());
-
         $dispatcher->trigger('onRegisterSearchFilters');
         $this->sidebar = JHtmlSidebar::render();
 
         $this->infotexts = $dispatcher->trigger('getInfoText');
-
 
         parent::display($tpl);
     }
