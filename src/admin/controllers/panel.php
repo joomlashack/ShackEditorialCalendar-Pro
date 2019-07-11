@@ -68,11 +68,6 @@ class PixPublishControllerPanel extends JControllerLegacy
 
     public function edit()
     {
-        echo __METHOD__;
-        echo '<pre>' . print_r($_REQUEST, 1) . '</pre>';
-        jexit();
-
-
         $source = $this->input->getCmd('plugin', '');
         $id     = $this->input->getCmd('id', '');
         $form   = new JForm('com_pixpublish');
