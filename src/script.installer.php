@@ -31,9 +31,32 @@ if (file_exists(__DIR__ . '/admin/library/Installer/AbstractScript.php')) {
 } else {
     require_once __DIR__ . '/library/Installer/AbstractScript.php';
 }
+
 /**
  * Custom installer script
  */
 class Com_PixpublishInstallerScript extends AbstractScript
 {
+    public function postFlight($type, $parent)
+    {
+        switch ($type) {
+            case 'update':
+                $this->removeObsoleteFiles();
+                break;
+        }
+
+        parent::postFlight($type, $parent);
+    }
+
+    /**
+     * Removes all obsolete files that are easier to remove here rather than in the manifest
+     */
+    protected function removeObsoleteFiles()
+    {
+        $files = JFolder::files(JPATH_ADMINISTRATOR . '/language', '.*pixpublish.*', true, true);
+
+        foreach ($files as $file) {
+            JFile::delete($file);
+        }
+    }
 }

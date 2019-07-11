@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension
-    version="2.5"
-    type="plugin"
-    group="pixpublish"
-    method="upgrade">
+<extension version="3.7" type="plugin" group="pixpublish" method="upgrade">
     <name>plg_pixpublish_content</name>
     <author>Joomlashack</author>
     <creationDate>July 10 2019</creationDate>
@@ -13,28 +9,20 @@
     <authorUrl>https://www.joomlashack.com</authorUrl>
     <version>1.2.4b1</version>
     <description>PLG_PIXPUBLISH_CONTENT_DESCRIPTION</description>
+
     <files>
         <file plugin="content">content.php</file>
         <folder>language</folder>
         <folder>form</folder>
         <folder>media</folder>
     </files>
-    <languages>
-        <language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_content.ini</language>
-        <language tag="en-GB">language/en-GB/en-GB.plg_pixpublish_content.sys.ini</language>
-        <language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_content.ini</language>
-        <language tag="de-DE">language/de-DE/de-DE.plg_pixpublish_content.sys.ini</language>
-        <language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_content.ini</language>
-        <language tag="pl-PL">language/pl-PL/pl-PL.plg_pixpublish_content.sys.ini</language>
-    </languages>
+
     <config>
         <fields name="params">
             <fieldset name="basic">
-                <field
-                    name="background_colour"
-                    type="color"
-                    label="PLG_PIXPUBLISH_CONTENT_CONFIG_BGC"
-                />
+                <field name="background_colour"
+                       type="color"
+                       label="PLG_PIXPUBLISH_CONTENT_CONFIG_BGC"/>
             </fieldset>
         </fields>
     </config>

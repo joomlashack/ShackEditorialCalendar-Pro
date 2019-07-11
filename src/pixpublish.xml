@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="2.5" method="upgrade">
+<extension type="component" version="3.7" method="upgrade">
     <name>com_pixpublish</name>
     <author>Joomlashack</author>
     <creationDate>July 10 2019</creationDate>
@@ -11,7 +11,7 @@
     <description>COM_PIXPUBLISH_XML_DESCRIPTION</description>
     <variant>PRO</variant>
 
-	<scriptfile>script.installer.php</scriptfile>
+    <scriptfile>script.installer.php</scriptfile>
 
     <media destination="com_pixpublish" folder="media">
         <folder>css</folder>
@@ -38,19 +38,11 @@
             <filename>include.php</filename>
             <filename>pixpublish.php</filename>
         </files>
-
-        <languages folder="admin/language">
-            <language tag="en-GB">en-GB/en-GB.com_pixpublish.ini</language>
-            <language tag="en-GB">en-GB/en-GB.com_pixpublish.sys.ini</language>
-            <language tag="de-DE">de-DE/de-DE.com_pixpublish.ini</language>
-            <language tag="de-DE">de-DE/de-DE.com_pixpublish.sys.ini</language>
-            <language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.ini</language>
-            <language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.sys.ini</language>
-        </languages>
     </administration>
 
     <updateservers>
-        <server type="extension" priority="1" name="Shack Editorial Calendar Pro"><![CDATA[https://deploy.ostraining.com/client/update/pro/stable/com_pixpublish]]></server>
+        <server type="extension" priority="1" name="Shack Editorial Calendar Pro"
+        ><![CDATA[https://deploy.ostraining.com/client/update/pro/stable/com_pixpublish]]></server>
     </updateservers>
 
     <alledia>
@@ -95,6 +87,7 @@
 
         <obsolete>
             <file>administrator/components/com_pixpublish/models/fields/fixed.php</file>
+            <file>administrator/components/com_pixpublish/models/forms/pixpublish.xml</file>
         </obsolete>
     </alledia>
 </extension>
