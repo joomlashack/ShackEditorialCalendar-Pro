@@ -72,7 +72,7 @@ jQuery(function($) {
                             }
 
                             if (val === 'Y') {
-                                var url = $calendar.data('base-url'); // + "&task=panel.save" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify( $('#pixsubmit_form').serializeObject() ) } );
+                                var url = $calendar.data('base-url');
                                 $.ajax({
                                     url    : url,
                                     method : "POST",

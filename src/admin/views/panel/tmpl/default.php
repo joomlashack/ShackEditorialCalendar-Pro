@@ -26,10 +26,9 @@ defined('_JEXEC') or die();
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
 JHtml::_('formbehavior.chosen', 'select');
-JHTML::_('behavior.modal');
+JHtml::_('behavior.modal');
 
-$base_url = JRoute::_('index.php?option=com_pixpublish&format=json', false);
-
+$baseUrl   = JRoute::_('index.php?option=com_pixpublish&format=json', false);
 $mainClass = empty($this->siderbar) ? '' : 'span10';
 
 if (!empty($this->sidebar)) :
@@ -40,9 +39,7 @@ if (!empty($this->sidebar)) :
             <?php echo $this->sidebar; ?>
         </form>
     </div>
-<?php
-endif;
-?>
+<?php endif; ?>
 <div id="j-main-container" class="<?php echo $mainClass; ?>">
     <?php
     if (count($this->infotexts) > 0) : ?>
@@ -54,7 +51,7 @@ endif;
             ?>
         </div>
     <?php endif; ?>
-    <div id='calendar' style='margin:3em 0;font-size:13px' data-base-url="<?php echo $base_url; ?>">
+    <div id="calendar" style="margin:3em 0;font-size:13px" data-base-url="<?php echo $baseUrl; ?>">
     </div>
 </div>
 
