@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension version="3.7"
-           type="plugin" group="pixpublish" method="upgrade">
+<extension version="3.7" type="plugin" group="pixpublish" method="upgrade">
     <name>plg_pixpublish_acymailing</name>
     <author>Joomlashack</author>
     <creationDate>July 10 2019</creationDate>
-    <copyright>Copyright 2018-2019 Joomlashack.com. All rights reserved</copyright>
+    <copyright>Copyright 2018-2020 Joomlashack.com. All rights reserved</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>help@joomlashack.com</authorEmail>
     <authorUrl>https://www.joomlashack.com</authorUrl>
