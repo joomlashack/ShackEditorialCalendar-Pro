@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="2.5" method="upgrade">
+<extension type="component" version="3.7" method="upgrade">
     <name>com_pixpublish</name>
     <author>Joomlashack</author>
-    <creationDate>February 12 2019</creationDate>
-    <copyright>Copyright 2018-2019 Joomlashack.com. All rights reserved</copyright>
+    <creationDate>October 20 2020</creationDate>
+    <copyright>Copyright 2018-2020 Joomlashack.com. All rights reserved</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>help@joomlashack.com</authorEmail>
     <authorUrl>https://www.joomlashack.com</authorUrl>
-    <version>1.2.3</version>
+    <version>1.2.4</version>
     <description>COM_PIXPUBLISH_XML_DESCRIPTION</description>
     <variant>PRO</variant>
 
-	<scriptfile>script.installer.php</scriptfile>
+    <scriptfile>script.installer.php</scriptfile>
 
     <media destination="com_pixpublish" folder="media">
         <folder>css</folder>
@@ -27,6 +27,7 @@
             <folder>controllers</folder>
             <folder>helpers</folder>
             <folder>language</folder>
+            <folder>layouts</folder>
             <folder>library</folder>
             <folder>media</folder>
             <folder>models</folder>
@@ -34,21 +35,14 @@
             <filename>access.xml</filename>
             <filename>config.xml</filename>
             <filename>controller.php</filename>
+            <filename>include.php</filename>
             <filename>pixpublish.php</filename>
         </files>
-
-        <languages folder="admin/language">
-            <language tag="en-GB">en-GB/en-GB.com_pixpublish.ini</language>
-            <language tag="en-GB">en-GB/en-GB.com_pixpublish.sys.ini</language>
-            <language tag="de-DE">de-DE/de-DE.com_pixpublish.ini</language>
-            <language tag="de-DE">de-DE/de-DE.com_pixpublish.sys.ini</language>
-            <language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.ini</language>
-            <language tag="pl-PL">pl-PL/pl-PL.com_pixpublish.sys.ini</language>
-        </languages>
     </administration>
 
     <updateservers>
-        <server type="extension" priority="1" name="Shack Editorial Calendar Pro"><![CDATA[https://deploy.ostraining.com/client/update/pro/stable/com_pixpublish]]></server>
+        <server type="extension" priority="1" name="Shack Editorial Calendar Pro"
+        ><![CDATA[https://deploy.ostraining.com/client/update/pro/stable/com_pixpublish]]></server>
     </updateservers>
 
     <alledia>
@@ -83,12 +77,17 @@
             <extension type="plugin"
                        group="pixpublish"
                        element="content">plg_pixpublish_content</extension>
-
-            <extension type="plugin"
-                       group="pixpublish"
-                       element="module">plg_pixpublish_module</extension>
         </relatedExtensions>
 
         <include>AllediaFreeDefaultFiles</include>
+
+        <obsolete>
+            <file>administrator/components/com_pixpublish/models/fields/fixed.php</file>
+            <file>administrator/components/com_pixpublish/models/forms/pixpublish.xml</file>
+
+            <extension type="plugin"
+                       group="pixpublish"
+                       element="module"/>
+        </obsolete>
     </alledia>
 </extension>

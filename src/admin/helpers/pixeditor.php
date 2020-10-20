@@ -3,8 +3,8 @@
  * @package   ShackEditorialCalendar-Pro
  * @contact   www.joomlashack.com, help@joomlashack.com
  * @author    2003-2017 You Rock AB. All Rights Reserved
- * @copyright 2018-2019 Joomlashack.com. All rights reserved
- * @license   http://www.gnu.org/licenses/gpl.html GNU/GPL
+ * @copyright 2018-2020 Joomlashack.com. All rights reserved
+ * @license   https://www.gnu.org/licenses/gpl.html GNU/GPL
  *
  * This file is part of ShackEditorialCalendar-Pro.
  *
@@ -19,48 +19,39 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ShackEditorialCalendar-Pro.  If not, see <http://www.gnu.org/licenses/>.
+ * along with ShackEditorialCalendar-Pro.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 defined('_JEXEC') or die();
 
 class PixEditor extends JEditor
 {
+    /**
+     * @return void
+     */
     public function getInit()
     {
-        // Check if editor is already loaded
-        if (is_null(($this->_editor))) {
-            return;
+        if ($this->_editor) {
+            $args['event'] = 'onInit';
+            $this->_editor->update($args);
         }
 
-        $args['event'] = 'onInit';
-
-        $results[] = $this->_editor->update($args);
-        //return print_r( $results, true );
-        foreach ($results as $result) {
-            if (trim($result)) {
-                // @todo remove code: $return .= $result;
-                $return = $result;
-            }
-        }
-        return $return;
+        return null;
     }
 
+    /**
+     * @return string
+     */
     public function getEditorType()
     {
-        // Check if editor is already loaded
-        if (is_null(($this->_editor))) {
-            return;
-        }
-
-        return get_class($this->_editor);
+        return $this->_editor ? get_class($this->_editor) : null;
     }
 
     /**
      * Returns the global Editor object, only creating it
      * if it doesn't already exist.
      *
-     * @param   string $editor The editor to use.
+     * @param string $editor The editor to use.
      *
      * @return  PixEditor The Editor object.
      *

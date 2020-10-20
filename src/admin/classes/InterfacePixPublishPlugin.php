@@ -2,8 +2,7 @@
 /**
  * @package   ShackEditorialCalendar-Pro
  * @contact   www.joomlashack.com, help@joomlashack.com
- * @author    2003-2017 You Rock AB. All Rights Reserved
- * @copyright 2018-2020 Joomlashack.com. All rights reserved
+ * @copyright 2019-2020 Joomlashack.com. All rights reserved
  * @license   https://www.gnu.org/licenses/gpl.html GNU/GPL
  *
  * This file is part of ShackEditorialCalendar-Pro.
@@ -22,43 +21,52 @@
  * along with ShackEditorialCalendar-Pro.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+use Joomla\CMS\Date\Date;
+use Joomla\CMS\Form\Form;
+
 defined('_JEXEC') or die();
 
-abstract class PixPublishPlugin extends JPlugin
+interface InterfacePixPublishPlugin
 {
     /**
-     * @param object[] $arr
-     * @param string   $fieldname
+     * @param Date   $start
+     * @param Date   $stop
+     * @param object $data
      *
-     * @return object[]
+     * @return ColorFixer[]
      */
-    protected static function fixDates(&$arr, $fieldname)
-    {
-        foreach ($arr as $row) {
-            $row->$fieldname = JFactory::getDate($row->start, 'UTC')
-                ->setTimezone(new DateTimeZone(self::getUserTimeoffset()))
-                ->format('Y-m-d H:i:s', true, false);
-        }
-
-        return $arr;
-    }
+    public function onDataFetch($start, $stop, $data);
 
     /**
-     * @return string
+     * @param string $source
+     * @param string $id
+     * @param int    $dayd
+     * @param int    $mind
+     *
+     * @return bool
      */
-    public function getInfoText()
-    {
-        return '';
-    }
+    public function onItemMove($source, $id, $dayd, $mind);
 
     /**
-     * @return string
+     * @param string $source
+     * @param int    $id
+     * @param Form   $form
+     *
+     * @return object
      */
-    protected static function getUserTimeoffset()
-    {
-        $config = JFactory::getConfig();
-        $user   = JFactory::getUser();
+    public function onGetDialog($source, $id, $form);
 
-        return $user->getParam('timezone', $config->get('offset', 'UTC'));
-    }
+    /**
+     * @param string $source
+     * @param int    $id
+     * @param object $data
+     *
+     * @return bool
+     */
+    public function onItemSave($source, $id, $data);
+
+    /**
+     * @return void
+     */
+    public function onRegisterSearchFilters();
 }

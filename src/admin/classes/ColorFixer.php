@@ -2,8 +2,7 @@
 /**
  * @package   ShackEditorialCalendar-Pro
  * @contact   www.joomlashack.com, help@joomlashack.com
- * @author    2003-2017 You Rock AB. All Rights Reserved
- * @copyright 2018-2020 Joomlashack.com. All rights reserved
+ * @copyright 2019-2020 Joomlashack.com. All rights reserved
  * @license   https://www.gnu.org/licenses/gpl.html GNU/GPL
  *
  * This file is part of ShackEditorialCalendar-Pro.
@@ -24,9 +23,20 @@
 
 defined('_JEXEC') or die();
 
-require_once('components/com_categories/models/fields/categoryedit.php');
-
-class JFormFieldPpCategory extends JFormFieldCategoryEdit
+class ColorFixer
 {
+    /**
+     * @var string
+     */
+    public static $st_color = '';
 
+    /**
+     * @var string
+     */
+    public $color = null;
+
+    public function __construct()
+    {
+        $this->color = self::$st_color;
+    }
 }

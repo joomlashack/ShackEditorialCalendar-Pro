@@ -1,116 +1,100 @@
 // Active plugins
-var PixPublishPlugins = new Array();
+var PixPublishPlugins = [];
 
 jQuery(function($) {
-    $.noConflict();
-
     $(document).ready(function() {
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
+        var $calendar = $('#calendar');
 
-        $('#calendar').fullCalendar(
-            {
-                header       :
-                    {
-                        left  : 'prev,next, today',
-                        center: 'title',
-                        right : 'month' // SUDDE
-                    },
-                editable     : true,
-                firstDay     : 1,
-                timeFormat   : 'H:mm',
-                events       :
-                    {
-                        url  : $('#calendar').data('base-url') + "&task=panel.getdata",
-                        data : function() {
-                            return {data: JSON.stringify($('#pixpublish_search').serializeObject())};
-                        },
-                        error: function(a, b, c) {
-                            //console.log(a.responseText);
-                            alert('there was an error while fetching events!');
-                        },
-                    },
-                eventRender  : function(event, element) {
-                    element.addClass('pp-state-' + event.state);
+        $calendar.fullCalendar({
+            header       : {
+                left  : 'prev,next, today',
+                center: 'title',
+                right : 'month'
+            },
+            editable     : true,
+            firstDay     : 1,
+            timeFormat   : 'H:mm',
+            events       : {
+                url  : $calendar.data('base-url') + "&task=panel.getdata",
+                data : function() {
+                    return {data: JSON.stringify($('#pixpublish_search').serializeObject())};
                 },
-                allDayDefault: false,
-                eventResize  : function(event, dayDelta, minuteDelta, revertFunc) {
-                    var url = $('#calendar').data('base-url') + "&task=panel.updateEndTime" + "&id=" + event.id + "&dayd=" + dayDelta + "&mind=" + minuteDelta + "&plugin=" + event.plugin;
+                error: function(xhr, status, error) {
+                    alert('Fetch Events Error: ' + error);
+                },
+            },
+            eventRender  : function(event, element) {
+                element.addClass('pp-state-' + event.state);
+            },
+            allDayDefault: false,
+            eventResize  : function(event, dayDelta, minuteDelta, revertFunc) {
+                var url = $calendar.data('base-url') + "&task=panel.updateEndTime" + "&id=" + event.id + "&dayd=" + dayDelta + "&mind=" + minuteDelta + "&plugin=" + event.plugin;
 
-                    $.ajax({
-                        url    : url,
-                        success: function() {
-                            $('#calendar').fullCalendar('refetchEvents');
-                        },
-                        error  : function() {
-                            revertFunc();
-                        }
-                    });
-                },
-                eventDrop    : function(event, dayDelta, minuteDelta, allDay, revertFunc) {
-                    var url = $('#calendar').data('base-url') + "&task=panel.move" + "&id=" + event.id + "&dayd=" + dayDelta + "&mind=" + minuteDelta + "&plugin=" + event.plugin;
-                    $.ajax({
-                        url    : url,
-                        success: function() {
-                            $('#calendar').fullCalendar('refetchEvents');
-                        },
-                        error  : function() {
-                            revertFunc();
-                        }
-                    });
-                },
-                eventClick   : function(calEvent, jsEvent, view) {
-                    Messi.load($('#calendar').data('base-url') + "&task=panel.edit" + '&id=' + calEvent.id + "&plugin=" + calEvent.plugin,
-                        {
-                            title   : Joomla.JText._('COM_PIXPUBLISH_EDIT') + ' ' + PLUGIN[calEvent.plugin].toLowerCase(),
-                            modal   : true,
-                            unload  : false,
-                            buttons : [{id: 0, label: Joomla.JText._('JSAVE'), val: 'Y', class: 'btn-success'}, {
-                                id: 1,
-                                label: Joomla.JText._('JCANCEL'),
-                                val: 'N'
-                            }],
-                            callback: function(val) {
-                                // console.debug( $('#pixsubmit_form') );
-                                if (typeof(toggleMe) == 'function') {
-                                    try {
-                                        toggleMe();
-                                    }
-                                    catch (ex) {
-                                    }
+                $.ajax({
+                    url    : url,
+                    success: function() {
+                        $calendar.fullCalendar('refetchEvents');
+                    },
+                    error  : function() {
+                        revertFunc();
+                    }
+                });
+            },
+            eventDrop    : function(event, dayDelta, minuteDelta, allDay, revertFunc) {
+                var url = $calendar.data('base-url') + "&task=panel.move" + "&id=" + event.id + "&dayd=" + dayDelta + "&mind=" + minuteDelta + "&plugin=" + event.plugin;
+                $.ajax({
+                    url    : url,
+                    success: function() {
+                        $calendar.fullCalendar('refetchEvents');
+                    },
+                    error  : function() {
+                        revertFunc();
+                    }
+                });
+            },
+            eventClick   : function(calEvent, jsEvent, view) {
+                Messi.load($calendar.data('base-url') + "&task=panel.edit" + '&id=' + calEvent.id + "&plugin=" + calEvent.plugin,
+                    {
+                        title   : Joomla.JText._('COM_PIXPUBLISH_EDIT') + ' ' + PLUGIN[calEvent.plugin].toLowerCase(),
+                        modal   : true,
+                        unload  : false,
+                        buttons : [{id: 0, label: Joomla.JText._('JSAVE'), val: 'Y', class: 'btn-success'}, {
+                            id   : 1,
+                            label: Joomla.JText._('JCANCEL'),
+                            val  : 'N'
+                        }],
+                        callback: function(val) {
+                            if (typeof (toggleMe) == 'function') {
+                                try {
+                                    toggleMe();
+                                } catch (ex) {
                                 }
-                                //toggleMe();
-                                //var form_data = JSON.stringify( $('#pixsubmit_form').serializeObject() );
-                                //console.debug( $.param( { data: JSON.stringify( $('#pixsubmit_form').serializeObject() ) } ) );
-                                if (val == 'Y') {
-                                    var url = $('#calendar').data('base-url'); // + "&task=panel.save" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify( $('#pixsubmit_form').serializeObject() ) } );
-                                    $.ajax({
-                                        url    : url,
-                                        method : "POST",
-                                        data   : "&task=panel.save" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param({data: JSON.stringify($('#pixsubmit_form').serializeObject())}),
-                                        success: function() {
-                                            $('#calendar').fullCalendar('refetchEvents');
-                                        },
-                                        error  : function() {
-                                            //revertFunc();
-                                        }
-                                    });
-                                }
-                            },
-                            onopen  : function() {
-                                $('.timepicker').timepicker({
-                                    template    : false,
-                                    showInputs  : false,
-                                    minuteStep  : 5,
-                                    defaultTime : false,
-                                    showMeridian: false,
+                            }
+
+                            if (val === 'Y') {
+                                var url = $calendar.data('base-url');
+                                $.ajax({
+                                    url    : url,
+                                    method : "POST",
+                                    data   : "&task=panel.save" + "&id=" + calEvent.id + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + calEvent.plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param({data: JSON.stringify($('#pixsubmit_form').serializeObject())}),
+                                    success: function() {
+                                        $calendar.fullCalendar('refetchEvents');
+                                    }
                                 });
                             }
-                        });
-                },
-            }).pixifyCalendar();
+                        },
+                        onopen  : function() {
+                            $('.timepicker').timepicker({
+                                template    : false,
+                                showInputs  : false,
+                                minuteStep  : 5,
+                                defaultTime : false,
+                                showMeridian: false,
+                            });
+                        }
+                    });
+            },
+        }).pixifyCalendar();
 
         $('#timepicker1').timepicker({
             template    : false,
@@ -121,16 +105,16 @@ jQuery(function($) {
         });
 
         $('#pixpublish_search_submit').click(function() {
-            $('#calendar').fullCalendar('refetchEvents');
+            $calendar.fullCalendar('refetchEvents');
         });
 
         $(".pixpublish_trigger").change(function() {
-            $('#calendar').fullCalendar('refetchEvents');
+            $calendar.fullCalendar('refetchEvents');
         });
 
         // run pixifyCalendar when calendar view is changed
         $('.fc-button').click(function() {
-            $('#calendar').pixifyCalendar();
+            $calendar.pixifyCalendar();
         });
 
         // activate plugin new buttons
@@ -138,41 +122,35 @@ jQuery(function($) {
             var date = $(this).parent().parent().parent().data('date');
             var plugin = $(this).data('plugin');
 
-            Messi.load($('#calendar').data('base-url') + "&task=panel.edit" + '&id=' + 0 + "&plugin=" + plugin,
+            Messi.load($calendar.data('base-url') + "&task=panel.edit" + '&id=' + 0 + "&plugin=" + plugin,
                 {
-                    title   : Joomla.JText._('COM_PIXPUBLISH_ADD_NEW') + ' ' + PLUGIN[plugin].toLowerCase(), // SUDDE
+                    title   : Joomla.JText._('COM_PIXPUBLISH_ADD_NEW') + ' ' + PLUGIN[plugin].toLowerCase(),
                     modal   : true,
                     unload  : false,
                     buttons : [{id: 0, label: Joomla.JText._('JSAVE'), val: 'Y', class: 'btn-success'}, {
-                        id: 1,
+                        id   : 1,
                         label: Joomla.JText._('JCANCEL'),
-                        val: 'N'
+                        val  : 'N'
                     }],
                     callback: function(val) {
-                        // console.debug( $('#pixsubmit_form') );
-                        if (typeof(toggleMe) == 'function') {
+                        if (typeof (toggleMe) == 'function') {
                             try {
                                 toggleMe();
-                            }
-                            catch (ex) {
+                            } catch (ex) {
                             }
                         }
-                        //toggleMe();
+
                         var data = $('#pixsubmit_form').serializeObject();
                         data["publish_up"] = date;
-                        //console.debug( data ); return;
-                        //var form_data = JSON.stringify( data );
-                        if (val == 'Y') {
-                            var url = $('#calendar').data('base-url'); // + "&task=panel.save" + "&id=" + 0 + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param( { data: JSON.stringify(data) } );
+
+                        if (val === 'Y') {
+                            var url = $calendar.data('base-url');
                             $.ajax({
                                 url    : url,
                                 method : "POST",
                                 data   : "&task=panel.save" + "&id=" + 0 + "&start=" + $('#pixtest_start').val() + "&mind=" + 0 + "&plugin=" + plugin + "&title=" + $('#pixtest_title').val() + "&" + $.param({data: JSON.stringify(data)}),
                                 success: function() {
-                                    $('#calendar').fullCalendar('refetchEvents');
-                                },
-                                error  : function() {
-                                    //revertFunc();
+                                    $calendar.fullCalendar('refetchEvents');
                                 }
                             });
                         }
@@ -191,9 +169,7 @@ jQuery(function($) {
 
         // Activate Bootstrap Tooltip
         $('.hasTooltip').tooltip({"html": true, "container": "body"});
-
-        // End Document Ready
-    });
+    }); // End Document Ready
 
     $.fn.pixifyCalendar = function() {
         if (!$(this).find('.fc-today .fc-day-number').parent().hasClass('pp-day-head')) {
@@ -208,13 +184,12 @@ jQuery(function($) {
         }
 
         return this;
-    }
+    };
 
     $.fn.serializeObject = function() {
-        var o = {};
-        // console.debug( this );
-        var a = this.serializeArray();
-        // console.debug( a );
+        var o = {},
+            a = this.serializeArray();
+
         $.each(a, function() {
             if (o[this.name] !== undefined) {
                 if (!o[this.name].push) {
@@ -225,8 +200,7 @@ jQuery(function($) {
                 o[this.name] = this.value || '';
             }
         });
-        //console.debug( o );
+
         return o;
     };
-
 });
