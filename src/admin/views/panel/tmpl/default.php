@@ -3,8 +3,8 @@
  * @package   ShackEditorialCalendar-Pro
  * @contact   www.joomlashack.com, help@joomlashack.com
  * @author    2003-2017 You Rock AB. All Rights Reserved
- * @copyright 2018-2019 Joomlashack.com. All rights reserved
- * @license   http://www.gnu.org/licenses/gpl.html GNU/GPL
+ * @copyright 2018-2020 Joomlashack.com. All rights reserved
+ * @license   https://www.gnu.org/licenses/gpl.html GNU/GPL
  *
  * This file is part of ShackEditorialCalendar-Pro.
  *
@@ -19,7 +19,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with ShackEditorialCalendar-Pro.  If not, see <http://www.gnu.org/licenses/>.
+ * along with ShackEditorialCalendar-Pro.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 defined('_JEXEC') or die();
