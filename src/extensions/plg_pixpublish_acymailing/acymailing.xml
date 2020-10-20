@@ -2,12 +2,12 @@
 <extension version="3.7" type="plugin" group="pixpublish" method="upgrade">
     <name>plg_pixpublish_acymailing</name>
     <author>Joomlashack</author>
-    <creationDate>July 10 2019</creationDate>
+    <creationDate>October 20 2020</creationDate>
     <copyright>Copyright 2018-2020 Joomlashack.com. All rights reserved</copyright>
     <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
     <authorEmail>help@joomlashack.com</authorEmail>
     <authorUrl>https://www.joomlashack.com</authorUrl>
-    <version>1.2.4b1</version>
+    <version>1.2.4</version>
     <description>PLG_PIXPUBLISH_ACYMAILING_DESCRIPTION</description>
 
     <files>
